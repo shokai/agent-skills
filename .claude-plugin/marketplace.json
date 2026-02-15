@@ -1,5 +1,5 @@
 {
-  "name": "shokai-claude-skills",
+  "name": "shokai-agent-skills",
   "owner": {
     "name": "shokai"
   },
@@ -17,7 +17,7 @@
       "author": {
         "name": "shokai"
       },
-      "repository": "https://github.com/shokai/claude-skills",
+      "repository": "https://github.com/shokai/agent-skills",
       "license": "MIT",
       "keywords": ["library-update", "dependabot", "renovatebot", "review", "npm"],
       "category": "code-review"

@@ -7,7 +7,7 @@
 ### 1. マーケットプレイスを登録
 
 ```bash
-/plugin marketplace add shokai/claude-skills
+/plugin marketplace add shokai/agent-skills
 ```
 
 ### 2. スキルをインストール
