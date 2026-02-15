@@ -1,0 +1,26 @@
+{
+  "name": "shokai-claude-skills",
+  "owner": {
+    "name": "shokai"
+  },
+  "metadata": {
+    "description": "shokai's Claude Code Agent Skills collection",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "library-update-review",
+      "source": "./plugins/library-update-review",
+      "description": "ライブラリ更新pull requestのレビュー手順。dependabot/renovatebot PRの分析、release note調査、コード更新、過去の失敗調査を行う。",
+      "version": "1.0.0",
+      "author": {
+        "name": "shokai"
+      },
+      "repository": "https://github.com/shokai/claude-skills",
+      "license": "MIT",
+      "keywords": ["library-update", "dependabot", "renovatebot", "review", "npm"],
+      "category": "code-review"
+    }
+  ]
+}

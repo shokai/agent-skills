@@ -1,0 +1,10 @@
+{
+  "name": "library-update-review",
+  "description": "ライブラリ更新pull requestのレビュー手順。dependabot/renovatebot PRの分析、release note調査、コード更新、過去の失敗調査を行う。",
+  "version": "1.0.0",
+  "author": {
+    "name": "shokai"
+  },
+  "repository": "https://github.com/shokai/claude-skills",
+  "license": "MIT"
+}
