@@ -14,6 +14,7 @@
 
 ```bash
 /plugin install library-update-review
+/plugin install codex-consultation
 ```
 
 ## 含まれるスキル
@@ -31,10 +32,28 @@
 - 必要に応じたコード更新の提案
 - 過去の失敗事例の調査
 
-#### 機能
+#### 使い方
 
 ```bash
 /library-update-review [PR-URL-or-number]
 ```
 
 dependabotやrenovatebotのPRブランチで実行すると、包括的なレビューレポートを作成します。
+
+### codex-consultation
+
+Codex CLI（OpenAI）にセカンドオピニオンを求めるスキルです。
+
+#### 機能
+
+- 会話コンテキストに基づいてCodex CLIにプロンプトを自動設計
+- codexの回答をClaudeが咀嚼し、自身の見解と照らし合わせて報告
+- codexのコマンド失敗を検知した場合、Claudeが補正
+
+#### 使い方
+
+```bash
+/codex-consultation
+```
+
+作業中に「codexと相談して」「codexに聞いて」「codexにレビューしてもらって」と伝えると発動します。
