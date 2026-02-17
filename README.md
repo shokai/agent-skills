@@ -17,6 +17,14 @@
 /plugin install codex-consultation
 ```
 
+### スキルをうまくインストールできない場合
+
+既にマーケットプレイスを登録済みの場合、新しいスキルをインストールするにはマーケットプレイスの更新が必要です。
+
+1. `/plugin` コマンドを実行
+2. 「Update marketplace」を選択
+3. 「Browse plugins」から新しいスキルをインストール
+
 ## 含まれるスキル
 
 ### library-update-review
