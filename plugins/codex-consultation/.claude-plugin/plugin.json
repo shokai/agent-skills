@@ -1,0 +1,10 @@
+{
+  "name": "codex-consultation",
+  "description": "Codex CLIにセカンドオピニオンを求めるスキル。「codexと相談して」「codexに聞いて」で発動する。",
+  "version": "1.0.0",
+  "author": {
+    "name": "shokai"
+  },
+  "repository": "https://github.com/shokai/agent-skills",
+  "license": "MIT"
+}
