@@ -26,7 +26,7 @@
       "name": "codex-consultation",
       "source": "./plugins/codex-consultation",
       "description": "Codex CLIにセカンドオピニオンを求めるスキル。「codexと相談して」「codexに聞いて」で発動する。",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "author": {
         "name": "shokai"
       },
