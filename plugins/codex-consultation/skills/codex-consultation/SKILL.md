@@ -57,12 +57,14 @@ codexに渡すプロンプトをClaude自身が設計する。以下の指針に
 Bashツールで以下の形式で実行する:
 
 ```
-codex exec --ephemeral "ここにプロンプトを入れる"
+codex exec --ephemeral --search -s workspace-write -c sandbox_workspace_write.network_access=true "ここにプロンプトを入れる"
 ```
 
 ### 重要なオプション
 
 - `--ephemeral` は必須。セッションを保存しない
+- `--search` はWeb検索を許可する。codexが必要に応じてWebで情報を調べられるようになる
+- `-s workspace-write -c sandbox_workspace_write.network_access=true` は必須。デフォルトではサンドボックスがネットワークアクセスをブロックするため、`gh`や`curl`などの外部通信コマンドが失敗する
 - ワーキングディレクトリはカレントディレクトリがそのまま使われる
 - プロンプトはCLI引数として渡す（標準入力ではない）
 
