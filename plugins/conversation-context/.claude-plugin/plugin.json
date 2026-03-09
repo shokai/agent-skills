@@ -1,0 +1,9 @@
+{
+  "name": "conversation-context",
+  "description": "対話コンテキストのexport/importスキル。会話で共有された目的・意図・設計判断・制約条件を .dev/contexts/ に書き出し、別セッションやレビューで読み込む。1対多のコンテキスト共有により、複数のsub PRをまとめたfeature PRのレビューやコードの自動改善に便利。",
+  "author": {
+    "name": "shokai"
+  },
+  "repository": "https://github.com/shokai/agent-skills",
+  "license": "MIT"
+}
