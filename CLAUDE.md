@@ -31,7 +31,7 @@ git mv old_path new_path
 コード変更後、すぐに以下を実行すること:
 
 ```
-prettier --write <changed-file>
+oxfmt <changed-file>
 ```
 
 変更したファイルをformatする。個別ファイルにprettierを実行する方がプロジェクト全体にlintを実行するより高速。
