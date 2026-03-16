@@ -47,6 +47,19 @@
       "license": "MIT",
       "keywords": ["context", "export", "import", "session", "handoff"],
       "category": "workflow"
+    },
+    {
+      "name": "pr-review",
+      "source": "./plugins/pr-review",
+      "description": "feature/bugfix/refactoring PRのレビュー報告書を作成する。PR概要欄・対話コンテキスト・実装の整合性を確認し、バグ・脆弱性・考慮漏れを調査してレビュー報告書を出力する。",
+      "version": "1.0.0",
+      "author": {
+        "name": "shokai"
+      },
+      "repository": "https://github.com/shokai/agent-skills",
+      "license": "MIT",
+      "keywords": ["pull-request", "review", "bug-hunting", "context", "codex"],
+      "category": "code-review"
     }
   ]
 }
