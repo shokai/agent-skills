@@ -1,10 +1,9 @@
 ---
 name: sanity-review
 description: >-
-  feature/bugfix/refactoring PRのレビュー報告書を作成する。
-  PR概要欄・対話コンテキスト・実装の整合性を確認し、バグ・脆弱性・考慮漏れを調査してレビュー報告書を出力する。
+  PRのレビュー報告書を作成する。bugや脆弱性の調査だけでなく、exportされた対話コンテキスト・PR概要欄・実装されたコードの整合性を確認し、実装者の正気を疑う。
   ユーザーが「PRのレビュー報告書を書いて」「対話コンテキストと共にコードレビューして」「このPRの正気を疑って」と言った時に使用する。
-argument-hint: '[PR-URL-or-number]'
+argument-hint: "[PR-URL-or-number]"
 ---
 
 # PRレビュー報告書の作成手順書
