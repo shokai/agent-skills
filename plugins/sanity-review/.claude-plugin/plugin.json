@@ -1,5 +1,5 @@
 {
-  "name": "pr-review",
+  "name": "sanity-review",
   "description": "feature/bugfix/refactoring PRのレビュー報告書を作成する。PR概要欄・対話コンテキスト・実装の整合性を確認し、バグ・脆弱性・考慮漏れを調査してレビュー報告書を出力する。",
   "author": {
     "name": "shokai"
