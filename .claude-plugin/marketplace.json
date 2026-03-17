@@ -58,7 +58,7 @@
       },
       "repository": "https://github.com/shokai/agent-skills",
       "license": "MIT",
-      "keywords": ["pull-request", "review", "bug-hunting", "context", "codex"],
+      "keywords": ["pull-request", "review", "sanity", "bug-hunting", "context", "codex"],
       "category": "code-review"
     }
   ]
