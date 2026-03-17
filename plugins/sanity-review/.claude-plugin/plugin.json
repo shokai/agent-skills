@@ -1,0 +1,9 @@
+{
+  "name": "sanity-review",
+  "description": "PRのレビュー報告書を作成する。bugや脆弱性の調査だけでなく、exportされた対話コンテキスト・PR概要欄・実装されたコードの整合性を確認し、実装者の正気を疑う。",
+  "author": {
+    "name": "shokai"
+  },
+  "repository": "https://github.com/shokai/agent-skills",
+  "license": "MIT"
+}
