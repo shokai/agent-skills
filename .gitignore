@@ -1,3 +1,6 @@
 .DS_Store
 *.log
 tmp/
+!.claude/
+.claude/*
+!.claude/skills/
