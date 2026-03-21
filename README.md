@@ -17,6 +17,7 @@
 /plugin install codex-consultation
 /plugin install conversation-context
 /plugin install sanity-review
+/plugin install prose-proofreading
 ```
 
 ### スキルをうまくインストールできない場合
@@ -96,4 +97,12 @@ PRのレビュー報告書を作成するスキルです。bugや脆弱性の調
 
 ```bash
 /sanity-review [PR-URL-or-number]
+```
+
+### prose-proofreading
+
+Markdownドキュメントの文章校正スキルです。ガイドラインに基づいて文体の問題を検出し、修正案を提示します。
+
+```bash
+/prose-proofreading [file-path or branch-diff]
 ```
