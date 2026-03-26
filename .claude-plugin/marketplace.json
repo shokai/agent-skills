@@ -65,7 +65,7 @@
       "name": "prose-proofreading",
       "source": "./plugins/prose-proofreading",
       "description": "Markdownドキュメントの文章校正。ガイドラインに基づいて文体の問題を検出し、修正案を提示する。",
-      "version": "1.0.0",
+      "version": "0.0.1",
       "author": {
         "name": "shokai"
       },
