@@ -1,0 +1,9 @@
+{
+  "name": "prose-proofreading",
+  "description": "Markdownドキュメントの文章校正。ガイドラインに基づいて文体の問題を検出し、修正案を提示する。",
+  "author": {
+    "name": "shokai"
+  },
+  "repository": "https://github.com/shokai/agent-skills",
+  "license": "MIT"
+}
