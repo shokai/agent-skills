@@ -3,7 +3,7 @@ name: prose-proofreading
 description: >-
   Markdownドキュメントの文章校正。ガイドラインに基づいて文体の問題を検出し、修正案を提示する。
   ユーザーが「文章を校正して」「文体を直して」「ドキュメントを校正して」と言った時に使用する。
-argument-hint: "[file-path or branch-diff]"
+argument-hint: '[file-path or branch-diff]'
 ---
 
 # 文章校正の手順書

@@ -4,7 +4,7 @@ description: >-
   ライブラリ更新pull requestのレビュー。
   dependabotやrenovatebotが作成したPR、または手動で作成されたライブラリ更新PRをレビューし、
   release note分析、コード更新、依存関係調査、過去の失敗調査を行う。
-argument-hint: "[PR-URL-or-number]"
+argument-hint: '[PR-URL-or-number]'
 ---
 
 # ライブラリ更新のレビュー手順書

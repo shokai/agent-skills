@@ -19,7 +19,13 @@
       },
       "repository": "https://github.com/shokai/agent-skills",
       "license": "MIT",
-      "keywords": ["library-update", "dependabot", "renovatebot", "review", "npm"],
+      "keywords": [
+        "library-update",
+        "dependabot",
+        "renovatebot",
+        "review",
+        "npm"
+      ],
       "category": "code-review"
     },
     {
@@ -58,7 +64,14 @@
       },
       "repository": "https://github.com/shokai/agent-skills",
       "license": "MIT",
-      "keywords": ["pull-request", "review", "sanity", "bug-hunting", "context", "codex"],
+      "keywords": [
+        "pull-request",
+        "review",
+        "sanity",
+        "bug-hunting",
+        "context",
+        "codex"
+      ],
       "category": "code-review"
     },
     {
@@ -71,7 +84,13 @@
       },
       "repository": "https://github.com/shokai/agent-skills",
       "license": "MIT",
-      "keywords": ["markdown", "proofreading", "writing", "style", "documentation"],
+      "keywords": [
+        "markdown",
+        "proofreading",
+        "writing",
+        "style",
+        "documentation"
+      ],
       "category": "documentation"
     }
   ]
