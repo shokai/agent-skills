@@ -1,0 +1,22 @@
+{
+  "name": "agent-skills",
+  "version": "1.0.0",
+  "description": "- https://github.com/shokai/agent-skills",
+  "homepage": "https://github.com/shokai/agent-skills#readme",
+  "bugs": {
+    "url": "https://github.com/shokai/agent-skills/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shokai/agent-skills.git"
+  },
+  "license": "MIT",
+  "author": "Sho Hashimoto <hashimoto@shokai.org>",
+  "type": "module",
+  "scripts": {
+    "test": "oxfmt --check"
+  },
+  "devDependencies": {
+    "oxfmt": "0.43.0"
+  }
+}
