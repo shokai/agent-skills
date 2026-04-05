@@ -85,7 +85,7 @@ AskUserQuestionツールで以下を確認する:
 
 1. 自分自身がCodex CLIではない場合は、Skill toolで `codex-consultation` を呼び出す
 2. 自分自身がCodex CLIである場合、またはCodexが利用できない場合（Codex CLIがインストールされていない等）は、Skill toolで `subagent-consultation` を呼び出す
-3. subagent-consultationも利用できない場合（スキルがインストールされていない等）は、メインエージェントが単独で作業を実行する。報告書の「レビュー作業において発生した問題」セクションに、外部Agentが利用できなかった旨を記載する
+3. subagent-consultationも利用できない場合（スキルがインストールされていない等）は、main agentが単独で作業を実行する。報告書の「レビュー作業において発生した問題」セクションに、外部Agentが利用できなかった旨を記載する
 
 各手順では、外部Agentに渡すArgsの内容と、結果の扱い方を記載する。
 
