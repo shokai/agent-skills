@@ -62,6 +62,19 @@
       "category": "code-review"
     },
     {
+      "name": "subagent-consultation",
+      "source": "./plugins/subagent-consultation",
+      "description": "Agentツール（subagent）にセカンドオピニオンを求めるスキル。「subagentと相談して」「subagentに聞いて」で発動する。",
+      "version": "1.0.0",
+      "author": {
+        "name": "shokai"
+      },
+      "repository": "https://github.com/shokai/agent-skills",
+      "license": "MIT",
+      "keywords": ["subagent", "consultation", "second-opinion"],
+      "category": "ai-collaboration"
+    },
+    {
       "name": "prose-proofreading",
       "source": "./plugins/prose-proofreading",
       "description": "Markdownドキュメントの文章校正。ガイドラインに基づいて文体の問題を検出し、修正案を提示する。",
