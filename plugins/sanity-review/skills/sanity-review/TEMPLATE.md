@@ -59,7 +59,7 @@ Agent自身の検証結果と見解。
 例:
 - 外部Agentが利用できなかった（外的要因）: 「外部Agent未使用（codex-consultation・subagent-consultationともにインストールされていないため）。バグ・脆弱性調査はAgent単独で実施」
 - Agentの判断で外部Agentを使わなかった: 「外部Agent未使用（Agentの判断: Markdownのみの変更のため不要と判断）。バグ・脆弱性調査はAgent単独で実施」
-- codex-consultationからsubagent-consultationにフォールバックした: 「Codex CLI未インストールのためsubagent-consultationで代替」
+- codex-consultationからsubagent-consultationにフォールバックした: 「codex-consultationが失敗したため（{失敗理由}）subagent-consultationで代替」
 - 対話コンテキストがなかった: 「対話コンテキストなし。考慮漏れ確認はスキップ」
 - 差分が大きすぎた: 「差分が大きいため、○○に絞って確認」
 

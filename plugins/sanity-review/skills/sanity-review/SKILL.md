@@ -87,7 +87,9 @@ AskUserQuestionツールで以下を確認する:
 
 1. Skill toolで `codex-consultation` を呼び出す。失敗した場合は2へ進む
 2. Skill toolで `subagent-consultation` を呼び出す。失敗した場合は3へ進む
-3. main agentが単独で作業を実行する。報告書の「レビュー作業において発生した問題」セクションに、外部Agentが利用できなかった旨を記載する
+3. main agentが単独で作業を実行する
+
+フォールバックが発生した場合や、外部Agentが利用できなかった場合は、報告書の「レビュー作業において発生した問題」セクションに記載する。
 
 各手順では、外部Agentに渡すArgsの内容と、結果の扱い方を記載する。
 
