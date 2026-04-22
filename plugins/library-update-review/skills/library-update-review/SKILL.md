@@ -74,9 +74,6 @@ gh pr diff <PR番号> --repo <owner>/<repo> 2>&1 \
 +      "resolved": "https://registry.npmjs.org/@codemirror/autocomplete/-/autocomplete-6.20.1.tgz",
 ```
 
-> **注意**: `grep '"version":'` のみでは**バージョン番号しか抽出されず、どのパッケージが変わったか判別できない**。
-> `resolved` URLを抽出することで、パッケージ名とバージョンを同時に確認できる。
-
 抽出したリストを元に、各パッケージが更新対象ライブラリの依存チェーンに含まれるかどうかを確認してください。
 依存チェーンに含まれないパッケージ（例: `@codemirror/*`、`react`、`jest` 関連など）が変化している場合は**特に注意**してください。
 
