@@ -26,7 +26,7 @@
       "name": "codex-consultation",
       "source": "./plugins/codex-consultation",
       "description": "Codex CLIにセカンドオピニオンを求めるスキル。「codexと相談して」「codexに聞いて」で発動する。",
-      "version": "1.2.2",
+      "version": "1.2.3",
       "author": {
         "name": "shokai"
       },
@@ -52,7 +52,7 @@
       "name": "sanity-review",
       "source": "./plugins/sanity-review",
       "description": "PRのレビュー報告書を作成する。bugや脆弱性の調査だけでなく、exportされた対話コンテキスト・PR概要欄・実装されたコードの整合性を確認し、実装者の正気を疑う。",
-      "version": "1.4.0",
+      "version": "1.4.1",
       "author": {
         "name": "shokai"
       },
@@ -65,7 +65,7 @@
       "name": "subagent-consultation",
       "source": "./plugins/subagent-consultation",
       "description": "Agentツール（subagent）にセカンドオピニオンを求めるスキル。「subagentと相談して」「subagentに聞いて」で発動する。",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "shokai"
       },
