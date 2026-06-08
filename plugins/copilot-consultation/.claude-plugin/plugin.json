@@ -1,0 +1,9 @@
+{
+  "name": "copilot-consultation",
+  "description": "GitHub Copilot CLIにセカンドオピニオンを求めるスキル。「copilotと相談して」「copilotに聞いて」で発動する。",
+  "author": {
+    "name": "tsuno"
+  },
+  "repository": "https://github.com/notainc/agent-skills",
+  "license": "MIT"
+}
