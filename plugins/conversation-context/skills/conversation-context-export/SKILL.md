@@ -29,7 +29,7 @@ Bashツールで以下を実行する:
 git branch --show-current && git rev-parse --short HEAD && gh pr view --json number -q .number
 ```
 
-ブランチ名、source commit、PR番号を取得する。Updated atには現在の日時（YYYY-MM-DD HH:mm:ss）を記入する。Exported byには自分のAgent名とAIモデル名を `Agent名 / AIモデル名` の形式で記入する。例: `Claude Code / Claude Opus 4.8`。既存ファイルを更新する場合の累積ルールは後述の「既存ファイルの更新ルール」に従う。
+ブランチ名、source commit、PR番号を取得する。Updated atには現在の日時（YYYY-MM-DD HH:mm:ss）を記入する。
 
 - PRが存在すれば番号を取得してメタデータのPRフィールドに記入する
 - コマンドがエラーになった場合（PRが未作成）は「export時点でPR未作成」と記入する
