@@ -29,7 +29,7 @@ Bashツールで以下を実行する:
 git branch --show-current && git rev-parse --short HEAD && gh pr view --json number -q .number
 ```
 
-ブランチ名、source commit、PR番号を取得する。Updated atには現在の日時（YYYY-MM-DD HH:mm:ss）を記入する。
+ブランチ名、source commit、PR番号を取得する。Updated atには現在の日時（YYYY-MM-DD HH:mm:ss）を記入する。Exported byには自分のAgent名とAIモデル名を `Agent名 / AIモデル名` の形式で記入する。例: `Claude Code / Claude Opus 4.8`。既存ファイルを更新する場合の累積ルールは後述の「既存ファイルの更新ルール」に従う。
 
 - PRが存在すれば番号を取得してメタデータのPRフィールドに記入する
 - コマンドがエラーになった場合（PRが未作成）は「export時点でPR未作成」と記入する
@@ -172,6 +172,7 @@ gh api repos/{owner}/{repo}/issues/comments/{コメントID} --method PATCH -F b
 #### 共通ルール
 
 - ファイルは常に「現時点で正しい状態」を表す。取り消し線や変更履歴は残さない（履歴はgitに任せる）
+- **Exported byフィールドは貢献モデルを累積する**: 既存ファイルのExported byに記載された全エントリを保持し、自分のエントリ `Agent名 / AIモデル名` が無ければ末尾にカンマ区切りで追記する。同一セッションでの全面再生成でもこの累積リストは保持する。「同一セッション内での再export」の「既存に縛られない」はコンテンツに対する指示であり、Exported byの累積はその例外。既存ファイルにExported byが無い旧形式の場合は、自分のエントリのみで初期化する
 
 ## 関連スキル
 
