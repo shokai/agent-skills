@@ -4,7 +4,7 @@
 - Branch: `{ブランチ名}`
 - Source commit: {git rev-parse --short HEADの出力}
 - Updated at: {YYYY-MM-DD HH:mm:ss}
-- Exported by: {Agent名 / AIモデル名。複数セッションで更新された場合はカンマ区切りで貢献モデルを累積}
+- Exported by: {Agent名 / AIモデル名。複数セッションで更新された場合はカンマ区切りで貢献モデル名を累積}
 
 ## 目的
 
