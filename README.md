@@ -19,6 +19,7 @@
 /plugin install conversation-context
 /plugin install sanity-review
 /plugin install prose-proofreading
+/plugin install unconventional-refactoring
 ```
 
 ### スキルをうまくインストールできない場合
@@ -129,3 +130,15 @@ Markdownドキュメントの文章校正スキルです。ガイドラインに
 ```bash
 /prose-proofreading [file-path or branch-diff]
 ```
+
+### unconventional-refactoring
+
+定石外発想で実装をリファクタリングするスキルです。AIが出しがちな「現状の発展型」ではなく、実装済みの解が依存している前提条件を1つずつ外し、よりシンプルな別解がないかを検討します。
+
+詳細は [plugins/unconventional-refactoring/README.md](plugins/unconventional-refactoring/README.md) を参照してください。
+
+```bash
+/unconventional-refactoring [対象ファイル/モジュール]
+```
+
+作業中に「定石外発想で」「前提を外して考えて」「もっとシンプルにできないか」「定石外も考えて」と伝えると発動します。実装後のリファクタリングで、求められた時だけ使う後段ツールです。提案・分類で停止し、コードの自動適用はしません。

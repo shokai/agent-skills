@@ -1,0 +1,9 @@
+{
+  "name": "unconventional-refactoring",
+  "description": "定石外発想で実装をリファクタリングする。現状の発展型ではなく、実装が依存する前提条件を1つずつ外し、よりシンプルな別解がないか検討する。",
+  "author": {
+    "name": "shokai"
+  },
+  "repository": "https://github.com/shokai/agent-skills",
+  "license": "MIT"
+}
