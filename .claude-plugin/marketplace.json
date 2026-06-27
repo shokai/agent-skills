@@ -90,7 +90,7 @@
     {
       "name": "unconventional-refactoring",
       "source": "./plugins/unconventional-refactoring",
-      "description": "定石外発想で実装をリファクタリングする。現状の発展型ではなく、実装が依存する前提条件を1つずつ外し、よりシンプルな別解がないか検討する。求められた時だけ発動する後段ツールで、提案・分類で停止する。",
+      "description": "定石外発想で実装をリファクタリングする。現状の発展型ではなく、実装の裏にある暗黙の前提条件を1つずつ外し、よりシンプルな別解がないか検討する。",
       "version": "0.1.0",
       "author": {
         "name": "shokai"
