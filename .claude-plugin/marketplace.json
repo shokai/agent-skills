@@ -98,11 +98,11 @@
       "repository": "https://github.com/shokai/agent-skills",
       "license": "MIT",
       "keywords": [
-        "refactoring",
+        "simplification",
         "unconventional",
         "premise-removal",
-        "simplification",
-        "ideation"
+        "ideation",
+        "refactoring"
       ],
       "category": "simplification"
     }
