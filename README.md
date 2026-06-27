@@ -19,7 +19,7 @@
 /plugin install conversation-context
 /plugin install sanity-review
 /plugin install prose-proofreading
-/plugin install unconventional-refactoring
+/plugin install unconventional-simplification
 ```
 
 ### スキルをうまくインストールできない場合
@@ -131,14 +131,14 @@ Markdownドキュメントの文章校正スキルです。ガイドラインに
 /prose-proofreading [file-path or branch-diff]
 ```
 
-### unconventional-refactoring
+### unconventional-simplification
 
-定石外発想で実装をリファクタリングするスキルです。AIが出しがちな「現状の発展型」ではなく、実装済みの解の裏にある暗黙の前提条件を1つずつ外し、よりシンプルな別解がないかを検討します。
+定石外発想で実装をシンプルにするスキルです。AIが出しがちな「現状の発展型」ではなく、実装済みの解の裏にある暗黙の前提条件を1つずつ外し、よりシンプルな別解がないかを検討します。
 
-詳細は [plugins/unconventional-refactoring/README.md](plugins/unconventional-refactoring/README.md) を参照してください。
+詳細は [plugins/unconventional-simplification/README.md](plugins/unconventional-simplification/README.md) を参照してください。
 
 ```bash
-/unconventional-refactoring [対象ファイル/モジュール]
+/unconventional-simplification [対象ファイル/モジュール]
 ```
 
 作業中に「定石外発想で」「前提を疑って」「もっとシンプルにできないか」と伝えると発動します。既にある実装や設計案を見直し、提案・分類で停止します。コードの自動適用はしません。

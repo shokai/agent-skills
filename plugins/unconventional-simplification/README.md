@@ -1,6 +1,6 @@
-# unconventional-refactoring
+# unconventional-simplification
 
-定石外発想で実装をリファクタリングするAgent Skillです。実装済みの解の裏にある暗黙の前提条件を1つずつ外し、よりシンプルな別解がないかを検討します。
+定石外発想で実装をシンプルにするAgent Skillです。実装済みの解の裏にある暗黙の前提条件を1つずつ外し、よりシンプルな別解がないかを検討します。
 
 ## 背景
 

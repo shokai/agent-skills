@@ -88,9 +88,9 @@
       "category": "documentation"
     },
     {
-      "name": "unconventional-refactoring",
-      "source": "./plugins/unconventional-refactoring",
-      "description": "定石外発想で実装をリファクタリングする。現状の発展型ではなく、実装の裏にある暗黙の前提条件を1つずつ外し、よりシンプルな別解がないか検討する。",
+      "name": "unconventional-simplification",
+      "source": "./plugins/unconventional-simplification",
+      "description": "定石外発想で実装をシンプルにする。現状の発展型ではなく、実装の裏にある暗黙の前提条件を1つずつ外し、よりシンプルな別解がないか検討する。",
       "version": "0.0.1",
       "author": {
         "name": "shokai"
@@ -104,7 +104,7 @@
         "simplification",
         "ideation"
       ],
-      "category": "refactoring"
+      "category": "simplification"
     }
   ]
 }
