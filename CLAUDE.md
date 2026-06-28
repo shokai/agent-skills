@@ -1,37 +1,49 @@
 # Coding Agentガイドライン
 
-# 重要なルール
+# AIが作業をする際の重要なルール
 
-## Version Control Best Practices
+コード変更後の基本フロー:
 
-`git -C`は使用禁止。gitコマンドはproject rootディレクトリから実行すること。
+1. plan modeで実装した場合はbug確認
+2. formatterを実行
+3. 必要に応じてcommit（ただしmainには直接commitしない）
+4. pushはユーザーの明示的な指示を待つ
 
-リポジトリ内でファイルを移動する際は、通常の`mv`コマンドではなく必ず`git mv`を使うこと:
+各手順の詳細は以下のセクションを参照。
+
+## Gitの使い方
+
+### mainブランチにcommitしない
+
+commit前に現在のbranchを確認する。
 
 ```
-git mv old_path new_path
+git branch --show-current
 ```
 
-これによりGitでファイル履歴が保持される。通常の`mv`コマンドを使うと、Gitはファイルの削除と新規作成として認識し、履歴が失われる可能性がある。
+`main` branchの場合はcommitせず停止し、変更内容に基づいた適切なbranch名を提案してユーザーに確認する
 
-### commitはユーザーの明示的な指示を待つこと
+### 履歴を書き換える操作は勝手にやらない
 
-ユーザーから明示的に指示されない限り、絶対にcommitしないこと。常に以下の手順を守ること:
+`git commit --amend` やreflogを使った巻き戻しなど、commit済みの履歴を書き換える操作は勝手に行わない。必要だと判断した場合は、実行前にユーザーに提案して指示を仰ぐ。
 
-1. 依頼されたコード変更を行う
-2. formattingとlintingを実行する
-3. ユーザーのレビューを待つ
-4. 「git commit」「commitして」等の明示的な指示があった場合のみcommitする
-5. commit前に`git branch --show-current`で現在のbranchを確認する。`main` branchの場合はcommitせず停止し、変更内容に基づいた適切なbranch名を提案してユーザーに確認する
+### pushはユーザーの明示的な指示を待つ
 
-これにより、ユーザーがリポジトリにcommitされる前にすべての変更をレビュー・承認できる。
+commit済みの変更をpushする前に、ユーザーの明示的な指示を待つ。
 
-## タスク完了後・git commit前に実行するコマンド
+## コードのformatting
 
-コード変更後、すぐに以下を実行すること:
+### コード変更後、oxfmtを実行すること
 
 ```
 oxfmt <changed-file>
 ```
 
-変更したファイルをformatする。個別ファイルにprettierを実行する方がプロジェクト全体にlintを実行するより高速。
+変更したファイルをformatする。個別ファイルにoxfmtを実行する方がプロジェクト全体にlintを実行するより高速。
+
+## plan modeで実装した後にやること
+
+### bugがないか確認する
+
+codex-consultation スキルでよく相談し、実装内容を確認する。
+単純なbugであれば修正する。解決方法が複数ある場合はユーザーに質問する。
