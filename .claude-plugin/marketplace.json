@@ -105,6 +105,19 @@
         "refactoring"
       ],
       "category": "simplification"
+    },
+    {
+      "name": "codepatrol",
+      "source": "./plugins/codepatrol",
+      "description": "リポジトリを領域ごとに巡回するセキュリティ調査スキル。観点チェックリストに基づき未調査領域を調査し、外部Agentの批判レビューを経てレポート出力する。複数session前提の長期作業。",
+      "version": "0.0.1",
+      "author": {
+        "name": "shokai"
+      },
+      "repository": "https://github.com/shokai/agent-skills",
+      "license": "MIT",
+      "keywords": ["security", "audit", "vulnerability", "patrol", "code-review"],
+      "category": "security"
     }
   ]
 }
