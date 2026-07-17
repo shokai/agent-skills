@@ -1,0 +1,9 @@
+{
+  "name": "codepatrol",
+  "description": "リポジトリを領域ごとに巡回するセキュリティ調査スキル。調査対象リストと観点チェックリストに基づき未調査領域を選んで調査し、外部Agentによる批判レビューを経てレポートを出力する。複数sessionにまたがる長期作業を想定。",
+  "author": {
+    "name": "shokai"
+  },
+  "repository": "https://github.com/shokai/agent-skills",
+  "license": "MIT"
+}

@@ -20,6 +20,7 @@
 /plugin install sanity-review
 /plugin install prose-proofreading
 /plugin install unconventional-simplification
+/plugin install codepatrol
 ```
 
 ### スキルをうまくインストールできない場合
@@ -142,3 +143,13 @@ Markdownドキュメントの文章校正スキルです。ガイドラインに
 ```
 
 作業中に「定石外発想で」「前提を疑って」「もっとシンプルにできないか」と伝えると発動します。既にある実装や設計案を見直し、提案・分類で停止します。コードの自動適用はしません。
+
+### codepatrol
+
+リポジトリを領域ごとに巡回してセキュリティ調査するスキルです。調査対象リストと観点チェックリストに基づいて未調査の領域を選んで調査し、外部Agentによる批判的レビューを経てレポートを出力します。複数sessionにまたがる長期作業を前提とし、実行するたびに現状を確認して続きから進めます。
+
+詳細は [plugins/codepatrol/README.md](plugins/codepatrol/README.md) を参照してください。
+
+```bash
+/codepatrol [調査対象リストを更新しろ]
+```
