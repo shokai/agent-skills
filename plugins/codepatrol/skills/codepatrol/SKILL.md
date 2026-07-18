@@ -139,13 +139,13 @@ Source commit: {short hash}
 
 **checklistの領分**: checklistに書くこと・書かないことは [checklist-vs-report.md](checklist-vs-report.md) に従う（要点: 仕様・機構の説明と中立な観点だけを書く。特定のbugの断定・深刻度・悪用仮説・レポート発見への言及は書かず、レポートへ）。生成時にこの境界を守る。
 
-#### checklist.md が既にある場合（更新・浄化）
+#### checklist.md が既にある場合（更新）
 
 「観点リスト（チェックリスト）を更新しろ」と指示された時、または既存の `.dev/codepatrol/checklist.md` を調査で使う前に、次を行う:
 
 1. Readツールで既存の `.dev/codepatrol/checklist.md` を読み込む
 2. リポジトリの機構を再走査し、観点の追加・更新を行う（手順は上の「checklist.md がない場合」に準じる）
-3. **浄化**: [checklist-vs-report.md](checklist-vs-report.md) の「混入していたら（浄化）」に従い、既に入り込んだbug断定・深刻度・悪用仮説・レポート発見への言及を検出し、仕様事実または中立な観点に書き直す（または削除する）。観点の追加・更新と浄化は同じ作業で行う
+3. [checklist-vs-report.md](checklist-vs-report.md) の責任境界に照らし、境界に合わない記述（既に入り込んだbug断定・深刻度・悪用仮説・レポート発見への言及）があれば、仕様事実または中立な観点に書き直す（または削除する）。観点の追加・更新と合わせて行う
 
 ### 手順3: 進捗確認と調査対象の選択
 
