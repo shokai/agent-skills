@@ -4,7 +4,7 @@
 - PR: #{番号}
 - Branch: `{ブランチ名}`
 - Reviewed at: {YYYY-MM-DD HH:mm:ss}
-- Reviewer: {Agent名}
+- Reviewer: {Agent名 (model名)}, with {外部Agentの実行環境。consultation skillが取得した表記をそのまま使い、複数使った場合は列挙する}
 
 ## AIとの対話コンテキスト
 

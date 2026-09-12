@@ -144,7 +144,7 @@ codexの出力を読み取り、以下の構成でユーザーに報告する:
 
 #### codexへの相談内容
 
-codexに送ったプロンプトの概要を1-2文で説明する。
+codexの実行環境を `Codex CLI v0.153.4 (gpt-6-astra, reasoning effort: high)` の形式で1行記載し、続けてcodexに送ったプロンプトの概要を1-2文で説明する。
 
 #### codexの回答サマリー
 
