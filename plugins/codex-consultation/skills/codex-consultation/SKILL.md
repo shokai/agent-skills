@@ -113,25 +113,6 @@ codex exec --ephemeral -s workspace-write -c sandbox_workspace_write.network_acc
 
 codexの実行には時間がかかる場合がある。Bashツールのtimeoutを900000（15分）に設定する。
 
-### 実行環境の読み取り
-
-codexは実行時にstderrへ以下のヘッダを出力する:
-
-```
-OpenAI Codex v0.153.4
---------
-workdir: /path/to/repo
-model: gpt-6-astra
-provider: openai
-approval: never
-sandbox: workspace-write
-reasoning effort: high
---------
-```
-
-このヘッダからCLIバージョン・model名・reasoning effortを読み取り、報告に使う。
-model名はcodex側の設定で決まり、相談元Agentからは事前に分からない。codex自身も自分のmodel名を知らないため、プロンプトで自己申告を求めても取得できない。
-
 ### 追加往復の判断
 
 「全力」モードでは、1往復目の結果を受け取った後、2往復目を原則実施する。明らかに追加の深掘りが不要な場合（1往復目で十分網羅的な回答が得られた場合）のみスキップする。

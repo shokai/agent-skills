@@ -85,8 +85,7 @@ subagentに渡すプロンプトを相談元Agentが設計する。以下の指�
 
 #### model IDの申告依頼（常にプロンプトに含める）
 
-subagentのmodelはAgentツールのmodel指定や設定のdefaultで決まり、相談元Agentからは確定できない。
-subagentはsystem promptで自身のmodel IDを知らされているため、回答の末尾に `model: <ID>` の形式で動作中のmodel IDを1行記載するよう、必ずプロンプトに含める。
+回答の末尾に `model: <ID>` の形式で動作中のmodel IDを1行記載するよう依頼する。
 
 ## 3. subagentの実行
 
