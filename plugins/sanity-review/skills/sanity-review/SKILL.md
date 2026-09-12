@@ -32,7 +32,7 @@ gh pr view {PR番号またはURL} --json number,title,body,url,author,comments,h
 
 PRが見つからない場合はユーザーに報告して終了する。
 
-PRタイトル、PR番号、ブランチ名は報告書のヘッダーに使用する。Reviewed atには現在の日時（YYYY-MM-DD HH:mm:ss）を、Reviewerには自分のAgent名を記入する。
+PRタイトル、PR番号、ブランチ名は報告書のヘッダーに使用する。Reviewed atには現在の日時（YYYY-MM-DD HH:mm:ss）を、Reviewerには自分のAgent名とmodel名を記入し、外部Agentを使った場合はconsultation skillが取得した実行環境を併記する。
 
 以下の情報を取得する:
 
