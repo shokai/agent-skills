@@ -3,7 +3,7 @@
 - Area: {領域名}
 - Investigated at: {YYYY-MM-DD HH:mm:ss}
 - Source commit: {git rev-parse --short HEAD の出力}
-- Investigator: {Agent名 (model名)}
+- Investigator: {Agent名 (model名)}, with {外部Agentの実行環境。consultation skillが取得した表記をそのまま使い、複数使った場合は列挙する}
 
 ## 調査対象
 
