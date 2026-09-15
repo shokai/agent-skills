@@ -20,7 +20,7 @@ disable-model-invocation: true
 5. pushはユーザーの明示的な指示を待つ
 6. PR作成を指示されたらdraftで作成し、対話コンテキストをexportし、インラインレビューコメントの草稿を書く
 7. 草稿を提示したら投稿方法をユーザーに確認する。AIが投稿するか、ユーザー自身が投稿するか
-8. sanity-reviewはユーザーの指示を待ち、指摘対応をpushしてからready for review
+8. sanity-reviewはユーザーの指示を待ち、指摘対応をpushし、対応内容を簡単にコメント投稿してからready for review
 
 ## bug確認
 
