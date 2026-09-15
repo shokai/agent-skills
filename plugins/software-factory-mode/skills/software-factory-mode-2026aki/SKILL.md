@@ -19,7 +19,8 @@ disable-model-invocation: true
 4. 必要に応じてcommit。default branchには直接commitしない
 5. pushはユーザーの明示的な指示を待つ
 6. PR作成を指示されたらdraftで作成し、対話コンテキストをexportし、インラインレビューコメントの草稿を書く
-7. sanity-reviewはユーザーの指示を待ち、指摘対応をpushしてからready for review
+7. 草稿を提示したら投稿方法をユーザーに確認する。AIが投稿するか、ユーザー自身が投稿するか
+8. sanity-reviewはユーザーの指示を待ち、指摘対応をpushしてからready for review
 
 ## bug確認
 
@@ -43,7 +44,8 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 
 ## レビュー
 
-- sanity-review skillの実行者はレビュアーではなく実装者。概要欄とインラインレビューコメントを書き終えてから、レビュアーに依頼する前に実行する
+- sanity-review skillの実行者はレビュアーではなく実装者。概要欄を書き終えてから、レビュアーに依頼する前に実行する
+- インラインレビューコメントを投稿してからsanity-reviewを実行するのが望ましい。コメントでの実装者の説明と実装の整合性を確認する材料になる
 - 開発したsessionでsanity-reviewを依頼された時は、開発sessionの会話履歴を引き継がないOpusのsubagentを起動する。subagentにはPRのURL、実行条件、報告書の出力先だけを渡す。skillのフォールバック手順を使わない事も指示に含める
 - sanity-reviewの前提: 対話コンテキストがPRコメントに投稿されている事。同じマシンにCodex CLIがある事。Codex CLIが無ければ実行せず、Codexとの相談に失敗したら中止する。Opus以上を使う。Sonnetではレビューできない
 - sanity-reviewが済むまでPRはdraftのままにする。指摘への対応をpushし終えてから、実装者がdraftからready for reviewに切り替える
