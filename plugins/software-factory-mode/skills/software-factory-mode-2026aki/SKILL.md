@@ -2,7 +2,7 @@
 name: software-factory-mode-2026aki
 description: >-
   Software Factory 2026秋の開発フローをこのsessionに適用する。
-  変更が一段落したらcodexでbug確認、draft PR作成、対話コンテキストexport、インラインレビューコメントの草稿、ユーザーの指示でsanity-review、という進め方を定める。
+  着手前に不明点をユーザーに質問、変更が一段落したらcodexでbug確認、draft PR作成、対話コンテキストexport、インラインレビューコメントの草稿、ユーザーの指示でsanity-review、という進め方を定める。
   開発の開始時にユーザーが手動で起動する。
 disable-model-invocation: true
 ---
@@ -13,12 +13,13 @@ disable-model-invocation: true
 
 ## 基本フロー
 
-1. 変更が一段落したらbug確認
-2. formatterとlinterを実行
-3. 必要に応じてcommit。default branchには直接commitしない
-4. pushはユーザーの明示的な指示を待つ
-5. PR作成を指示されたらdraftで作成し、対話コンテキストをexportし、インラインレビューコメントの草稿を書く
-6. sanity-reviewはユーザーの指示を待ち、指摘対応をpushしてからready for review
+1. 着手前に不明点・懸念事項をユーザーに質問し、解消してからplan modeに入る
+2. 変更が一段落したらbug確認
+3. formatterとlinterを実行
+4. 必要に応じてcommit。default branchには直接commitしない
+5. pushはユーザーの明示的な指示を待つ
+6. PR作成を指示されたらdraftで作成し、対話コンテキストをexportし、インラインレビューコメントの草稿を書く
+7. sanity-reviewはユーザーの指示を待ち、指摘対応をpushしてからready for review
 
 ## bug確認
 
