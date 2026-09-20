@@ -123,7 +123,7 @@
       "name": "software-factory-mode",
       "source": "./plugins/software-factory-mode",
       "description": "Software Factory 2026秋の開発フローをsessionに適用するmode skill。着手前に不明点をユーザーに質問、変更が一段落したらcodexでbug確認、draft PR作成、対話コンテキストexport、インラインレビューコメントの草稿、ユーザーの指示でsanity-review、という進め方を定める。開発の開始時にユーザーが手動で起動する。",
-      "version": "0.2.3",
+      "version": "0.3.0",
       "author": {
         "name": "shokai"
       },
