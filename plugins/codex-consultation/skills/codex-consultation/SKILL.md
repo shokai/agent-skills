@@ -95,10 +95,10 @@ codexに渡すプロンプトを相談元Agentが設計する。以下の指針�
 
 ## 4. codexの実行
 
-Bashツールで以下の形式で実行する:
+プロンプトを一時ファイルに書き出し、Bashツールで以下の形式で実行する:
 
 ```
-codex exec --ephemeral -s workspace-write -c sandbox_workspace_write.network_access=true "ここにプロンプトを入れる" < /dev/null
+codex exec --ephemeral -s workspace-write -c sandbox_workspace_write.network_access=true < /path/to/prompt.md
 ```
 
 ### 重要なオプション
@@ -106,8 +106,9 @@ codex exec --ephemeral -s workspace-write -c sandbox_workspace_write.network_acc
 - `--ephemeral` は必須。セッションを保存しない
 - `-s workspace-write -c sandbox_workspace_write.network_access=true` は必須。デフォルトではサンドボックスがネットワークアクセスをブロックするため、`gh`や`curl`などの外部通信コマンドが失敗する
 - ワーキングディレクトリはカレントディレクトリがそのまま使われる
-- プロンプトはCLI引数として渡す（標準入力ではない）
-- `< /dev/null` は必須。プロンプトを引数で渡していても、stdinがpipe状態だとcodexは追加入力を `<stdin>` ブロックとして読みに行きEOFまで待つため、明示的に閉じないとhangする
+- カレントディレクトリはgitリポジトリ内である必要がある。非gitディレクトリだとcodexは起動せずに終了する。エラーメッセージはtrust設定の問題に見えるが、判定条件はgitリポジトリ内かどうかだけ
+- プロンプトはstdinから渡す。CLI引数で渡すと、stdinがpipe状態のときcodexが追加入力を `<stdin>` ブロックとして読みEOFまで待つためhangする
+- プロンプトファイルはリポジトリの作業ツリー外に置く。作業ツリー内に置くと未commitの変更として現れ、レビュー対象を汚染する
 
 ### タイムアウト
 
