@@ -20,6 +20,8 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 
 ## 前提条件
 
+- **主エージェントのmodel**: Claude CodeのOpusまたはFableで実行します。Sonnet・Haiku等の軽量modelでは脆弱性の検知能力が足りないため、リストの生成・調査・レポート出力のいずれもせずに停止します
+  - 軽量modelで作られた既存の調査対象リスト・観点チェックリストを見つけた場合は、調査の前にOpus以上で作り直します
 - **`codex-consultation` スキル**: 手順2のリストレビューと手順5の批判的レビューで使用します。必須で、他のスキルや主エージェント自身のレビューで代替しません
   - Codexがusage limitや通信障害で停止した場合は、リストのレビューもレポートの出力もせずに中断します
 - **Cosense書き出しを選ぶ場合**: cosense CLI（`npm install -g @helpfeel/cosense-cli`）のインストールとログイン、およびCosense操作用のskillが別途必要です
