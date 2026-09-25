@@ -11,6 +11,13 @@ disable-model-invocation: true
 
 このsessionでは以下の開発フローに従う。formatter・linter・testの実行方法や依存関係の準備といったrepo固有の手順は、repoのCLAUDE.mdやREADMEに従う。
 
+## 実行環境の確認
+
+modeを適用する前に実行環境を確認する。いずれかを満たさなければ、modeを適用せず、満たさない条件をユーザーに報告して停止する:
+
+1. 自分のmodelがOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは、新しい世代でも満たさない
+2. Codex CLIがある場合、そのmodelがSol（`gpt-5.6-sol`）以上のflagshipで、reasoning effortがmedium以上である。Bashツールで `command -v codex` を実行して有無を確認し、あれば短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
+
 ## 基本フロー
 
 1. 着手前に不明点・懸念事項をユーザーに質問し、解消してからplan modeに入る
@@ -26,7 +33,7 @@ disable-model-invocation: true
 
 変更が一段落したら、codex-consultation skillでよく相談し、実装内容を確認する。単純なbugであれば修正する。解決方法が複数ある場合はユーザーに質問する。
 
-Codex CLIが無い環境ではsubagent-consultation skillにフォールバックし、報告にその旨を明記する。Codexが利用制限や通信障害等で使えなくなった時はフォールバックせず、ユーザーに報告して判断を仰ぐ。
+Codex CLIが無い環境ではsubagent-consultation skillにフォールバックし、報告にその旨を明記する。subagentはOpus以上のtierのmodelを指定して起動する。Codexが利用制限や通信障害等で使えなくなった時はフォールバックせず、ユーザーに報告して判断を仰ぐ。
 
 ## Gitの使い方
 
@@ -47,6 +54,6 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - sanity-review skillの実行者はレビュアーではなく実装者。概要欄を書き終えてから、レビュアーに依頼する前に実行する
 - 変更の規模を理由にsanity-reviewを省略しない。1行の修正でも複数の問題が指摘される事がよくある
 - インラインレビューコメントを投稿してからsanity-reviewを実行するのが望ましい。コメントでの実装者の説明と実装の整合性を確認する材料になる
-- 開発したsessionでsanity-reviewを依頼された時は、開発sessionの会話履歴を引き継がないOpusのsubagentを起動する。subagentにはPRのURL、実行条件、報告書の出力先だけを渡す。出力先はチャットとpull requestの両方に固定する。skillのフォールバック手順を使わない事も指示に含める
-- sanity-reviewの前提: 対話コンテキストがPRコメントに投稿されている事。同じマシンにCodex CLIがある事。Codex CLIが無ければ実行せず、Codexとの相談に失敗したら中止する。Opus以上を使う。Sonnetではレビューできない
+- 開発したsessionでsanity-reviewを依頼された時は、開発sessionの会話履歴を引き継がない、Opus以上のtierのsubagentを起動する。subagentにはPRのURL、実行条件、報告書の出力先だけを渡す。出力先はチャットとpull requestの両方に固定する。skillのフォールバック手順を使わない事も指示に含める
+- sanity-reviewの前提: 対話コンテキストがPRコメントに投稿されている事。同じマシンにCodex CLIがあり、modelとreasoning effortが「実行環境の確認」の条件を満たす事。Codex CLIが無ければ実行せず、Codexとの相談に失敗したら中止する。Opus以上のtierを使う。Sonnetではレビューできない
 - sanity-reviewが済むまでPRはdraftのままにする。指摘への対応をpushし終えてから、実装者がdraftからready for reviewに切り替える
