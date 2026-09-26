@@ -17,10 +17,23 @@ argument-hint: "[PR-URL-or-number]"
 - dependabotやrenovatebotが作成したライブラリ更新pull request
 - 人間が作成したライブラリ更新pull request
 
+## 実行環境の確認
+
+レビューを始める前に、あなたの実行環境が次のいずれかに当てはまる事を確認してください。当てはまらない場合は、レポートを作成せず、その旨を報告して停止してください。
+
+- modelがClaudeのOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは、新しい世代であっても当てはまらない
+- modelがCodexのSol以上のflagshipで、reasoning effortがmedium以上である。Luna・Terra等の軽量tierと、Solより前の世代のmodelは当てはまらない
+
 ## 章立てと実行すべき作業
 
 以下に示した形式に従って章立てし、レポートを作成してください。
 外部のドキュメントを参照した場合はそのURLを明記してください。
+
+レポートの冒頭には、作成者として自分のAgent名とmodel名を次の形式で書いてください:
+
+```
+Reviewer: Claude Code (claude-opus-5-5)
+```
 
 ### 1. ライブラリの概要
 

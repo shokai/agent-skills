@@ -34,8 +34,10 @@ PRのレビュー報告書を作成するAgent Skillです。bugや脆弱性の�
 
 ## 前提条件
 
+- 主エージェントのmodel: Claude CodeのOpus以上のtier（Opus、Fable、Mythos等）で実行する。Sonnet・Haiku等の下位tierやCodex等のClaude以外のmodelでは、レビューせずに停止する
 - GitHub CLI（`gh`）がインストール済みで認証済みであること
 - `codex-consultation` スキル: Codexとの相談によるバグ・脆弱性調査と整合性確認に使用
+  - CodexのmodelはSol以上のflagship（Sol、Astra等）、reasoning effortはmedium以上に設定しておく。Luna・Terra等の軽量tierやSolより前の世代のmodelでは停止する
   - 未インストールの場合は `subagent-consultation` にフォールバックする
 - `subagent-consultation` スキル: codex-consultationが利用できない場合のフォールバック先
   - 両方未インストールの場合はAgent単独で続行する

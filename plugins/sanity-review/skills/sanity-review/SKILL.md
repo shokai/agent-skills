@@ -17,7 +17,16 @@ feature/bugfix/refactoring PRをレビューし、レビュー報告書を作成
 
 ## 手順
 
-### 手順0: PR情報の取得と報告書の出力先の確認
+### 手順0: 状況確認
+
+#### 実行環境の確認
+
+まず実行環境を確認する。いずれかを満たさなければレビューを行わず、満たさない条件をユーザーに報告して停止する:
+
+1. 自分のmodelがClaudeのOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは新しい世代でも満たさず、Codex等のClaude以外のmodelも満たさない
+2. Codex CLIがある場合、そのmodelがSol以上のflagshipで、reasoning effortがmedium以上である。Bashツールで `command -v codex` を実行して有無を確認し、あれば短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
+
+#### PR情報の取得
 
 引数でPR番号またはURLが指定されている場合はそのPRを対象とする。
 指定がない場合は、現在のブランチに紐づくPRを自動検出する。
@@ -92,10 +101,8 @@ AskUserQuestionツールで以下を確認する:
 
 手順3・手順4・手順5では外部Agentにセカンドオピニオンを求める（ただし手順4の「長期視点で命名・設計を考察する」サブセクションは対象外）。手順6では疑わしい点がある場合に限り外部Agentへ相談する。以下のフォールバック順序に従い、**推測で判断せず実際に呼び出して試す**こと:
 
-自分自身がCodex CLIの場合は2から開始する。そうでない場合は1から開始する。
-
 1. Skill toolで `codex-consultation` を呼び出す。失敗した場合は2へ進む
-2. Skill toolで `subagent-consultation` を呼び出す。失敗した場合は3へ進む
+2. Skill toolで `subagent-consultation` を呼び出す。subagentはOpus以上のtierのmodelを指定して起動する。失敗した場合は3へ進む
 3. main agentが単独で作業を実行する
 
 フォールバックが発生した場合や、外部Agentが利用できなかった場合は、報告書の「レビュー作業において発生した問題」セクションに記載する。
