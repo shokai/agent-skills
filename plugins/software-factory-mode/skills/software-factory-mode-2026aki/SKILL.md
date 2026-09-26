@@ -38,6 +38,9 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 ## Gitの使い方
 
 - commit前に現在のbranchを確認する。default branchにいる場合はcommitせず停止し、変更内容に基づいたbranch名を提案してユーザーに確認する
+- branch名は、入力補完や一覧から探しやすくなるよう、最重要トピックを先頭に置いて `対象-性質` の順にする。各セグメントはcamelCaseで書き、セグメント間をハイフンでつなぐ。例: `reviewSkills-requireOpusModel`
+  - `fix/` や `worktree-` 等の接頭辞を付けない
+- `git commit --amend` やreflogを使った巻き戻しなど、commit済みの履歴を書き換える操作は勝手に行わない。必要だと判断した場合は、実行前にユーザーに提案して指示を仰ぐ
 - 作成済みのPRがあるbranchにpushしたら、対話コンテキストをexportする
 - git worktreeを作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする
 
