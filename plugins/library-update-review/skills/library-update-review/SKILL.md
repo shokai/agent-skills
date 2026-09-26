@@ -17,6 +17,11 @@ argument-hint: "[PR-URL-or-number]"
 - dependabotやrenovatebotが作成したライブラリ更新pull request
 - 人間が作成したライブラリ更新pull request
 
+## 実行環境の確認
+
+レビューを始める前に、あなたのmodelがClaudeのOpus以上のtier（Opus、Fable、Mythos等）である事を確認してください。
+Opus以上のtierでない場合は、レポートを作成せず、その旨を報告して停止してください。Sonnet・Haiku等の下位tierは、新しい世代であってもこのレビューに使えません。Codex等のClaude以外のmodelも使えません。
+
 ## 章立てと実行すべき作業
 
 以下に示した形式に従って章立てし、レポートを作成してください。
