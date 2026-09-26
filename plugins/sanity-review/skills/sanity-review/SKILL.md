@@ -26,6 +26,8 @@ feature/bugfix/refactoring PRをレビューし、レビュー報告書を作成
 1. 自分のmodelがClaudeのOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは新しい世代でも満たさず、Codex等のClaude以外のmodelも満たさない
 2. Codex CLIがある場合、そのmodelがSol以上のflagshipで、reasoning effortがmedium以上である。Bashツールで `command -v codex` を実行して有無を確認し、あれば短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
 
+`codex exec` を直接実行するのはこの確認だけにする。以降の手順でCodexに相談する時は、必ず「外部Agent相談の共通方針」に従い、Skill toolで `codex-consultation` を呼び出す。Codexの実行環境の取得と相談の往復は、codex-consultationが担う。
+
 #### PR情報の取得
 
 引数でPR番号またはURLが指定されている場合はそのPRを対象とする。
