@@ -21,6 +21,7 @@
 /plugin install prose-proofreading
 /plugin install unconventional-simplification
 /plugin install codepatrol
+/plugin install software-factory-mode
 ```
 
 ### スキルをうまくインストールできない場合
@@ -152,4 +153,16 @@ Markdownドキュメントの文章校正スキルです。ガイドラインに
 
 ```bash
 /codepatrol [調査対象リストを更新しろ]
+```
+
+### software-factory-mode
+
+Software Factory 2026秋の開発フローをsessionに適用するmode skillです。開発の開始時に手動で起動すると、着手前の質問、codexとのbug確認、draft PRの作成、対話コンテキストのexport、インラインレビューコメントの草稿、sanity-reviewという順序で作業を進めます。
+
+repoのCLAUDE.mdを書き換えずに、自分のマシンにインストールするだけで開発フローを持ち込めます。
+
+依存するcodex-consultation・subagent-consultation・conversation-context・sanity-reviewも一緒にインストールされます。
+
+```bash
+/software-factory-mode:software-factory-mode-2026aki
 ```
