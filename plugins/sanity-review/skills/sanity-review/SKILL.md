@@ -15,16 +15,18 @@ feature/bugfix/refactoring PRをレビューし、レビュー報告書を作成
 
 - ライブラリ更新PR（dependabot/renovatebot等）は `library-update-review` skillの対象であり、このスキルの対象外
 
-## 実行環境の確認
+## 手順
 
-手順0に進む前に実行環境を確認する。いずれかを満たさなければレビューを行わず、満たさない条件をユーザーに報告して停止する:
+### 手順0: 実行環境の確認、PR情報の取得、報告書の出力先の確認
+
+#### 実行環境の確認
+
+まず実行環境を確認する。いずれかを満たさなければレビューを行わず、満たさない条件をユーザーに報告して停止する:
 
 1. 自分のmodelがClaudeのOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは新しい世代でも満たさず、Codex等のClaude以外のmodelも満たさない
 2. Codex CLIがある場合、そのmodelがSol（`gpt-5.6-sol`）以上のflagshipで、reasoning effortがmedium以上である。Bashツールで `command -v codex` を実行して有無を確認し、あれば短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
 
-## 手順
-
-### 手順0: PR情報の取得と報告書の出力先の確認
+#### PR情報の取得
 
 引数でPR番号またはURLが指定されている場合はそのPRを対象とする。
 指定がない場合は、現在のブランチに紐づくPRを自動検出する。
