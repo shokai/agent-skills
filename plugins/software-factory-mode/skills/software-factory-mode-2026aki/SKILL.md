@@ -16,7 +16,7 @@ disable-model-invocation: true
 modeを適用する前に実行環境を確認する。いずれかを満たさなければ、modeを適用せず、満たさない条件をユーザーに報告して停止する:
 
 1. 自分のmodelがOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは、新しい世代でも満たさない
-2. Codex CLIがある場合、そのmodelがSol（`gpt-5.6-sol`）以上のflagshipで、reasoning effortがmedium以上である。Bashツールで `command -v codex` を実行して有無を確認し、あれば短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
+2. Codex CLIがある場合、そのmodelがSol以上のflagshipで、reasoning effortがmedium以上である。Bashツールで `command -v codex` を実行して有無を確認し、あれば短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
 
 ## 基本フロー
 

@@ -36,7 +36,7 @@ argument-hint: "[調査対象リストを更新しろ]"
 
 1. 自分のmodelがOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは脆弱性の検知能力が足りない
 2. Codex CLIがインストールされている。Bashツールで `command -v codex` を実行して確認する
-3. CodexのmodelがSol（`gpt-5.6-sol`）以上のflagshipで、reasoning effortがmedium以上である。短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
+3. CodexのmodelがSol以上のflagshipで、reasoning effortがmedium以上である。短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
 
 次に以下の存在を確認する:
 

@@ -22,7 +22,7 @@ argument-hint: "[PR-URL-or-number]"
 レビューを始める前に、あなたの実行環境が次のいずれかに当てはまる事を確認してください。当てはまらない場合は、レポートを作成せず、その旨を報告して停止してください。
 
 - modelがClaudeのOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは、新しい世代であっても当てはまらない
-- modelがCodexのSol（`gpt-5.6-sol`）以上のflagshipで、reasoning effortがmedium以上である。Luna・Terra等の軽量tierと、Solより前の世代のmodelは当てはまらない
+- modelがCodexのSol以上のflagshipで、reasoning effortがmedium以上である。Luna・Terra等の軽量tierと、Solより前の世代のmodelは当てはまらない
 
 ## 章立てと実行すべき作業
 
