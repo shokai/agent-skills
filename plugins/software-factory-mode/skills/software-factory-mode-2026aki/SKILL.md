@@ -68,7 +68,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 
 - 起動した開発サーバーやコンテナは、目視確認・test・lint・Codexとの相談といった、それを使う作業が終わったら止める。再び要る時に起動し直す
 - 他のworktreeやsessionが起動した物は、ユーザーの指示があるまで止めない
-- mergeされたら、作業に使ったworktreeとbranchを消す。branchはremoteのbranchと一致する事を確かめてから消す。worktree専用に作られたdocker volumeやimage等も一緒に消す。main worktreeの物は残す
+- mergeされたら、作業に使ったworktreeとbranchを消す。worktree専用に作られたdocker volumeやimage等も一緒に消す。main worktreeの物は残す
 
 ## 手順全体を通して守る事
 
@@ -84,6 +84,9 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 タスクの指示元が作業ページ・issue・チケット等のドキュメントにある時に行う。記法や状態の表し方はプロジェクトの慣習に従い、既存の記述に合わせる。
 
 - 作業を開始したら、指示元に自分が着手した事を書く
-- PRの概要欄に指示元のURLを書き、指示元にはPRへのリンクを足す。親PRに向けたsub PRを作った時も、親子の両方から相互にリンクする
-- draft PR作成・ready for review・mergeの各時点で、指示元の作業ページと、それを載せている親のタスクまとめページの状態を同期する。mergeは`gh pr view`で確かめてから反映する
-- PR概要欄や共有ドキュメントを編集する時は、直前に最新版を取得し、自分が元にした版から変わっていない事を確かめてから書く。変わっていれば最新版の上に自分の変更を当て直す
+- PRの概要欄に指示元のURLを書き、指示元にはPRへのリンクを足す。親PRに向けたsub PRを作った時も、親PRとsub PRを相互にリンクする
+- draft PR作成・ready for review・mergeの各時点で、指示元と、それを載せている親のタスクまとめページの状態を同期する。mergeは`gh pr view`で確かめてから反映する
+
+### 共有テキストの編集
+
+PR概要欄や共有ドキュメントを編集する時は、直前に最新版を取得し、自分が元にした版から変わっていない事を確かめてから書く。変わっていれば最新版の上に自分の変更を当て直す。
