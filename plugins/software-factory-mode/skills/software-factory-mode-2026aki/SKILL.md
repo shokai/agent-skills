@@ -85,7 +85,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 
 - 作業を開始したら、指示元に自分が着手した事を書く
 - PRの概要欄に指示元のURLを書き、指示元にはPRへのリンクを足す。親PRに向けたsub PRを作った時も、親PRとsub PRを相互にリンクする
-- draft PR作成・ready for review・mergeの各時点で、指示元と、それを載せている親のタスクまとめページの状態を同期する。mergeは`gh pr view`で確かめてから反映する
+- draft PR作成・ready for review・mergeの各時点で、指示元と、それを載せている親のタスクまとめページの状態を同期する。mergeは実際にmergeされた事を確かめてから反映する
 
 ### 共有テキストの編集
 
