@@ -177,3 +177,5 @@ repoのCLAUDE.mdを書き換えずに、自分のマシンにインストール�
 ```bash
 /kuden:agent-skill
 ```
+
+software-factory-modeには含まれていません。software-factory-modeでAgent Skillを開発する時は、両方を起動します。
