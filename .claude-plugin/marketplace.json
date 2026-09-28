@@ -109,7 +109,7 @@
     {
       "name": "codepatrol",
       "source": "./plugins/codepatrol",
-      "description": "リポジトリを領域ごとに巡回するセキュリティ調査スキル。観点チェックリストに基づき未調査領域を調査し、Codexの批判的レビューを経てレポート出力する。複数session前提の長期作業。",
+      "description": "リポジトリを領域ごとに巡回するセキュリティ調査スキル。観点チェックリストに基づき未調査領域を調査し、Codexの批判的レビューを経てレポート出力する。複数session前提の長期作業。複数の領域をsubagentで続けて調査するcodepatrol-sweepを含む。",
       "version": "0.3.3",
       "author": {
         "name": "shokai"
