@@ -1,7 +1,7 @@
 ---
 name: codepatrol-sweep
 description: >-
-  リポジトリの複数の領域を、領域ごとに起動したsubagentで順にセキュリティ調査し、全領域のレポートを揃える。
+  リポジトリの複数の領域を、領域ごとに起動したsubagentで順にセキュリティ調査する。
   このsessionは調査を指揮し、コードは読まない。各subagentがcodepatrol skillを実行してレポートを出力する。
   ユーザーが手動で起動する。
 argument-hint: "[未調査の領域だけ | 全領域 | 領域名...]"
@@ -18,7 +18,7 @@ codepatrol skillによる調査を、複数の領域に対して続けて行う�
 ## 準備
 
 1. codepatrol skillの手順1にある実行環境の条件を、このsessionでも確認する。満たさなければ、満たさない条件をユーザーに報告して停止する
-2. `.dev/codepatrol/` の `targets.md`・`config.md`・`checklist.md` が揃っている事を確認する。揃っていない時と、codepatrol skillの手順1が作り直しと判定する状態の時は、先にcodepatrol skillを単独で実行するようユーザーに伝えて停止する。調査の前にリストを更新したい時も、同じく先に済ませてもらう
+2. `.dev/codepatrol/` の `targets.md`・`config.md`・`checklist.md` が揃っている事を確認する。揃っていない時と、codepatrol skillの手順1が手順2での対処を求める状態の時は、先にcodepatrol skillを単独で実行するようユーザーに伝えて停止する。調査の前にリストを更新したい時も、同じく先に済ませてもらう
 3. 調査対象のリポジトリを、最新のdefault branchに追従させる。ユーザーのcheckoutが別のbranchにある等で追従できない時は、調査用のworktreeを用意する
 
 ## 調査する領域を決める
@@ -56,7 +56,7 @@ subagentには、Opus以上のtierのmodelを指定する。
 - Codexが止まってcodepatrol skillの手順が中断を求めた時は、途中結果を作業用ディレクトリに書き出して終了する事
 - 最終報告に含める事
 
-subagentがcodepatrol skillを起動できない環境では、SKILL.mdのパスを指示に含め、同じディレクトリのファイルと合わせて読ませる。
+subagentがskillを起動できない環境では、codepatrolとcodex-consultationのSKILL.mdのパスを指示に含め、同じディレクトリのファイルと合わせて読ませる。
 
 ### 発見の名前の一覧
 
@@ -88,9 +88,9 @@ subagentがcodepatrol skillを起動できない環境では、SKILL.mdのパス
 
 subagentの最終報告は自己申告である。ユーザーに報告する前に、以下を自分で確かめる。
 
-- レポートが出力されている
+- レポートが、設定された書き出し先に出力されている
 - Codexへの相談が最後まで完了している。作業用ディレクトリに残った出力で確かめる
-- Codexへの相談が、codex-consultation skillを通して行われている
+- Codexへの相談が、codex-consultation skillの手順を通して行われている。subagentの実行の記録を読める時は記録で確かめ、読めない時はsubagentの報告に基づく内容として扱う
 
 ユーザーへの報告では、subagentの報告に基づく内容と、自分で確かめた内容を分ける。
 
@@ -108,6 +108,7 @@ subagentの最終報告は自己申告である。ユーザーに報告する前
 
 - Codexが止まり、subagentがレポートを出力せずに中断した。指揮役が自分で調査を代行する事も、Codexを使わない調査に切り替える事もしない
 - subagentが利用上限で止まった。上限が解けたら、新しいsubagentを起動せず、止まったsubagentに中断箇所から再開させる。途中結果とCodexの出力を引き継げる
+- レポートが、設定された書き出し先に出力されなかった。次に起動した時に、その領域が未調査として扱われる
 - レポートの間に、指揮役では決められない食い違いがある
 
 ## 出力済みのレポートを消さない

@@ -157,7 +157,7 @@ Markdownドキュメントの文章校正スキルです。ガイドラインに
 
 ```bash
 /codepatrol [調査対象リストを更新しろ]
-/codepatrol-sweep [未調査の領域だけ | 全領域 | 領域名...]
+/codepatrol:codepatrol-sweep [未調査の領域だけ | 全領域 | 領域名...]
 ```
 
 ### software-factory-mode
