@@ -152,8 +152,12 @@ Markdownドキュメントの文章校正スキルです。ガイドラインに
 
 詳細は [plugins/codepatrol/README.md](plugins/codepatrol/README.md) を参照してください。
 
+- **codepatrol**: 1つの領域を調査してレポートを出力する
+- **codepatrol-sweep**: 複数の領域を、領域ごとに起動したsubagentで続けて調査する
+
 ```bash
 /codepatrol [調査対象リストを更新しろ]
+/codepatrol-sweep [未調査の領域だけ | 全領域 | 領域名...]
 ```
 
 ### software-factory-mode
