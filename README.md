@@ -22,6 +22,7 @@
 /plugin install unconventional-simplification
 /plugin install codepatrol
 /plugin install software-factory-mode
+/plugin install kuden
 ```
 
 ### スキルをうまくインストールできない場合
@@ -166,3 +167,15 @@ repoのCLAUDE.mdを書き換えずに、自分のマシンにインストール�
 ```bash
 /software-factory-mode:software-factory-mode-2026aki
 ```
+
+### kuden
+
+作者がAIとの対話の中で伝えてきた心得を集めたガイドライン群です。必要なsessionで手動で起動します。
+
+- **agent-skill**: Agent Skillを書く時に、何を書き、何を書かないかの判断基準と、レビュー指摘の採否の基準
+
+```bash
+/kuden:agent-skill
+```
+
+software-factory-modeには含まれていません。software-factory-modeでAgent Skillを開発する時は、両方を起動します。

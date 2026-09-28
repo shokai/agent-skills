@@ -1,0 +1,10 @@
+{
+  "name": "kuden",
+  "displayName": "口伝",
+  "description": "作者がAIとの対話の中で伝えてきた心得を集めたガイドライン群。Agent Skillを書く時に、何を書き、何を書かないかの判断基準を定める。必要なsessionでユーザーが手動で起動する。",
+  "author": {
+    "name": "shokai"
+  },
+  "repository": "https://github.com/shokai/agent-skills",
+  "license": "MIT"
+}
