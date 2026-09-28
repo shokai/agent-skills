@@ -51,12 +51,9 @@ subagentには、Opus以上のtierのmodelを指定する。
 - 並走している領域と、担当する領域とファイルが重なる領域
 - ユーザーに質問できないので、判断がつかない事は最終報告に書く事
 - 調査対象のcheckoutでは、branchの切り替え・pull・commitをしない事
-- codepatrol skillの手順2にある `checklist.md` と `targets.md` の更新は行わない事。複数のsubagentが同じファイルを作り直すと、互いの変更を壊す
-- `checklist.md` と `targets.md` は、担当する領域に関する事実の誤りだけを、最小限の置換で直す事。他のsubagentも同じファイルを編集するので、編集の直前に読み直す。commitはしない
+- `checklist.md` と `targets.md` は、並走するsubagentも編集する事。codepatrol skillの手順2にある更新は行わず、担当する領域に関する事実の誤りだけを、編集の直前に読み直した上で、最小限の置換で直す。commitはしない
 - Codexが止まってcodepatrol skillの手順が中断を求めた時は、途中結果を作業用ディレクトリに書き出して終了する事
 - 最終報告に含める事
-
-subagentがskillを起動できない環境では、codepatrolとcodex-consultationのSKILL.mdのパスを指示に含め、同じディレクトリのファイルと合わせて読ませる。
 
 ### 発見の名前の一覧
 
