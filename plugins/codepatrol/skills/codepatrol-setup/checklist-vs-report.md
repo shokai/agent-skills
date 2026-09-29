@@ -1,10 +1,10 @@
 # チェックリストとレポートの責任境界
 
 観点リスト（checklist）と調査レポート（report）で役割を分ける。
-checklistがbugを先取りすると、調査者や手順5のCodexがその箇所に引っ張られ、本当に見るべき別のbugを見落とす。
+checklistがbugを先取りすると、調査者や相談先のCodexがその箇所に引っ張られ、本当に見るべき別のbugを見落とす。
 checklistは調査の足場であって、発見リストではない。
 
-このガイドラインは、SKILL.mdの手順2（生成）・手順4（更新）・手順5（Codexの指摘の反映）から参照される。
+このガイドラインは、checklistを生成・更新するcodepatrol-setupと、調査中にchecklistの事実の誤りを直し、Codexの指摘を反映するcodepatrol-reportから参照される。
 
 ## checklist（`CHECKLIST.md` マスター / `.dev/codepatrol/checklist.md` 作業用）
 
@@ -44,7 +44,7 @@ checklistは調査の足場であって、発見リストではない。
 
 ## 境界に合わない記述を見つけたら
 
-checklistを生成・更新する時、および既存checklistを使う前に、この境界に照らして全体を確認する。
+checklistを生成・更新する時、および既存checklistを調査の担当に読ませる前に、この境界に照らして全体を確認する。
 bug断定・深刻度・悪用仮説・レポート発見への言及があれば、次のいずれかに直す:
 
 - 仕様事実に書き直す（例: 「〜で突破できる【High】」→ 「〜という機構である」）
