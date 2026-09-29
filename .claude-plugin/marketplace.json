@@ -109,7 +109,7 @@
     {
       "name": "codepatrol",
       "source": "./plugins/codepatrol",
-      "description": "リポジトリを領域ごとに巡回するセキュリティ調査スキル。観点チェックリストに基づき未調査領域を調査し、Codexの批判的レビューを経てレポート出力する。複数session前提の長期作業。起動したsessionが指揮役になり、領域ごとに起動したsubagentが調査する。",
+      "description": "リポジトリを領域ごとに巡回するセキュリティ調査スキル。観点チェックリストに基づき未調査領域を調査し、Codexの批判的レビューを経てレポート出力する。複数session前提の長期作業。起動したsessionが指揮役になり、領域ごとに起動したsubagentが調査する。レポートの発見のトリアージと、修正の状態の同期も行う。",
       "version": "2.0.1",
       "author": {
         "name": "shokai"
