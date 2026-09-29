@@ -3,7 +3,6 @@ name: codepatrol-report
 description: >-
   リポジトリの1つの領域をセキュリティ観点で調査し、Codexの批判的レビューを経てレポートを出力する。
   codepatrol skillが起動したsubagentが実行する。ユーザーが直接呼び出す事は想定していない。
-user-invocable: false
 ---
 
 # 1つの領域のセキュリティ調査

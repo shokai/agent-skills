@@ -3,7 +3,6 @@ name: codepatrol-setup
 description: >-
   セキュリティ調査に使う調査対象リストと観点リストを、リポジトリのコードを読んで生成・更新する。
   codepatrol skillが起動したsubagentが実行する。ユーザーが直接呼び出す事は想定していない。
-user-invocable: false
 ---
 
 # 調査対象リストと観点リストの生成・更新
