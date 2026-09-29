@@ -148,16 +148,12 @@ Markdownドキュメントの文章校正スキルです。ガイドラインに
 
 ### codepatrol
 
-リポジトリを領域ごとに巡回してセキュリティ調査するスキルです。調査対象リストと観点チェックリストに基づいて未調査の領域を選んで調査し、外部Agentによる批判的レビューを経てレポートを出力します。複数sessionにまたがる長期作業を前提とし、実行するたびに現状を確認して続きから進めます。
+リポジトリを領域ごとに巡回してセキュリティ調査するスキルです。起動したsessionが指揮役になり、領域ごとに起動したsubagentが、調査対象リストと観点チェックリストに基づいて調査し、外部Agentによる批判的レビューを経てレポートを出力します。複数sessionにまたがる長期作業を前提とし、実行するたびに現状を確認して続きから進めます。
 
 詳細は [plugins/codepatrol/README.md](plugins/codepatrol/README.md) を参照してください。
 
-- **codepatrol**: 1つの領域を調査してレポートを出力する
-- **codepatrol-sweep**: 複数の領域を、領域ごとに起動したsubagentで続けて調査する
-
 ```bash
-/codepatrol [調査対象リストを更新しろ]
-/codepatrol:codepatrol-sweep [未調査の領域だけ | 全領域 | 領域名...]
+/codepatrol:codepatrol [未調査の領域だけ | 全領域 | 領域名... | 調査対象リストを更新しろ]
 ```
 
 ### software-factory-mode
