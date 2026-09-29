@@ -2,13 +2,12 @@
 name: agent-skill
 description: >-
   Agent Skillを書く時の心得。SKILL.mdに何を書き、何を書かないかの判断基準と、レビュー指摘の採否の基準を定める。
-  Agent Skillを作成・編集するsessionで、ユーザーが手動で起動する。
-disable-model-invocation: true
+  Agent Skillを作成する時、編集する時、レビュー指摘の採否を決める時に読み込む。
 ---
 
 # Agent Skillを書く時の心得
 
-このsessionでAgent Skillを作成・編集する間、以下の基準に従う。
+Agent Skillを作成・編集する間、以下の基準に従う。
 
 ## 心得1. 読み手は賢いmodelである
 
