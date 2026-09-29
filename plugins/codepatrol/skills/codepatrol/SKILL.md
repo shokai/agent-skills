@@ -21,6 +21,8 @@ disable-model-invocation: true
 - **codepatrol-setup**: 調査対象リストと観点リストを生成・更新する
 - **codepatrol-report**: 1つの領域を調査してレポートを出力する
 
+subagentには、Opus以上のtierのmodelを指定する。
+
 ## ファイル構成
 
 ```
@@ -43,14 +45,18 @@ disable-model-invocation: true
 
 ## 調査用の作業ツリー
 
-調査と設定ファイルの編集は、調査用のbranchをcheckoutしたgit worktreeで行う。調査は長時間かかるので、その間もユーザーが自分のcheckoutで他の作業を続けられるようにする。
+調査は、調査用のbranchをcheckoutしたgit worktreeで行う。調査は長時間かかるので、その間もユーザーが自分のcheckoutで他の作業を続けられるようにする。
 
 - 調査用のbranchは、最新のdefault branchから切る。前のsessionが作った調査用のworktreeが残っていれば、それを使い、最新のdefault branchに追従させる
-- `.dev/codepatrol/` の設定ファイルやレポートが、default branchではなく他のbranchやユーザーのcheckoutにある時は、調査用のbranchに引き継ぐ。引き継がないと、設定を作り直し、調査済みの領域を未調査として扱ってしまう
-- `.dev/codepatrol/` がgit管理されていないリポジトリでは、設定ファイルとレポートはユーザーのcheckoutの物を読み書きし、commitはしない
-- subagentには、このworktreeでコードと設定ファイルを読ませる
 - 調査対象が他のリポジトリにもある時は、それらも最新のdefault branchの状態で読めるようにする
-- ユーザーのcheckoutは変更しない
+- ユーザーのcheckoutでは、branchの切り替えもファイルの変更もしない
+
+`.dev/codepatrol/` の置き場所は、リポジトリがこのディレクトリをgitで管理するかどうかで決まる。
+
+- 管理するリポジトリでは、調査用のworktreeの中の物を使う。設定ファイルやレポートが、default branchではなく他のbranchやユーザーのcheckoutにある時は、調査用のbranchに引き継ぐ。引き継がないと、設定を作り直し、調査済みの領域を未調査として扱ってしまう
+- gitignoreしている等、管理しないリポジトリでは、ユーザーのcheckoutの中の物を使う。worktreeには現れないためである。ユーザーのcheckoutで書き換えてよいのは、このディレクトリだけである。commitはしない
+
+subagentには、コードを読む場所と、`.dev/codepatrol/` の場所の両方を伝える。
 
 ## セットアップ
 
@@ -92,7 +98,7 @@ disable-model-invocation: true
 
 codepatrol-setupでのCodexのレビューを経ていないリストで、調査を始めない。Codexが止まってレビューが完了しなかった時は、ユーザーに報告して判断を待つ。
 
-調査を始める前に `checklist.md` を読み、[checklistとレポートの責任境界](../codepatrol-setup/checklist-vs-report.md) に合わない記述が入り込んでいないかを確かめる。bugの断定・深刻度・レポートの発見への言及があれば、調査の担当が読む前に、事実の記述に直す。
+調査を始める前に `checklist.md` を読み、[checklistとレポートの責任境界](../codepatrol-setup/checklist-vs-report.md) に合わない記述が入り込んでいないかを確かめる。bugの断定・深刻度・レポートの発見への言及があれば、調査の担当が読む前に取り除く。事実の記述に書き直すのにコードの確認が要る時は、codepatrol-setupを実行するsubagentに任せる。
 
 subagentの報告から、targets.mdの領域の一覧をユーザーに伝える。領域の分割・統合は、ユーザーがtargets.mdを編集して行う。
 
@@ -119,13 +125,11 @@ subagentの報告から、targets.mdの領域の一覧をユーザーに伝え�
 
 レポート1本ごとに新しいsubagentを起動し、codepatrol-reportを実行させる。前の領域を調査したsubagentに、次の領域を任せない。前の領域の調査内容が、次の領域の調査を誘導する。
 
-subagentには、Opus以上のtierのmodelを指定する。
-
 ### 指示に含める事
 
 - 担当する領域の名前
 - 再調査の場合は、その領域の既存レポートのタイトル
-- 調査用のworktreeの場所。調査対象が他のリポジトリにもある時は、その場所
+- コードを読む場所と、`.dev/codepatrol/` の場所
 - 作業用ディレクトリ。session用の一時ディレクトリの下に、領域ごとに分ける。Codexの出力や途中結果が、並走するsubagentの物と混ざらないようにする
 - 発見の名前の一覧のファイル
 - 並走している領域と、担当する領域とファイルが重なる領域
@@ -162,7 +166,7 @@ subagentは、作業の中で `checklist.md` と `targets.md` を編集する。
 
 - セットアップが終わった時と、レポートが1本できるたびにcommitする。並列にした時は、1組が終わるたびにcommitする
 - 書き出し先がローカルの場合は、レポートのファイルも一緒にcommitする
-- commitの前に、差分を読む。`checklist.md` に、責任境界に合わない記述が入っていれば、commitせず、事実の記述に直す。checklistは調査の足場で、発見を書くと次の調査を誘導する
+- commitの前に、差分を読む。`checklist.md` に、責任境界に合わない記述が入っていれば、commitせず、取り除く。checklistは調査の足場で、発見を書くと次の調査を誘導する
 - subagentが報告した「足すべき観点・領域」は、自分では足さない。ユーザーに伝え、足すと決まった物は、codepatrol-setupを実行するsubagentに更新を任せる
 - pushとpull requestの作成は、ユーザーの指示を待つ。作業を終える時に、調査用のbranchの名前と、積んだcommitをユーザーに報告する
 
@@ -178,7 +182,7 @@ subagentは、作業の中で `checklist.md` と `targets.md` を編集する。
 
 - Codexが止まり、subagentがレポートを出力せずに中断した。指揮役が自分で調査を代行する事も、Codexを使わない調査に切り替える事もしない
 - subagentが利用上限で止まった。上限が解けたら、新しいsubagentを起動せず、止まったsubagentに中断箇所から再開させる。途中結果とCodexの出力を引き継げる
-- レポートが、設定された書き出し先に出力されなかった。次に起動した時に、その領域が未調査として扱われる
+- レポートが、設定された書き出し先に出力されなかった。subagentが作業用ディレクトリに書き出したレポートを使い、指揮役が出力をやり直す。それでも出力できない時は、レポートの場所をユーザーに伝えて止まる。作業用ディレクトリはsessionが終わると残らず、次に起動した時にその領域が未調査として扱われる
 - レポートの間に、指揮役では決められない食い違いがある
 
 ## 出力済みのレポートを消さない

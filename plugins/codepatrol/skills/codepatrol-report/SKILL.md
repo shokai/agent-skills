@@ -3,6 +3,7 @@ name: codepatrol-report
 description: >-
   リポジトリの1つの領域をセキュリティ観点で調査し、Codexの批判的レビューを経てレポートを出力する。
   codepatrol skillが起動したsubagentが実行する。ユーザーが直接呼び出す事は想定していない。
+user-invocable: false
 ---
 
 # 1つの領域のセキュリティ調査
@@ -30,7 +31,7 @@ checklistとレポートの責任境界は [checklist-vs-report.md](../codepatro
 
 - 実行環境の条件は [codepatrol skill](../codepatrol/SKILL.md) の「実行環境の確認」と同じである。調査に入る前に自分でも確認し、満たさなければ調査もレポートの出力も行わず、満たさない条件を報告して終了する
 - ユーザーに質問できない。判断がつかない事は、最後の報告に書く
-- 作業するのは、指揮役が用意した作業ツリーである。branchの切り替え・pull・commitはしない
+- コードを読む場所と、`.dev/codepatrol/` の場所は、指揮役の指示に従う。branchの切り替え・pull・commitはしない
 - 他の領域を調査するsubagentが、同じ作業ツリーで並走している事がある
 
 ## 既存の発見を調査から離す
