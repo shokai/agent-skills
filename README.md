@@ -166,7 +166,7 @@ Software Factory 2026秋の開発フローをsessionに適用するmode skillで
 
 repoのCLAUDE.mdを書き換えずに、自分のマシンにインストールするだけで開発フローを持ち込めます。
 
-依存するcodex-consultation・subagent-consultation・conversation-context・sanity-reviewも一緒にインストールされます。
+依存するcodex-consultation・subagent-consultation・conversation-context・sanity-review・kudenも一緒にインストールされます。
 
 ```bash
 /software-factory-mode:software-factory-mode-2026aki
@@ -174,12 +174,12 @@ repoのCLAUDE.mdを書き換えずに、自分のマシンにインストール�
 
 ### kuden
 
-作者がAIとの対話の中で伝えてきた心得を集めたガイドライン群です。必要なsessionで手動で起動します。
+作者がAIとの対話の中で伝えてきた心得を集めたガイドライン群です。AIが必要だと判断した時に読み込みます。手動でも起動できます。
 
 - **agent-skill**: Agent Skillを書く時に、何を書き、何を書かないかの判断基準と、レビュー指摘の採否の基準
+- **code-comment**: ソースコード中のコメントに、何を書き、何を書かないかの判断基準と、置く位置、日本語の文体
 
 ```bash
 /kuden:agent-skill
+/kuden:code-comment
 ```
-
-software-factory-modeには含まれていません。software-factory-modeでAgent Skillを開発する時は、両方を起動します。
