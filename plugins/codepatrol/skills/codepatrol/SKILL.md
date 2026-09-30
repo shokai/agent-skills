@@ -42,7 +42,7 @@ subagentには、Opus以上のtierのmodelを指定する。
 
 いずれかを満たさなければ、何も行わず、満たさない条件をユーザーに報告して停止する。トリアージと、状態同期だけを行う時は、条件2と条件3の確認は要らない:
 
-1. 自分のmodelがOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは脆弱性の検知能力が足りない
+1. 自分のmodelがOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは問題の検出能力が足りない
 2. Codex CLIがインストールされている。Bashツールで `command -v codex` を実行して確認する
 3. CodexのmodelがSol以上のflagship（Sol、Astra等）で、reasoning effortがmedium以上である。短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
 
@@ -109,7 +109,7 @@ subagentには、コードを読む場所と、`.dev/codepatrol/` の場所の�
 
 codepatrol-setupでのCodexのレビューを経ていないリストで、調査を始めない。Codexが止まってレビューが完了しなかった時は、ユーザーに報告して判断を待つ。
 
-調査を始める前に `checklist.md` を読み、[checklistとレポートの責任境界](../codepatrol-setup/checklist-vs-report.md) に合わない記述が入り込んでいないかを確かめる。bugの断定・深刻度・レポートの問題への言及があれば、調査の担当が読む前に取り除く。事実の記述に書き直すのにコードの確認が要る時は、codepatrol-setupを実行するsubagentに任せる。
+調査を始める前に `checklist.md` を読み、[checklistとレポートの責任境界](../codepatrol-setup/checklist-vs-report.md) に合わない記述が入り込んでいないかを確かめる。問題の断定・深刻度・レポートの問題への言及があれば、調査の担当が読む前に取り除く。事実の記述に書き直すのにコードの確認が要る時は、codepatrol-setupを実行するsubagentに任せる。
 
 subagentの報告から、targets.mdの領域の一覧をユーザーに伝える。領域の分割・統合は、ユーザーがtargets.mdを編集して行う。
 
@@ -240,4 +240,4 @@ subagentは、判断が要る事を、ページを直さずに報告する。報
 - **codepatrol-triage**: レポートの問題を分類し、トリアージページを作るスキル。subagentが実行する
 - **codepatrol-sync-state**: 問題を直すpull requestの状態を、トリアージページとレポートに反映するスキル。subagentが実行する
 - **codex-consultation**: Codex CLIと相談するスキル。codepatrol-setupとcodepatrol-reportが使用する。必須で、他のスキルや `codex exec` の直接実行で代替しない
-- **sanity-review**: pull requestのレビュー報告書を作成するスキル。調査で発見した問題を修正するpull requestのレビューに使用できる
+- **sanity-review**: pull requestのレビュー報告書を作成するスキル。調査で検出した問題を修正するpull requestのレビューに使用できる
