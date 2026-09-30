@@ -21,7 +21,7 @@ codepatrol skillの指揮役から任されて、指定された1つの領域を
   config.md            ← レポートの書き出し先設定
   checklist.md         ← 観点リスト
   targets.md           ← 調査対象リスト
-  {領域名}.md          ← 領域ごとの調査レポート（書き出し先がローカルの場合）
+  {領域名}-{YYYY-MM-DD}.md  ← 領域ごとの調査レポート（書き出し先がローカルの場合）
 ```
 
 checklistとレポートの責任境界は [checklist-vs-report.md](../codepatrol-setup/checklist-vs-report.md) にある。
@@ -151,7 +151,7 @@ Investigatorには自分のAgent名とmodel名を記入し、codex-consultation�
 
 **書き出し先がローカルの場合:**
 
-`.dev/codepatrol/{領域名}.md` に書き出す。
+`.dev/codepatrol/{領域名}-{YYYY-MM-DD}.md` に書き出す。日付は、レポートを書き出す日である。
 
 ## 指揮役への報告
 
