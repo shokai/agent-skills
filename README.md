@@ -153,7 +153,7 @@ Markdownドキュメントの文章校正スキルです。ガイドラインに
 詳細は [plugins/codepatrol/README.md](plugins/codepatrol/README.md) を参照してください。
 
 ```bash
-/codepatrol:codepatrol [未調査の領域だけ | 全領域 | 領域名... | 調査対象リストを更新しろ | トリアージ | 状態を同期]
+/codepatrol:codepatrol [未調査の領域だけ | 全領域 | 領域名... | 調査対象リストを更新しろ | トリアージ | 状態同期]
 ```
 
 ### software-factory-mode
