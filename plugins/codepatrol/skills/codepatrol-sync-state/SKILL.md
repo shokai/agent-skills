@@ -1,7 +1,7 @@
 ---
 name: codepatrol-sync-state
 description: >-
-  セキュリティ調査で見つかった問題を直すpull requestの状態を、トリアージページと調査レポートに反映する。
+  セキュリティ調査で検出された問題を直すpull requestの状態を、トリアージページと調査レポートに反映する。
   codepatrol skillが起動したsubagentが実行する。ユーザーが直接呼び出す事は想定していない。
 ---
 
