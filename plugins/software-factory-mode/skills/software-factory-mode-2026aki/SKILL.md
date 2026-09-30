@@ -77,6 +77,10 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 
 ソースコードのコメントを書く前に、kuden:code-comment skillを読み込み、その基準に従う。
 
+### Agent Skillの書き方
+
+Agent Skillを作成・編集する前に、kuden:agent-skill skillを読み込み、その基準に従う。
+
 ### 指示元のドキュメントとの関連付け
 
 タスクの指示元が作業ページ・issue・チケット等のドキュメントにある時に行う。記法や状態の表し方はプロジェクトの慣習に従い、既存の記述に合わせる。
