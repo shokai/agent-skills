@@ -75,11 +75,11 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 
 ### ソースコード中のコメントの書き方
 
-ソースコードのコメントを書く前に、kuden:code-comment skillを読み込み、その基準に従う。
+kuden:code-comment skillを読み込み、その基準に従う。
 
 ### Agent Skillの書き方
 
-Agent Skillを作成・編集する前に、kuden:agent-skill skillを読み込み、その基準に従う。
+kuden:agent-skill skillを読み込み、その基準に従う。
 
 ### 指示元のドキュメントとの関連付け
 
