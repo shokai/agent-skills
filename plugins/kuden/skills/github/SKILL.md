@@ -40,8 +40,10 @@ pull requestを作成・更新する時、GitHubに載る文章を書く時、�
 - 日本語を含むURLは、percent-encodeせずに書く。encodeしたURLは、どのページへのリンクかを人間が読み取れない
 - 括弧を含むURLは、Markdownのリンク記法で包まず、そのまま書く。リンク記法の括弧と衝突して壊れる
 
-## 心得4. sub pull requestの組み方
+## 心得4. sub pull requestは、親子の両方からリンクする
 
+- 親PRの概要欄に `## sub pull request` の節を置き、sub PRを作る度に `- #1234` の形で足す
+- sub PRの概要欄の1行目に、`#1234 に向けたsub pull requestです` と書く
 - 親branchは、mainに空のcommitを1つ積んで作り、draftの親PRにする。差分が無いとPRを作れない
 - sub PR同士は兄弟にする。あるsub PRのbranchから次のsub PRを作ると、先のPRのcommitがdiffに混ざる
 - PRをどこに向けるかをユーザーに訊く時は、branch名ではなくPRの関係で訊く。「`feature-x` からbranchを切るか」ではなく、「#1234 に向けたsub PRにするか、mainに向けたPRにするか」と訊き、本番に載る時期のような帰結を添える
