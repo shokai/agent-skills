@@ -142,7 +142,7 @@
       },
       "repository": "https://github.com/shokai/agent-skills",
       "license": "MIT",
-      "keywords": ["guideline", "agent-skill", "code-comment", "writing"],
+      "keywords": ["guideline", "agent-skill", "code-comment", "github", "writing"],
       "category": "guideline"
     }
   ]
