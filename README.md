@@ -174,7 +174,7 @@ repoのCLAUDE.mdを書き換えずに、自分のマシンにインストール�
 
 - **agent-skill**: Agent Skillを書く時に、何を書き、何を書かないかの判断基準と、レビュー指摘の採否の基準
 - **code-comment**: ソースコード中のコメントに、何を書き、何を書かないかの判断基準と、置く位置、日本語の文体
-- **github**: pull requestのタイトルと概要欄に、何を書き、何を書かないかの判断基準と、リンクの書き方、sub pull requestの組み方
+- **github**: pull requestのタイトルと概要欄の書き方、リンクが壊れない書き方、sub pull requestの組み方
 
 ```bash
 /kuden:agent-skill
