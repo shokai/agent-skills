@@ -81,6 +81,10 @@ kuden:code-comment skillを読み込み、その基準に従う。
 
 kuden:agent-skill skillを読み込み、その基準に従う。
 
+### pull requestとGitHubに載る文章の書き方
+
+kuden:github skillを読み込み、その基準に従う。
+
 ### 指示元のドキュメントとの関連付け
 
 タスクの指示元が作業ページ・issue・チケット等のドキュメントにある時に行う。記法や状態の表し方はプロジェクトの慣習に従い、既存の記述に合わせる。
