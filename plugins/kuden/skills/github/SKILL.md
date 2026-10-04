@@ -15,11 +15,11 @@ pull requestを作成・更新する時、GitHubに載る文章を書く時、�
 
 - 実装の手順をなぞらない。そのPRで新しく作った関数名やファイルパスを並べたタイトルは、diffを読むまで意味が分からない
 - 症状を消すとだけ書かない。「warningを消す」は握り潰しとも読め、変更の性質が伝わらない。「findOneAndUpdateのnew: trueはdeprecatedなのでreturnDocument: afterを使う」のように、理由と置き換えの中身を書く
-- ユーザーに見えるbugの修正は、「<再現条件>と<症状>問題を修正」の形で書く。どう直したかは、概要欄の1行目に置く
+- ユーザーに見えるbugの修正は、「<再現条件>で<症状>が起きる問題を修正」の形で書く。どう直したかは、概要欄の冒頭に置く
 - 画面に関わる変更は、実装の語ではなく、影響する画面の名前で範囲を示す
 - 既存のtoolに出力を1つ足すような小さな変更は、理由を付けず、既存のファイル名やfield名で短く書く。理由を付けて長くなるなら、理由は概要欄に回す
 - 文末の時制や区切り方は、そのrepoのmerge済みのPRに合わせる
-- squash mergeではタイトルがcommitになる。commit messageの1行目も同じ基準で書く
+- commit messageの1行目も同じ基準で書く
 
 ## 心得2. 概要欄には、diffから読めない事を書く
 
@@ -38,13 +38,12 @@ pull requestを作成・更新する時、GitHubに載る文章を書く時、�
 - `#1234` やURLの前後には、半角スペースを入れる。`#1234で直した` はリンクにならない。`(https://example.com/日本語のページ)。` は、`)。` までがURLに含まれる
 - `#数字` は、issueとPRの番号にだけ使う。Dependabot alertのように別の番号体系を持つ物は、フルURLで書く。`#数字` で書くと、同じ番号の無関係なissueやPRへのリンクになる
 - 日本語を含むURLは、percent-encodeせずに書く。encodeしたURLは、どのページへのリンクかを人間が読み取れない
-- 括弧を含むURLは、Markdownのリンク記法で包まず、そのまま書く。リンク記法の括弧と衝突して壊れる
 
 ## 心得4. sub pull requestは、親子の両方からリンクする
 
 - 親PRの概要欄に `## sub pull request` の節を置き、sub PRを作る度に `- #1234` の形で足す
 - sub PRの概要欄の1行目に、`#1234 に向けたsub pull requestです` と書く
-- 親branchは、mainに空のcommitを1つ積んで作り、draftの親PRにする。差分が無いとPRを作れない
+- 親branchは、mainに空のcommitを1つ積んで作り、親PRにする。mainに無いcommitが1つも無いと、PRを作れない
 - sub PR同士は兄弟にする。あるsub PRのbranchから次のsub PRを作ると、先のPRのcommitがdiffに混ざる
 - PRをどこに向けるかをユーザーに訊く時は、branch名ではなくPRの関係で訊く。「`feature-x` からbranchを切るか」ではなく、「#1234 に向けたsub PRにするか、mainに向けたPRにするか」と訊き、本番に載る時期のような帰結を添える
 
