@@ -46,7 +46,7 @@ codepatrol skillの指揮役から任されて、調査レポートの問題を1
 次の事は、上の許可があっても変わらない。
 
 - pushの前に、毎回Codexに相談する。rebaseした後も、sanity-reviewの指摘に対応したcommitも、コメントだけの変更も飛ばさない。それぞれを新しい相談として扱う。往復の上限は、相談ごとに数える
-- Codexへの相談は、自分も、sanity-reviewを任せるsubagentも、Skill toolで `codex-consultation` を呼び出して行う。`codex exec` の直接実行で済ませない
+- Codexへの相談は、自分も、sanity-reviewを任せるsubagentも、Skill toolで `codex-consultation` を呼び出して行う。`codex exec` の直接実行で済ませない。Codexの出力は、作業用ディレクトリに残す。指揮役が、相談が最後まで完了した事を確かめるのに使う
 - Codexへの依頼の言葉は、[codepatrol-report](../codepatrol-report/SKILL.md) の「依頼の枠組み」に従う。問題の修正は、攻撃側の語彙で説明しやすく、Codexの提供元のフィルタで止まりやすい
 - Codexが利用制限や障害で止まったら、他の相談相手に切り替えず、途中結果をcommitして作業を止め、報告する
 - 作業を途中で止める時は、止めた理由をpull requestにコメントする。pull requestが無ければ、途中結果を残したbranchの名前と一緒に、レポートの申し送りに書く。次に起動した指揮役が、再開してよい修正かどうかを、そこから判断する
@@ -88,6 +88,7 @@ pull request、トリアージページの行、レポートの問題を、互�
 - pull requestの場所と状態。ready for review、draft、質問で停止のどれか
 - レポートの対応の案と違う判断をした事
 - 人間が確認すべき事。mergeの前に本番の点検が要る、設計の変更が大きい、挙動が変わる、動作確認のうち実施できなかった物がある、といった事である
+- Codexに相談した回数と、Codexの出力の場所
 - 残した作業環境。worktree、branch、test用に作ったDBやコンテナ等である。merge後の後始末の担当に渡される
 - 質問で止まった時は、質問
 - 手順や規則で、曖昧だった点
