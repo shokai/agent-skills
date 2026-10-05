@@ -47,21 +47,27 @@ release PRと親PRは、指揮役もsubagentもmergeしない。本番に出す�
 
 mergeするのは、subagentがready for reviewにし、CIが通ったpull request全てである。subagentが「人間が確認すべき事」を報告していてもmergeし、その内容をユーザーに伝える。
 
-次のpull requestはmergeせず、ready for reviewのまま残して報告する。
+条件を満たさないpull requestは、mergeしない。残すのではなく、mergeできる状態にする事を先に試みる。次のような場合である。
 
-- mergeすると即座に本番に出るbranchに向いている。mergeの直前に、pull requestの実際の向け先を確かめる。ready for reviewまでの段階で作られた物は、段階を切り替えた後も、default branchに向いたままである
-- CIが走っていない。結果が無い事を、通ったと扱わない。親PRに向けたpull requestでは、CIが走らない設定のrepoがある
-- 人間が変更を求めている
+- mergeすると即座に本番に出るbranchに向いている。mergeの直前に、pull requestの実際の向け先を確かめる。ready for reviewまでの段階で作られた物は、段階を切り替えた後も、default branchに向いたままである。親PRに向け直し、向け直した後のCIを確かめる
+- CIが失敗している。修正したsubagentに直させる
+- CIが走っていない。結果が無い事を、通ったと扱わない。親PRに向けたpull requestでは、CIが走らない設定のrepoがある。CIを走らせるか、repoの手順でtestを実行させる。testが通れば、CIが通ったのと同じに扱う
+- 人間が求めた変更に、まだ対応していない。修正したsubagentに対応させる。対応が済めば、他のpull requestと同じ条件でmergeする
 - branchの保護等でmergeできない
+
+どうしてもmergeできる状態にならない物は、pull requestの状態を変えずに残して報告する。
 
 ## 起動を止める上限
 
-人間の確認を待つ修正が溜まりすぎると、pull request同士が衝突し、まとめて本番に出す量も増える。次の2つの量を数え、どちらかが上限に達したら、新しいsubagentを起動しない。進行中のsubagentは完走させる。上限は量ごとに別の値で、最初にユーザーにそれぞれ訊く。
+修正が溜まりすぎると、pull request同士が衝突し、まとめて本番に出す量も増える。次の2つの量を数え、どちらかが上限に達したら、新しいsubagentを起動しない。進行中のsubagentは完走させる。上限は量ごとに別の値で、作業を始める時に、ユーザーにそれぞれ訊いて決める。
 
-- 自動修正で作った、mergeされていない問題。mergeを見送って残した問題も数える。pull requestではなく、問題で数える。1つの問題の修正が、複数のrepoのpull requestになる事がある。5件を目安として勧める
-- mergeされたが、本番に出ていないpull request。release PRや親PRに積まれている物である。そのようなpull requestがあるrepoで数える。自動修正の物に限らず、積まれているpull requestの数で数える。上限は、一度に本番に出せる量で決まり、1つ目の量よりずっと大きくなるのが普通である
+- 自動修正で作った、mergeされていない問題。pull requestではなく、問題で数える。1つの問題の修正が、複数のrepoのpull requestになる事がある。5件を目安として勧める
+- release PRや親PRに積まれ、本番に出ていないpull request。そのようなpull requestがあるrepoで数える。自動修正の物に限らず、積まれているpull requestの数で数える。上限は、一度に本番に出せる量で決まり、1つ目の量よりずっと大きくなるのが普通である
 
-どちらも、段階に関係なく数える。人間がmergeする段階でも、mergeが速く進むと、本番に出ていない修正だけが膨らむ。
+どちらも、段階に関係なく数える。
+
+- 人間がmergeする段階では、mergeが追いつかないと1つ目が溜まる。mergeが速く進むと、2つ目だけが膨らむ
+- mergeまで進める段階では、1つ目は基本的には溜まらない。溜まるのは、判断を待って止まった修正と、mergeできる状態にならなかった修正である
 
 ## 問題を選ぶ
 
