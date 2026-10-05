@@ -1,5 +1,5 @@
 ---
-name: codepatrol-deploy-note
+name: codepatrol-autofix-deploynote
 description: >-
   本番に出る前の修正が積まれたpull requestに、デプロイの前後に人間がやる事をまとめたコメントを投稿・更新する。
   codepatrol skillが起動したsubagentが実行する。ユーザーが直接呼び出す事は想定していない。

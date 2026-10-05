@@ -19,14 +19,14 @@ disable-model-invocation: true
 
 作業は、以下のskillを実行するsubagentに任せる。
 
-| skill                  | 作業                                                       | 読む物                 |
-| ---------------------- | ---------------------------------------------------------- | ---------------------- |
-| codepatrol-setup       | 調査対象リストと観点リストを生成・更新する                 | コード                 |
-| codepatrol-report      | 1つの領域を調査してレポートを出力する                      | コード                 |
-| codepatrol-triage      | レポートの問題を分類し、トリアージページを作る             | レポート               |
-| codepatrol-sync-state  | 問題を直すpull requestの状態を、ページに反映する           | レポートとpull request |
-| codepatrol-autofix     | 1つの問題を修正し、pull requestを仕上げる                  | レポートとコード       |
-| codepatrol-deploy-note | デプロイの前後にやる事を、pull requestのコメントにまとめる | pull request           |
+| skill                         | 作業                                                       | 読む物                 |
+| ----------------------------- | ---------------------------------------------------------- | ---------------------- |
+| codepatrol-setup              | 調査対象リストと観点リストを生成・更新する                 | コード                 |
+| codepatrol-report             | 1つの領域を調査してレポートを出力する                      | コード                 |
+| codepatrol-triage             | レポートの問題を分類し、トリアージページを作る             | レポート               |
+| codepatrol-sync-state         | 問題を直すpull requestの状態を、ページに反映する           | レポートとpull request |
+| codepatrol-autofix            | 1つの問題を修正し、pull requestを仕上げる                  | レポートとコード       |
+| codepatrol-autofix-deploynote | デプロイの前後にやる事を、pull requestのコメントにまとめる | pull request           |
 
 subagentには、Opus以上のtierのmodelを指定する。
 
@@ -246,7 +246,7 @@ subagentは、判断が要る事を、ページを直さずに報告する。報
 - **codepatrol-triage**: レポートの問題を分類し、トリアージページを作るスキル。subagentが実行する
 - **codepatrol-sync-state**: 問題を直すpull requestの状態を、トリアージページとレポートに反映するスキル。subagentが実行する
 - **codepatrol-autofix**: 1つの問題を修正し、pull requestをready for reviewまで仕上げるスキル。subagentが実行する
-- **codepatrol-deploy-note**: デプロイの前後に人間がやる事を、pull requestのコメントにまとめるスキル。subagentが実行する
+- **codepatrol-autofix-deploynote**: デプロイの前後に人間がやる事を、pull requestのコメントにまとめるスキル。subagentが実行する
 - **codex-consultation**: Codex CLIと相談するスキル。codepatrol-setupとcodepatrol-reportとcodepatrol-autofixが使用する。必須で、他のスキルや `codex exec` の直接実行で代替しない
 - **software-factory-mode-2026aki**: 開発フローを定めるスキル。codepatrol-autofixが従う。自動修正に必須である
 - **sanity-review**: pull requestのレビュー報告書を作成するスキル。自動修正の開発フローの中で使用する

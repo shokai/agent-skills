@@ -128,7 +128,7 @@ mergeされたpull requestについて、次の3つをまとめて1つのsubagen
 
 1. 開発環境の後始末。`software-factory-mode-2026aki` skillの「開発環境の後始末」に従う。修正したsubagentが報告した、残した作業環境を渡す。どの修正の物か分からない物は、消さずに報告させる
 2. 状態同期。codepatrol-sync-stateを実行させる。範囲は、対象のpull requestの行だけでよい
-3. deploy noteの更新。codepatrol-deploy-noteを実行させる。release PRや親PRのように、本番に出る前の修正が積まれるpull requestがある時に行う
+3. deploy noteの更新。codepatrol-autofix-deploynoteを実行させる。release PRや親PRのように、本番に出る前の修正が積まれるpull requestがある時に行う
 
 報告は短くさせる。空いた分だけ、次の問題の修正を起動する。
 
