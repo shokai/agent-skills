@@ -3,28 +3,30 @@ name: codepatrol
 description: >-
   リポジトリのセキュリティ調査を領域ごとに進める。
   このsessionは調査を指揮し、領域ごとに起動したsubagentが調査してレポートを出力する。
-  レポートの問題のトリアージと、問題を直すpull requestの状態の同期も指揮する。
+  レポートの問題のトリアージと、問題の自動修正、問題を直すpull requestの状態の同期も指揮する。
   複数sessionにまたがる長期作業を想定し、実行するたびに現状を確認して続きの作業を行う。
   ユーザーが手動で起動する。
-argument-hint: "[未調査の領域だけ | 全領域 | 領域名... | 調査対象リストを更新しろ | トリアージ | 状態同期]"
+argument-hint: "[未調査の領域だけ | 全領域 | 領域名... | 調査対象リストを更新しろ | トリアージ | 状態同期 | 自動修正]"
 disable-model-invocation: true
 ---
 
 # セキュリティ調査の指揮
 
-リポジトリのソースコードを領域ごとにセキュリティ観点で調査し、レポートを揃える。ユーザーに依頼された時は、揃ったレポートの問題をトリアージし、問題を直すpull requestの状態をページに反映する。
+リポジトリのソースコードを領域ごとにセキュリティ観点で調査し、レポートを揃える。ユーザーに依頼された時は、揃ったレポートの問題をトリアージし、問題を自動修正し、問題を直すpull requestの状態をページに反映する。
 このsessionは指揮役になる。ユーザーと対話し、調査する領域を決め、subagentに作業を任せ、結果を確かめて記録する。調査する領域が1つでも同じである。
 
 指揮役は調査対象のコードを読まない。多くの領域を回してもコンテキストを使い切らないためと、指揮役の見立てが各領域の調査を誘導しないためである。
 
 作業は、以下のskillを実行するsubagentに任せる。
 
-| skill                 | 作業                                             | 読む物                 |
-| --------------------- | ------------------------------------------------ | ---------------------- |
-| codepatrol-setup      | 調査対象リストと観点リストを生成・更新する       | コード                 |
-| codepatrol-report     | 1つの領域を調査してレポートを出力する            | コード                 |
-| codepatrol-triage     | レポートの問題を分類し、トリアージページを作る   | レポート               |
-| codepatrol-sync-state | 問題を直すpull requestの状態を、ページに反映する | レポートとpull request |
+| skill                         | 作業                                                       | 読む物                 |
+| ----------------------------- | ---------------------------------------------------------- | ---------------------- |
+| codepatrol-setup              | 調査対象リストと観点リストを生成・更新する                 | コード                 |
+| codepatrol-report             | 1つの領域を調査してレポートを出力する                      | コード                 |
+| codepatrol-triage             | レポートの問題を分類し、トリアージページを作る             | レポート               |
+| codepatrol-sync-state         | 問題を直すpull requestの状態を、ページに反映する           | レポートとpull request |
+| codepatrol-autofix            | 1つの問題を修正し、pull requestを仕上げる                  | レポートとコード       |
+| codepatrol-autofix-deploynote | デプロイの前後にやる事を、pull requestのコメントにまとめる | pull request           |
 
 subagentには、Opus以上のtierのmodelを指定する。
 
@@ -217,7 +219,7 @@ subagentは、作業の中で `checklist.md` と `targets.md` を編集する。
 - 載せる問題の条件。ユーザーの指示があった時だけ含める
 - 前のトリアージページ。hubページにリンクしているページから探す
 
-subagentの報告から、作成したページの場所、分類ごとの行の数、分類に迷った問題をユーザーに伝える。
+subagentの報告から、作成したページの場所、修正難度ごとの行の数、修正難度に迷った問題をユーザーに伝える。
 
 前のトリアージページがある時は、新しいページを作る前に、前のページで状態同期をしておく。修正PRの行は、前のページの状態のまま引き継がれる。
 
@@ -233,11 +235,18 @@ subagentの報告から、作成したページの場所、分類ごとの行の
 
 subagentは、判断が要る事を、ページを直さずに報告する。報告をユーザーに伝え、判断を待つ。
 
+## 自動修正
+
+ユーザーに依頼された時に行う。トリアージページの問題を、subagentに1つずつ修正させる。[autofix.md](autofix.md) を読み込み、それに従う。
+
 ## 関連スキル
 
 - **codepatrol-setup**: 調査対象リストと観点リストを生成・更新するスキル。subagentが実行する
 - **codepatrol-report**: 1つの領域を調査してレポートを出力するスキル。subagentが実行する
 - **codepatrol-triage**: レポートの問題を分類し、トリアージページを作るスキル。subagentが実行する
 - **codepatrol-sync-state**: 問題を直すpull requestの状態を、トリアージページとレポートに反映するスキル。subagentが実行する
-- **codex-consultation**: Codex CLIと相談するスキル。codepatrol-setupとcodepatrol-reportが使用する。必須で、他のスキルや `codex exec` の直接実行で代替しない
-- **sanity-review**: pull requestのレビュー報告書を作成するスキル。調査で検出した問題を修正するpull requestのレビューに使用できる
+- **codepatrol-autofix**: 1つの問題を修正し、pull requestをready for reviewまで仕上げるスキル。subagentが実行する
+- **codepatrol-autofix-deploynote**: デプロイの前後に人間がやる事を、pull requestのコメントにまとめるスキル。subagentが実行する
+- **codex-consultation**: Codex CLIと相談するスキル。codepatrol-setupとcodepatrol-reportとcodepatrol-autofixが使用する。必須で、他のスキルや `codex exec` の直接実行で代替しない
+- **software-factory-mode-2026aki**: 開発フローを定めるスキル。codepatrol-autofixが従う。自動修正に必須である
+- **sanity-review**: pull requestのレビュー報告書を作成するスキル。自動修正の開発フローの中で使用する

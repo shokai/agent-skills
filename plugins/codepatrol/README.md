@@ -1,6 +1,6 @@
 # codepatrol
 
-リポジトリを領域ごとに巡回してセキュリティ調査するAgent Skillです。起動したsessionが指揮役になり、領域ごとに起動したsubagentが、調査対象リストと観点チェックリストに基づいて調査し、Codexによる批判的レビューを経てレポートを出力します。
+リポジトリを領域ごとに巡回してセキュリティ調査するAgent Skillです。起動したsessionが指揮役になり、領域ごとに起動したsubagentが、調査対象リストと観点チェックリストに基づいて調査し、Codexによる批判的レビューを経てレポートを出力します。レポートの問題をトリアージし、subagentに自動修正させる事もできます。
 
 ## 背景
 
@@ -17,8 +17,10 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 5. **レポート出力**: 問題・根拠・深刻度・推奨対応をまとめたレポートを、Cosenseまたはローカルファイルに出力します
 6. **再調査**: 調査済みの領域を調査し直した時は、前回の問題との対応と、修正された物、今回検出しなかった物をレポートに書きます
 7. **設定ファイルの変更の記録**: 調査で直した調査対象リストと観点チェックリストを、調査用のbranchにcommitします。pushとpull requestの作成は、ユーザーの指示を待ちます
-8. **トリアージ**: レポートの問題を、修正に必要な仕様の判断の重さで3つに分類し、どれを誰が直すかを決める材料にします
+8. **トリアージ**: レポートの問題を、修正に必要な仕様の判断の重さで3つの修正難度に分け、どれを誰が直すかを決める材料にします
 9. **状態同期**: 問題を直すpull requestの状態を、トリアージのページとレポートに反映します
+10. **自動修正**: トリアージした問題を、subagentが1つずつ修正し、pull requestをready for reviewまで仕上げます。どの深刻度と修正難度の問題を自動修正するか、mergeまで自動で進めるかは、起動時に選びます
+11. **Release PR deploy note**: 自動修正で積み上がったpull requestの概要欄から、デプロイの前後に人間がやる事をまとめ、release PR等のコメントに投稿します
 
 観点チェックリスト（`CHECKLIST.md`）は認可・トークン・認証・SSRF・XSS・インジェクション・ファイル・DoS・情報漏洩・ビジネスロジック・設定の11カテゴリを収録していますが、これは出発点であり網羅的ではありません。リストにないパターンも積極的に調査し、見つけた観点は報告します。
 
@@ -29,6 +31,8 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 - **codepatrol-report**: 1つの領域を調査してレポートを出力します。codepatrolが起動したsubagentが実行します
 - **codepatrol-triage**: レポートの問題を分類し、トリアージのページを作ります。codepatrolが起動したsubagentが実行します
 - **codepatrol-sync-state**: 問題を直すpull requestの状態を、ページに反映します。codepatrolが起動したsubagentが実行します
+- **codepatrol-autofix**: 1つの問題を修正し、pull requestを仕上げます。codepatrolが起動したsubagentが実行します
+- **codepatrol-autofix-deploynote**: デプロイの前後に人間がやる事を、pull requestのコメントにまとめます。codepatrolが起動したsubagentが実行します
 
 ## 前提条件
 
@@ -40,21 +44,23 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
   - Codexがusage limitや通信障害で停止した場合は、リストのレビューもレポートの出力もせずに中断します
 - **Cosense書き出しを選ぶ場合**: cosense CLI（`npm install -g @helpfeel/cosense-cli`）のインストールとログイン、およびCosense操作用のskillが別途必要です
   - ローカルファイル出力だけを使う場合、これらは不要です
-  - トリアージと状態同期は、Cosense書き出しの場合だけ使えます
-- **`sanity-review` / `conversation-context` スキル**: 関連スキル。必須ではありません
-  - sanity-review はセキュリティ調査で検出した問題の修正PRレビューに使えます
-  - conversation-context はレポートのヘッダー形式の背景知識です
+  - トリアージ、状態同期、自動修正は、Cosense書き出しの場合だけ使えます
+- **`software-factory-mode` plugin**: 自動修正に必須です。修正するsubagentが、この開発フローに従ってpull requestを作ります。依存する `sanity-review`、`conversation-context`、`kuden` も必要です
+  - 調査、トリアージ、状態同期だけを使う場合、これらは使われません
+  - conversation-context はレポートのヘッダー形式の背景知識でもあります
 
 ## 使い方
 
 ```bash
-/codepatrol:codepatrol [未調査の領域だけ | 全領域 | 領域名... | 調査対象リストを更新しろ | トリアージ | 状態同期]
+/codepatrol:codepatrol [未調査の領域だけ | 全領域 | 領域名... | 調査対象リストを更新しろ | トリアージ | 状態同期 | 自動修正]
 ```
 
 - 引数なしで実行すると、現状（調査済み・未調査の領域）を確認し、調査する範囲を尋ねます
 - `調査対象リストを更新しろ` と指示すると、リポジトリを再走査して調査対象リストを最新化します
 - `トリアージ` と指示すると、レポートの問題を分類したページを作ります
 - `状態同期` と指示すると、問題を直すpull requestの状態をページに反映します
+- `自動修正` と指示すると、トリアージした問題をsubagentが修正していきます。最初は、深刻度Highの修正難度1から始める事を勧めます。仕様変更の意思決定がほぼ無い問題です
+  - 修正のpull requestは人間の確認を待たずに作られます。pull requestの概要欄、対話コンテキスト、sanity-reviewの報告書、Release PR deploy noteで、後からまとめて確認できます
 - 1領域の調査には数十分かかり、多くのtokenを消費します
 - 調査はgit worktreeで行うので、調査の間も自分のcheckoutで他の作業を続けられます
 
