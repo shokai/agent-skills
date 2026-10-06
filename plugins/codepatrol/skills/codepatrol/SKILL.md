@@ -246,3 +246,4 @@ subagentは、判断が要る事を、ページを直さずに報告する。報
 - **software-factory-mode-2026aki**: 開発フローを定めるスキル。codepatrol-autofixが従う。自動修正に必須である
 - **sanity-review**: pull requestのレビュー報告書を作成するスキル。自動修正の開発フローの中で使用する
 - **kuden:orchestrator**: subagentに作業を任せる指揮役の心得。指揮役が従う
+- **kuden:github**: GitHubでpull requestを作り、文章を書く時の心得。自動修正のrelease pull requestの組み方で使用する
