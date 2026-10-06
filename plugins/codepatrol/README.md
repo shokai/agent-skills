@@ -45,7 +45,8 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 - **Cosense書き出しを選ぶ場合**: cosense CLI（`npm install -g @helpfeel/cosense-cli`）のインストールとログイン、およびCosense操作用のskillが別途必要です
   - ローカルファイル出力だけを使う場合、これらは不要です
   - トリアージ、状態同期、自動修正は、Cosense書き出しの場合だけ使えます
-- **`software-factory-mode` plugin**: 自動修正に必須です。修正するsubagentが、この開発フローに従ってpull requestを作ります。依存する `sanity-review`、`conversation-context`、`kuden` も必要です
+- **`kuden` plugin**: 指揮役が `kuden:orchestrator` の心得に従います。subagentの報告の確かめ方、中断後の再開、利用上限に合わせた速度の調整が、ここで決まります
+- **`software-factory-mode` plugin**: 自動修正に必須です。修正するsubagentが、この開発フローに従ってpull requestを作ります。依存する `sanity-review`、`conversation-context` も必要です
   - 調査、トリアージ、状態同期だけを使う場合、これらは使われません
   - conversation-context はレポートのヘッダー形式の背景知識でもあります
 
