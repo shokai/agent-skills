@@ -175,9 +175,11 @@ repoのCLAUDE.mdを書き換えずに、自分のマシンにインストール�
 - **agent-skill**: Agent Skillを書く時に、何を書き、何を書かないかの判断基準と、レビュー指摘の採否の基準
 - **code-comment**: ソースコード中のコメントに、何を書き、何を書かないかの判断基準と、置く位置、日本語の文体
 - **github**: pull requestのタイトルと概要欄の書き方、リンクが壊れない書き方、親子PRの組み方
+- **orchestrator**: subagentに作業を任せる指揮役の心得。報告の確かめ方、進み具合の持ち方、止まったsubagentの扱い、利用上限との付き合い方
 
 ```bash
 /kuden:agent-skill
 /kuden:code-comment
 /kuden:github
+/kuden:orchestrator
 ```
