@@ -31,7 +31,7 @@
 修正のpull requestは、mergeしても本番には出ないbranchに向ける。積まれた修正は、人間が本番に出す前にまとめて確かめ、1つのpull requestをmergeしてから本番に出す。このpull requestをrelease pull requestと呼ぶ。deploy noteもここに置く。
 
 - release pull requestを作る仕組みがあるrepoでは、その仕組みが修正を集めるbranchに向ける
-- 仕組みが無いrepoでは、既存のrelease pull requestを使い、無ければ指揮役が作る。修正のpull requestをその子PRにする。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillの親PRと子PRの組み方に従う
+- 仕組みが無いrepoでは、既存のrelease pull requestを使い、無ければ指揮役が作る。修正のpull requestをその子PRにする。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillの親子PRの組み方に従う
 
 release pull requestは、指揮役もsubagentもmergeしない。本番に出すのは人間である。人間がmergeする段階でも、指揮役がmergeする段階でも、向け先は同じである。
 

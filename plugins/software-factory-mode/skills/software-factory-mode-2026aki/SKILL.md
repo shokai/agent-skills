@@ -51,7 +51,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 
 - PRはdraftで作成する。draftは実装者が仕上げている途中の状態で、AIによるレビューはこの間に済ませる。ready for reviewは人間にレビューを依頼できる状態を表し、AIレビュー待ちの意味では使わない
 - 概要欄はrepoのPRテンプレートに従う
-- 子PRを作ったら、親PRと子PRを相互にリンクする
+- 子PRを作ったら、親子PRを相互にリンクする
 - PRを作成したら、また作成後にpushしたら、conversation-context-export skillを実行する。worktreeで作業している場合は、出力先をmain worktreeの`.dev/contexts/`にする
 - `.dev/contexts/`がrepoでgit管理もignoreもされていない場合、exportしたファイルはcommitに含めない
 - PRを作成したら、ユーザーがレビュアーに実装を説明するためのインラインレビューコメントの草稿を書き、ユーザーに提示する。重要な変更に絞り、ファイル名と行番号を付ける
