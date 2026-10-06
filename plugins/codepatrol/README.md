@@ -32,7 +32,7 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 - **codepatrol-triage**: レポートの問題を分類し、トリアージのページを作ります。codepatrolが起動したsubagentが実行します
 - **codepatrol-sync-state**: 問題を直すpull requestの状態を、ページに反映します。codepatrolが起動したsubagentが実行します
 - **codepatrol-autofix**: 1つの問題を修正し、pull requestを仕上げます。codepatrolが起動したsubagentが実行します
-- **codepatrol-autofix-deploynote**: デプロイの前後に人間がやる事を、pull requestのコメントにまとめます。codepatrolが起動したsubagentが実行します
+- **codepatrol-autofix-deploynote**: デプロイの前後に人間がやる事を、release pull requestのコメントにまとめます。codepatrolが起動したsubagentが実行します
 
 ## 前提条件
 

@@ -28,10 +28,10 @@
 
 ## release pull request
 
-修正のpull requestは、mergeしても本番には出ないbranchに向ける。積まれた修正は、人間が本番に出す前にまとめて確かめ、1つのpull requestをmergeして本番に出す。このpull requestをrelease pull requestと呼ぶ。deploy noteもここに置く。
+修正のpull requestは、mergeしても本番には出ないbranchに向ける。積まれた修正は、人間が本番に出す前にまとめて確かめ、1つのpull requestをmergeしてから本番に出す。このpull requestをrelease pull requestと呼ぶ。deploy noteもここに置く。
 
-- release pull requestがあるrepoでは、そのhead branchに向ける
-- 無いrepoでは、指揮役が作る。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillの親PRと子PRの組み方に従い、修正のpull requestをその子PRにする
+- release pull requestを作る仕組みがあるrepoでは、その仕組みが修正を集めるbranchに向ける
+- 仕組みが無いrepoでは、既存のrelease pull requestを使い、無ければ指揮役が作る。修正のpull requestをその子PRにする。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillの親PRと子PRの組み方に従う
 
 release pull requestは、指揮役もsubagentもmergeしない。本番に出すのは人間である。人間がmergeする段階でも、指揮役がmergeする段階でも、向け先は同じである。
 
@@ -135,7 +135,7 @@ mergeされたpull requestについて、次の3つをまとめて1つのsubagen
 
 報告は短くさせる。起動を止める上限に空きがあれば、次の問題の修正を起動する。
 
-deploy noteは、人間が書いた確認も反映する。mergeが無くても、起動し直した時と、作業を終える時に更新させる。
+修正が積まれたrelease pull requestのdeploy noteは、人間が書いた確認も反映する。新しいmergeが無くても、起動し直した時と、作業を終える時に更新させる。
 
 ## 止まってユーザーの判断を待つ
 
