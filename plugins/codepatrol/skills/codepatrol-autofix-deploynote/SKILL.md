@@ -1,13 +1,13 @@
 ---
 name: codepatrol-autofix-deploynote
 description: >-
-  本番に出る前の修正が積まれたpull requestに、デプロイの前後に人間がやる事をまとめたコメントを投稿・更新する。
+  本番に出る前の修正が積まれたrelease pull requestに、デプロイの前後に人間がやる事をまとめたコメントを投稿・更新する。
   codepatrol skillが起動したsubagentが実行する。ユーザーが直接呼び出す事は想定していない。
 ---
 
 # Release PR deploy note
 
-codepatrol skillの指揮役から任されて、本番に出る前の修正が積まれたpull requestに、デプロイの前後に人間がやる事をまとめた「Release PR deploy note」をコメントする。
+codepatrol skillの指揮役から任されて、本番に出る前の修正が積まれたrelease pull requestに、デプロイの前後に人間がやる事をまとめた「Release PR deploy note」をコメントする。
 
 自動修正では、修正のpull requestが速く積み上がる。DBのindexを作る、環境変数を足すといった注意書きは、個々のpull requestの概要欄に散らばり、デプロイする人間が気付けない。1箇所にまとめて、気付けるようにする。人間が、積まれた修正の内容をまとめて確かめる場所にもなる。
 
@@ -25,7 +25,7 @@ codepatrol skillの指揮役から任されて、本番に出る前の修正が�
 - コードは読まない。pull requestの概要欄とコメントから作る
 - 書き込むのは、noteのコメントだけである。下書きの確認を取らずに投稿してよい。他のコメントや概要欄は編集しない
 - GitHubに載る文章の書き方は、`kuden:github` skillに従う
-- 対象のpull requestは、指揮役の指示に従う。release PRか、修正をまとめる親PRである
+- 対象のrelease pull requestは、指揮役の指示に従う
 
 ## noteは1つのコメントを書き直し続ける
 
