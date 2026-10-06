@@ -31,7 +31,7 @@
 修正のpull requestは、mergeしても本番には出ないbranchに向ける。積まれた修正は、人間が本番に出す前にまとめて確かめ、1つのpull requestをmergeして本番に出す。このpull requestをrelease pull requestと呼ぶ。deploy noteもここに置く。
 
 - release pull requestがあるrepoでは、そのhead branchに向ける
-- 無いrepoでは、指揮役が作る。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillのsub pull requestの組み方に従い、修正のpull requestをそのsub pull requestにする
+- 無いrepoでは、指揮役が作る。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillの親PRと子PRの組み方に従い、修正のpull requestをその子PRにする
 
 release pull requestは、指揮役もsubagentもmergeしない。本番に出すのは人間である。人間がmergeする段階でも、指揮役がmergeする段階でも、向け先は同じである。
 
@@ -103,7 +103,7 @@ mergeするのは、subagentがready for reviewにし、CIが通ったpull reque
 - 担当する問題の名前と、レポートの問題への行リンク、トリアージページの行へのリンク
 - 途中で止まった修正を引き継がせる時は、引き継ぎである事と、残っているpull requestやbranch
 - `software-factory-mode-2026aki` skillのSKILL.mdの場所
-- pull requestの向け先。sub pull requestにする時は、そのrelease pull request
+- pull requestの向け先。子PRにする時は、親になるrelease pull request
 - 仕様の判断が要る時の扱い。ユーザーが決めた時だけ含める
 - ユーザーの署名。subagentが、ページに自分の署名と並べて書く
 - 作業用ディレクトリ。session用の一時ディレクトリの下に、問題ごとに分ける

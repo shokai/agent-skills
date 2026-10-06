@@ -1,7 +1,7 @@
 ---
 name: github
 description: >-
-  GitHubでpull requestを作り、文章を書く時の心得。PRのタイトルと概要欄の書き方、リンクが壊れない書き方、sub pull requestの組み方を定める。
+  GitHubでpull requestを作り、文章を書く時の心得。PRのタイトルと概要欄の書き方、リンクが壊れない書き方、親PRと子PRの組み方を定める。
   pull requestを作成・更新する時、GitHubに載る文章を書く時に読み込む。
 ---
 
@@ -34,10 +34,10 @@ pull requestを作成・更新する時、GitHubに載る文章を書く時は�
 - `#数字` は、issueとPRの番号にだけ使う。Dependabot alertのように別の番号体系を持つ物は、フルURLで書く。`#数字` で書くと、同じ番号の無関係なissueやPRへのリンクになる
 - URLの日本語の部分は、percent-encodeせずに書く。encodeしたURLは、どのページへのリンクかを人間が読み取れない
 
-## 心得4. sub pull requestは、親子の両方からリンクする
+## 心得4. 親PRと子PRは、両方からリンクする
 
-- 親PRの概要欄に `## sub pull request` の節を置き、sub PRを作る度に `- #1234` の形で足す
-- sub PRの概要欄の1行目に、`#1234 に向けたsub pull requestです` と書く
+- 親PRの概要欄に `## 子PR` の節を置き、子PRを作る度に `- #1234` の形で足す
+- 子PRの概要欄の1行目に、`#1234 の子PRです` と書く
 - 親branchは、default branchに空のcommitを1つ積んで作り、親PRにする。default branchに無いcommitが1つも無いと、PRを作れない
-- sub PR同士は兄弟にする。あるsub PRのbranchから次のsub PRを作ると、先のPRのcommitがdiffに混ざる
-- PRをどこに向けるかをユーザーに訊く時は、branch名ではなくPRの関係で訊く。「`feature-x` からbranchを切るか」ではなく、「#1234 に向けたsub PRにするか、mainに向けたPRにするか」と訊き、本番に載る時期のような帰結を添える
+- 子PRは親branchに向け、子PR同士は兄弟にする。ある子PRのbranchから次の子PRを作ると、先のPRのcommitがdiffに混ざる
+- PRをどこに向けるかをユーザーに訊く時は、branch名ではなくPRの関係で訊く。「`feature-x` からbranchを切るか」ではなく、「#1234 の子PRにするか、mainに向けたPRにするか」と訊き、本番に載る時期のような帰結を添える
