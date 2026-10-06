@@ -20,7 +20,7 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 8. **トリアージ**: レポートの問題を、修正に必要な仕様の判断の重さで3つの修正難度に分け、どれを誰が直すかを決める材料にします
 9. **状態同期**: 問題を直すpull requestの状態を、トリアージのページとレポートに反映します
 10. **自動修正**: トリアージした問題を、subagentが1つずつ修正し、pull requestをready for reviewまで仕上げます。どの深刻度と修正難度の問題を自動修正するか、mergeまで自動で進めるかは、起動時に選びます
-11. **Release PR deploy note**: 自動修正で積み上がったpull requestの概要欄から、デプロイの前後に人間がやる事をまとめ、release PR等のコメントに投稿します
+11. **Release PR deploy note**: 自動修正で積み上がったpull requestの概要欄から、デプロイの前後に人間がやる事をまとめ、release pull requestのコメントに投稿します
 
 観点チェックリスト（`CHECKLIST.md`）は認可・トークン・認証・SSRF・XSS・インジェクション・ファイル・DoS・情報漏洩・ビジネスロジック・設定の11カテゴリを収録していますが、これは出発点であり網羅的ではありません。リストにないパターンも積極的に調査し、見つけた観点は報告します。
 
@@ -32,7 +32,7 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 - **codepatrol-triage**: レポートの問題を分類し、トリアージのページを作ります。codepatrolが起動したsubagentが実行します
 - **codepatrol-sync-state**: 問題を直すpull requestの状態を、ページに反映します。codepatrolが起動したsubagentが実行します
 - **codepatrol-autofix**: 1つの問題を修正し、pull requestを仕上げます。codepatrolが起動したsubagentが実行します
-- **codepatrol-autofix-deploynote**: デプロイの前後に人間がやる事を、pull requestのコメントにまとめます。codepatrolが起動したsubagentが実行します
+- **codepatrol-autofix-deploynote**: デプロイの前後に人間がやる事を、release pull requestのコメントにまとめます。codepatrolが起動したsubagentが実行します
 
 ## 前提条件
 

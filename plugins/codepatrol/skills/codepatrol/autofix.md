@@ -26,6 +26,15 @@
 
 修正難度2や3を含む組み合わせが選ばれた時は、subagentからの質問の取り次ぎが大量に起きる事を伝え、どう進めるかを訊いてから始める。
 
+## release pull request
+
+修正のpull requestは、mergeしても本番には出ないbranchに向ける。積まれた修正は、人間が本番に出す前にまとめて確かめ、1つのpull requestをmergeしてから本番に出す。このpull requestをrelease pull requestと呼ぶ。deploy noteもここに置く。
+
+- release pull requestを作る仕組みがあるrepoでは、その仕組みが修正を集めるbranchに向ける
+- 仕組みが無いrepoでは、既存のrelease pull requestを使い、無ければ指揮役が作る。修正のpull requestをその子PRにする。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillの親子PRの組み方に従う
+
+release pull requestは、指揮役もsubagentもmergeしない。本番に出すのは人間である。人間がmergeする段階でも、指揮役がmergeする段階でも、向け先は同じである。
+
 ## どこまで自動で進めるかを決める
 
 2つの段階がある。最初にユーザーに訊き、ready for reviewまでの段階から始める事を勧める。mergeの自動化は、ユーザーが出来上がったpull requestの様子を見てから上げる物である。作業の途中でも、ユーザーの指示があれば切り替える。
@@ -35,23 +44,15 @@
 | ready for reviewまで | pull requestをready for reviewまで仕上げる | 人間                                      |
 | mergeまで            | 同じ                                       | 指揮役。CIが通ったpull requestをmergeする |
 
-### mergeまで進める時の、pull requestの向け先
-
-修正のpull requestは、mergeしても即座には本番に出ないbranchに向ける。人間が、本番に出す前に、積まれた修正をまとめて確かめられるようにする。
-
-- default branchにmergeした物が、release PR等を経てから本番に出るrepoでは、default branchに向ける
-- default branchにmergeすると即座に本番に出るrepoでは、修正をまとめる親PRを作り、修正のpull requestをそのsub pull requestにする。作り方は `kuden:github` skillに従う
-- どちらのrepoなのかが分からなければ、ユーザーに訊く
-
-release PRと親PRは、指揮役もsubagentもmergeしない。本番に出すのは人間である。
+### mergeまで進める時の、mergeの条件
 
 mergeするのは、subagentがready for reviewにし、CIが通ったpull request全てである。subagentが「人間が確認すべき事」を報告していてもmergeし、その内容をユーザーに伝える。
 
 条件を満たさないpull requestは、mergeしない。残すのではなく、mergeできる状態にする事を先に試みる。次のような場合である。
 
-- mergeすると即座に本番に出るbranchに向いている。mergeの直前に、pull requestの実際の向け先を確かめる。ready for reviewまでの段階で作られた物は、段階を切り替えた後も、default branchに向いたままである。親PRに向け直し、向け直した後のCIを確かめる
+- release pull requestに積まれないbranchに向いている。mergeの直前に、pull requestの実際の向け先を確かめる。向け直し、向け直した後のCIを確かめる
 - CIが失敗している。修正したsubagentに直させる
-- CIが走っていない。結果が無い事を、通ったと扱わない。親PRに向けたpull requestでは、CIが走らない設定のrepoがある。CIを走らせるか、repoの手順でtestを実行させる。testが通れば、CIが通ったのと同じに扱う
+- CIが走っていない。結果が無い事を、通ったと扱わない。default branch以外に向けたpull requestでは、CIが走らない設定のrepoがある。CIを走らせるか、repoの手順でtestを実行させる。testが通れば、CIが通ったのと同じに扱う
 - 人間が求めた変更に、まだ対応していない。修正したsubagentに対応させる。対応が済めば、他のpull requestと同じ条件でmergeする
 - branchの保護等でmergeできない
 
@@ -62,7 +63,7 @@ mergeするのは、subagentがready for reviewにし、CIが通ったpull reque
 修正が溜まりすぎると、pull request同士が衝突し、まとめて本番に出す量も増える。次の2つの量を数え、どちらかが上限に達したら、新しいsubagentを起動しない。進行中のsubagentは完走させる。上限は量ごとに別の値で、作業を始める時に、ユーザーにそれぞれ訊いて決める。
 
 - 自動修正で作った、mergeされていない問題。pull requestではなく、問題で数える。1つの問題の修正が、複数のrepoのpull requestになる事がある。5件を目安として勧める
-- release PRや親PRに積まれ、本番に出ていないpull request。そのようなpull requestがあるrepoで数える。自動修正の物に限らず、積まれているpull requestの数で数える。上限は、一度に本番に出せる量で決まり、1つ目の量よりずっと大きくなるのが普通である
+- release pull requestに積まれ、本番に出ていないpull request。自動修正の物に限らず、積まれているpull requestの数で数える。上限は、一度に本番に出せる量で決まり、1つ目の量よりずっと大きくなるのが普通である
 
 どちらも、段階に関係なく数える。
 
@@ -102,7 +103,7 @@ mergeするのは、subagentがready for reviewにし、CIが通ったpull reque
 - 担当する問題の名前と、レポートの問題への行リンク、トリアージページの行へのリンク
 - 途中で止まった修正を引き継がせる時は、引き継ぎである事と、残っているpull requestやbranch
 - `software-factory-mode-2026aki` skillのSKILL.mdの場所
-- pull requestの向け先。親PRに向ける時は、親PR
+- pull requestの向け先。子PRにする時は、親になるrelease pull request
 - 仕様の判断が要る時の扱い。ユーザーが決めた時だけ含める
 - ユーザーの署名。subagentが、ページに自分の署名と並べて書く
 - 作業用ディレクトリ。session用の一時ディレクトリの下に、問題ごとに分ける
@@ -130,11 +131,11 @@ mergeされたpull requestについて、次の3つをまとめて1つのsubagen
 
 1. 開発環境の後始末。`software-factory-mode-2026aki` skillの「開発環境の後始末」に従う。修正したsubagentが報告した、残した作業環境を渡す。どの修正の物か分からない物は、消さずに報告させる
 2. 状態同期。codepatrol-sync-stateを実行させる。範囲は、対象のpull requestの行だけでよい
-3. deploy noteの更新。codepatrol-autofix-deploynoteを実行させる。release PRや親PRのように、本番に出る前の修正が積まれるpull requestがある時に行う
+3. deploy noteの更新。codepatrol-autofix-deploynoteを実行させる。対象は、mergeされたpull requestが積まれたrelease pull requestである
 
 報告は短くさせる。起動を止める上限に空きがあれば、次の問題の修正を起動する。
 
-deploy noteは、人間が書いた確認も反映する。mergeが無くても、起動し直した時と、作業を終える時に更新させる。
+修正が積まれたrelease pull requestのdeploy noteは、人間が書いた確認も反映する。新しいmergeが無くても、起動し直した時と、作業を終える時に更新させる。
 
 ## 止まってユーザーの判断を待つ
 
