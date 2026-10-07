@@ -22,7 +22,7 @@
 2. 「Update marketplace」を選択
 3. 「Browse plugins」から新しいスキルをインストール
 
-## 含まれるplugin
+## 含まれるスキル
 
 - [library-update-review](plugins/library-update-review/README.md) - ライブラリ更新pull requestのレビューを支援する
 - [codex-consultation](plugins/codex-consultation/README.md) - Codex CLI（OpenAI）にセカンドオピニオンを求める
