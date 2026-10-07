@@ -24,7 +24,7 @@
 
 ## 含まれるスキル
 
-- [library-update-review](plugins/library-update-review/README.md) - ライブラリ更新pull requestのレビューを支援する
+- [library-update-review](plugins/library-update-review/README.md) - dependabotやrenovateが作成する、ライブラリ更新pull requestのレビューを支援する
 - [codex-consultation](plugins/codex-consultation/README.md) - Codex CLI（OpenAI）に、批判的思考の連鎖を使ったセカンドオピニオンを求める
 - [subagent-consultation](plugins/subagent-consultation/README.md) - Agentツール（subagent）に、批判的思考の連鎖を使ったセカンドオピニオンを求める
 - [conversation-context](plugins/conversation-context/README.md) - 対話コンテキストを `.dev/contexts/` にexportし、別セッションやレビューでimportする
