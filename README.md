@@ -29,10 +29,10 @@
 - [library-update-review](plugins/library-update-review/README.md) - dependabotやrenovateが作成する、ライブラリ更新pull requestのレビューを支援する
 - [codex-consultation](plugins/codex-consultation/README.md) - Codex CLI（OpenAI）に、批判的思考の連鎖を使ったセカンドオピニオンを求める
 - [subagent-consultation](plugins/subagent-consultation/README.md) - Agentツール（subagent）に、批判的思考の連鎖を使ったセカンドオピニオンを求める
-- [conversation-context](plugins/conversation-context/README.md) - 対話コンテキストを `.dev/contexts/` にexportし、別セッションやレビューでimportする
+- [conversation-context](plugins/conversation-context/README.md) - AIとの対話で決まったやる事、制約、やらない事とその理由をテキストとしてexportする。別セッションやレビューでimportできる
 - [sanity-review](plugins/sanity-review/README.md) - PRのレビュー報告書を作成し、実装者の正気を疑う
-- [codepatrol](plugins/codepatrol/README.md) - リポジトリを領域ごとに巡回してセキュリティ調査し、トリアージ、自動修正と自動mergeも行う
-- [software-factory-mode](plugins/software-factory-mode/README.md) - sessionをSoftware Factory Modeに切り替える
+- [codepatrol](plugins/codepatrol/README.md) - リポジトリを領域ごとに巡回するセキュリティ調査ツール。発見した脆弱性をトリアージし、自動修正と自動mergeも行う
+- [software-factory-mode](plugins/software-factory-mode/README.md) - セッションをSoftware Factory Modeに切り替え、極めて正確な実装を行う
 - [kuden](plugins/kuden/README.md) - 作者がAIとの様々な作業の中で重ねてきた失敗と成功のmemoryから抽出した心得を集めたガイドライン群
 
 ### その他
