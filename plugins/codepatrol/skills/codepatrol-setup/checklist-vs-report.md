@@ -6,7 +6,7 @@ checklistは調査の足場であって、問題の一覧ではない。
 
 このガイドラインは、checklistを生成・更新するcodepatrol-setupと、調査中にchecklistの事実の誤りを直し、Codexの指摘を反映するcodepatrol-reportから参照される。
 
-## checklist（`CHECKLIST.md` マスター / `.dev/codepatrol/checklist.md` 作業用）
+## checklist（`CHECKLIST.md` マスター / `.dev/codepatrol/checklist.md` リポジトリ固有の層）
 
 役割: このリポジトリのセキュリティ機構の説明と、中立な観点（何を確認するか）。
 
