@@ -32,7 +32,7 @@
 - [conversation-context](plugins/conversation-context/README.md) - AIとの対話で決まったやる事、制約、やらない事とその理由をテキストとしてexportする。別セッションやレビューでimportできる
 - [sanity-review](plugins/sanity-review/README.md) - PRのレビュー報告書を作成し、実装者の正気を疑う
 - [codepatrol](plugins/codepatrol/README.md) - リポジトリを領域ごとに巡回するセキュリティ調査ツール。発見した脆弱性をトリアージし、自動修正と自動mergeも行う
-- [software-factory-mode](plugins/software-factory-mode/README.md) - sessionをSoftware Factory Modeに切り替え、極めて正確な実装を行う
+- [software-factory-mode](plugins/software-factory-mode/README.md) - セッションをSoftware Factory Modeに切り替え、極めて正確な実装を行う
 - [kuden](plugins/kuden/README.md) - 作者がAIとの様々な作業の中で重ねてきた失敗と成功のmemoryから抽出した心得を集めたガイドライン群
 
 ### その他
