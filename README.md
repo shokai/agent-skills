@@ -32,5 +32,5 @@
 - [prose-proofreading](plugins/prose-proofreading/README.md) - Markdownドキュメントの文章を校正する
 - [unconventional-simplification](plugins/unconventional-simplification/README.md) - 定石外発想で実装をシンプルにする
 - [codepatrol](plugins/codepatrol/README.md) - リポジトリを領域ごとに巡回してセキュリティ調査する
-- [software-factory-mode](plugins/software-factory-mode/README.md) - Software Factory 2026秋の開発フローをsessionに適用する
+- [software-factory-mode](plugins/software-factory-mode/README.md) - sessionをSoftware Factory Modeに切り替える
 - [kuden](plugins/kuden/README.md) - 作者がAIとの対話の中で伝えてきた心得を集めたガイドライン群
