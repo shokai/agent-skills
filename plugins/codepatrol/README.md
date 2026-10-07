@@ -42,7 +42,7 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 - **`codex-consultation` スキル**: リストのレビューと、調査結果の批判的レビューで使用します。リストの生成・更新と調査には必須で、他のスキルや主エージェント自身のレビューで代替しません
   - CodexのmodelはSol以上のflagship（Sol、Astra等）、reasoning effortはmedium以上に設定しておきます。Luna・Terra等の軽量tierやSolより前の世代のmodelでは停止します
   - Codexがusage limitや通信障害で停止した場合は、リストのレビューもレポートの出力もせずに中断します
-- **Cosense書き出しを選ぶ場合**: cosense CLI（`npm install -g @helpfeel/cosense-cli`）のインストールとログイン、およびCosense操作用のskillが別途必要です
+- **Cosense書き出しを選ぶ場合**: [cosense CLI](https://www.npmjs.com/package/@helpfeel/cosense-cli)（`npm install -g @helpfeel/cosense-cli`）のインストールとログイン、および [Cosense操作用のskill](https://github.com/helpfeel/cosense-cli) が別途必要です
   - ローカルファイル出力だけを使う場合、これらは不要です
   - トリアージ、状態同期、自動修正は、Cosense書き出しの場合だけ使えます
 - **`kuden` plugin**: 指揮役が `kuden:orchestrator` の心得に従います。subagentの報告の確かめ方、中断後の再開、利用上限に合わせた速度の調整が、ここで決まります
@@ -69,4 +69,13 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 
 ## インストール方法
 
-[リポジトリルートのREADME](../../README.md#インストール方法)を参照してください。
+マーケットプレイスを登録してから、pluginをインストールします。
+
+```bash
+/plugin marketplace add shokai/agent-skills
+/plugin install codepatrol
+```
+
+既にマーケットプレイスを登録済みの場合、新しいスキルをインストールするには [マーケットプレイスの更新](../../README.md#スキルをうまくインストールできない場合) が必要です。
+
+他のpluginは [リポジトリルートのREADME](../../README.md) から探せます。

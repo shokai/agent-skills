@@ -12,18 +12,7 @@
 
 ### 2. スキルをインストール
 
-```bash
-/plugin install library-update-review
-/plugin install codex-consultation
-/plugin install subagent-consultation
-/plugin install conversation-context
-/plugin install sanity-review
-/plugin install prose-proofreading
-/plugin install unconventional-simplification
-/plugin install codepatrol
-/plugin install software-factory-mode
-/plugin install kuden
-```
+各pluginのREADMEに書かれたコマンドでインストールします。
 
 ### スキルをうまくインストールできない場合
 
@@ -35,151 +24,18 @@
 
 ## 含まれるスキル
 
-### library-update-review
+### オススメ
 
-ライブラリ更新pull requestのレビューを支援するスキルです。
+- [library-update-review](plugins/library-update-review/README.md) - dependabotやrenovateが作成する、ライブラリ更新pull requestのレビューを支援する
+- [codex-consultation](plugins/codex-consultation/README.md) - Codex CLI（OpenAI）に、批判的思考の連鎖を使ったセカンドオピニオンを求める
+- [subagent-consultation](plugins/subagent-consultation/README.md) - Agentツール（subagent）に、批判的思考の連鎖を使ったセカンドオピニオンを求める
+- [conversation-context](plugins/conversation-context/README.md) - AIとの対話で決まったやる事、制約、やらない事とその理由をテキストとしてexportする。別セッションやレビューでimportできる
+- [sanity-review](plugins/sanity-review/README.md) - PRのレビュー報告書を作成し、実装者の正気を疑う
+- [codepatrol](plugins/codepatrol/README.md) - リポジトリを領域ごとに巡回するセキュリティ調査ツール。発見した脆弱性をトリアージし、自動修正と自動mergeも行う
+- [software-factory-mode](plugins/software-factory-mode/README.md) - セッションをSoftware Factory Modeに切り替え、極めて正確な実装を行う
+- [kuden](plugins/kuden/README.md) - 作者がAIとの様々な作業の中で重ねてきた失敗と成功のmemoryから抽出した心得を集めたガイドライン群
 
-#### 機能
+### その他
 
-- dependabotやrenovatebotが作成したPRの分析
-- release noteやchangelogの詳細調査
-- ライブラリの依存関係の確認
-- コードの使用箇所の特定
-- 必要に応じたコード更新の提案
-- 過去の失敗事例の調査
-
-#### 使い方
-
-```bash
-/library-update-review [PR-URL-or-number]
-```
-
-dependabotやrenovatebotのPRブランチで実行すると、包括的なレビューレポートを作成します。
-
-### codex-consultation
-
-Codex CLI（OpenAI）にセカンドオピニオンを求めるスキルです。
-
-批判的思考の連鎖によって互いの主張を検討・反論しあい、正確性と網羅性を向上するプロトコルが実装されています。
-
-前提: Codex CLIがローカル環境にインストールされ、実行可能であること。
-
-#### 機能
-
-- 会話コンテキストに基づいてCodexへの相談プロンプトを自動設計
-- Codexの回答をClaudeが要約・整理し、自身の見解と照らし合わせて報告
-- Codexのコマンド失敗を検知した場合、Claudeが補正
-
-#### 使い方
-
-```bash
-/codex-consultation
-```
-
-作業中に「codexと相談して」「codexに聞いて」「codexにレビューしてもらって」と伝えると発動します。
-
-### subagent-consultation
-
-Agentツール（subagent）にセカンドオピニオンを求めるスキルです。
-
-codex-consultationと同じ批判的思考の連鎖プロトコルを、Codex CLIの代わりにAgentツール（subagent）で実行します。Codex CLIがインストールされていない環境でも利用できます。
-
-#### 機能
-
-- 会話コンテキストに基づいてsubagentへの相談プロンプトを自動設計
-- subagentの回答を要約・整理し、自身の見解と照らし合わせて報告
-- subagentの実行失敗を検知した場合、相談元Agentが補正
-
-#### 使い方
-
-```bash
-/subagent-consultation
-```
-
-作業中に「subagentと相談して」「subagentに聞いて」「subagentにレビューしてもらって」と伝えると発動します。
-
-### conversation-context
-
-対話コンテキストのexport/importスキルです。2つのスキルがセットでインストールされます。
-
-会話で共有された目的・意図・設計判断・制約条件を `.dev/contexts/` ディレクトリに書き出し、別セッションやレビューで読み込むことができます。1対多のコンテキスト共有により、複数の子PRをまとめた親PRのレビューやコードの自動改善に便利です。
-
-#### 機能
-
-- **conversation-context-export**: 現在の会話コンテキスト（目的、設計判断、制約条件など）を `.dev/contexts/` に書き出す
-- **conversation-context-import**: `.dev/contexts/` に保存されたコンテキストを読み込み、現在のセッションに反映する
-
-#### 使い方
-
-```bash
-/conversation-context-export
-/conversation-context-import
-```
-
-### sanity-review
-
-PRのレビュー報告書を作成するスキルです。bugや脆弱性の調査だけでなく、exportされた対話コンテキスト・PR概要欄・実装されたコードの整合性を確認し、実装者の正気を疑います。
-
-詳細は [plugins/sanity-review/README.md](plugins/sanity-review/README.md) を参照してください。
-
-```bash
-/sanity-review [PR-URL-or-number]
-```
-
-### prose-proofreading
-
-Markdownドキュメントの文章校正スキルです。ガイドラインに基づいて文体の問題を検出し、修正案を提示します。
-
-```bash
-/prose-proofreading [file-path or branch-diff]
-```
-
-### unconventional-simplification
-
-定石外発想で実装をシンプルにするスキルです。AIが出しがちな「現状の発展型」ではなく、実装済みの解の裏にある暗黙の前提条件を1つずつ外し、よりシンプルな別解がないかを検討します。
-
-詳細は [plugins/unconventional-simplification/README.md](plugins/unconventional-simplification/README.md) を参照してください。
-
-```bash
-/unconventional-simplification [対象ファイル/モジュール]
-```
-
-作業中に「定石外発想で」「前提を疑って」「もっとシンプルにできないか」と伝えると発動します。既にある実装や設計案を見直し、提案・分類で停止します。コードの自動適用はしません。
-
-### codepatrol
-
-リポジトリを領域ごとに巡回してセキュリティ調査するスキルです。起動したsessionが指揮役になり、領域ごとに起動したsubagentが、調査対象リストと観点チェックリストに基づいて調査し、外部Agentによる批判的レビューを経てレポートを出力します。複数sessionにまたがる長期作業を前提とし、実行するたびに現状を確認して続きから進めます。レポートの問題のトリアージと自動修正も行います。
-
-詳細は [plugins/codepatrol/README.md](plugins/codepatrol/README.md) を参照してください。
-
-```bash
-/codepatrol:codepatrol [未調査の領域だけ | 全領域 | 領域名... | 調査対象リストを更新しろ | トリアージ | 状態同期 | 自動修正]
-```
-
-### software-factory-mode
-
-Software Factory 2026秋の開発フローをsessionに適用するmode skillです。開発の開始時に手動で起動すると、着手前の質問、codexとのbug確認、draft PRの作成、対話コンテキストのexport、インラインレビューコメントの草稿、sanity-reviewという順序で作業を進めます。
-
-repoのCLAUDE.mdを書き換えずに、自分のマシンにインストールするだけで開発フローを持ち込めます。
-
-依存するcodex-consultation・subagent-consultation・conversation-context・sanity-review・kudenも一緒にインストールされます。
-
-```bash
-/software-factory-mode:software-factory-mode-2026aki
-```
-
-### kuden
-
-作者がAIとの対話の中で伝えてきた心得を集めたガイドライン群です。AIが必要だと判断した時に読み込みます。手動でも起動できます。
-
-- **agent-skill**: Agent Skillを書く時に、何を書き、何を書かないかの判断基準と、レビュー指摘の採否の基準
-- **code-comment**: ソースコード中のコメントに、何を書き、何を書かないかの判断基準と、置く位置、日本語の文体
-- **github**: pull requestのタイトルと概要欄の書き方、リンクが壊れない書き方、親子PRの組み方
-- **orchestrator**: subagentに作業を任せる指揮役の心得。報告の確かめ方、進み具合の持ち方、止まったsubagentの扱い、利用上限との付き合い方
-
-```bash
-/kuden:agent-skill
-/kuden:code-comment
-/kuden:github
-/kuden:orchestrator
-```
+- [prose-proofreading](plugins/prose-proofreading/README.md) - Markdownドキュメントの文章を校正する
+- [unconventional-simplification](plugins/unconventional-simplification/README.md) - 定石外発想で実装をシンプルにする
