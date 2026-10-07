@@ -69,4 +69,13 @@ codepatrolは「巡回(patrol)」という発想でこの問題に向き合い�
 
 ## インストール方法
 
-[リポジトリルートのREADME](../../README.md#インストール方法)を参照してください。
+マーケットプレイスを登録してから、pluginをインストールします。
+
+```bash
+/plugin marketplace add shokai/agent-skills
+/plugin install codepatrol
+```
+
+既にマーケットプレイスを登録済みの場合、新しいスキルをインストールするには [マーケットプレイスの更新](../../README.md#スキルをうまくインストールできない場合) が必要です。
+
+他のpluginは [リポジトリルートのREADME](../../README.md) から探せます。

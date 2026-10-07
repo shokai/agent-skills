@@ -54,4 +54,13 @@ PRブランチで実行するか、PR URLまたは番号を指定すると、レ
 
 ## インストール方法
 
-[リポジトリルートのREADME](../../README.md#インストール方法)を参照してください。
+マーケットプレイスを登録してから、pluginをインストールします。
+
+```bash
+/plugin marketplace add shokai/agent-skills
+/plugin install sanity-review
+```
+
+既にマーケットプレイスを登録済みの場合、新しいスキルをインストールするには [マーケットプレイスの更新](../../README.md#スキルをうまくインストールできない場合) が必要です。
+
+他のpluginは [リポジトリルートのREADME](../../README.md) から探せます。
