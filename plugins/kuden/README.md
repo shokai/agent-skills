@@ -7,6 +7,7 @@
 - **agent-skill**: Agent Skillを書く時に、何を書き、何を書かないかの判断基準と、レビュー指摘の採否の基準
 - **code-comment**: ソースコード中のコメントに、何を書き、何を書かないかの判断基準と、置く位置、日本語の文体
 - **github**: pull requestのタイトルと概要欄の書き方、リンクが壊れない書き方、親子PRの組み方
+- **software-test**: 何をtestし、何をtestしないかの判断基準と、アクセス権限のtestの書き方、落ちたtestの直し方、fixtureの仮名
 - **orchestrator**: subagentに作業を任せる指揮役の心得。報告の確かめ方、進み具合の持ち方、止まったsubagentの扱い、利用上限との付き合い方
 
 ## 使い方
@@ -15,6 +16,7 @@
 /kuden:agent-skill
 /kuden:code-comment
 /kuden:github
+/kuden:software-test
 /kuden:orchestrator
 ```
 
