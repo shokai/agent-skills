@@ -1,6 +1,6 @@
 {
   "name": "kuden",
-  "description": "作者がAIとの対話の中で伝えてきた心得を集めたガイドライン群。Agent Skillやソースコード中のコメントを書く時、GitHubでpull requestを作る時に、何を書き、何を書かないかの判断基準を定める。subagentに作業を任せる指揮役の振る舞いも定める。",
+  "description": "作者がAIとの対話の中で伝えてきた心得を集めたガイドライン群。Agent Skillやソースコード中のコメント、ソフトウェアテストを書く時、GitHubでpull requestを作る時に、何を書き、何を書かないかの判断基準を定める。subagentに作業を任せる指揮役の振る舞いも定める。",
   "author": {
     "name": "shokai"
   },
