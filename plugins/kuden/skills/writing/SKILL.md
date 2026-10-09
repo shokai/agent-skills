@@ -31,4 +31,4 @@ description: >-
 
 ## 心得4. 和文と英字の間に空白を入れない
 
-和文と、英字やコードの識別子との間に空白を入れない。`Modal を <dialog> に` ではなく `Modalを<dialog>に` と書く。`react-bootstrap Modal` のような英単語同士の空白は残す。
+和文と、英字やコードの識別子との間に空白を入れない。`Modal を <dialog> に` ではなく `Modalを<dialog>に` と書く。`react-bootstrap Modal` のような英単語同士の空白は残す。Markdownのinline codeの前後の空白は、この規則の対象外である。
