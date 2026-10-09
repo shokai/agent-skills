@@ -37,5 +37,4 @@
 
 ### その他
 
-- [prose-proofreading](plugins/prose-proofreading/README.md) - Markdownドキュメントの文章を校正する
 - [unconventional-simplification](plugins/unconventional-simplification/README.md) - 定石外発想で実装をシンプルにする
