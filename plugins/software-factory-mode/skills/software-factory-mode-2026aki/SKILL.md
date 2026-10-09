@@ -70,6 +70,11 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - 起動した開発サーバーやコンテナは、目視確認・test・lint・Codexとの相談といった、それを使う作業が終わったら止める。再び要る時に起動し直す
 - 他のworktreeやsessionが起動した物は、ユーザーの指示があるまで止めない
 - mergeされたら、作業に使ったworktreeとbranchを消す。worktree専用に作られたdocker volumeやimage等も一緒に消す。main worktreeの物は残す
+- mergeされたら、main worktreeのdefault branchをremoteのdefault branchに追従させる。次のどれかに当たる時は追従させず、理由を報告する
+  - main worktreeがdefault branch以外にいる
+  - main worktreeの追跡済みファイルに未commitの変更があるか、追従で書き換わる未追跡ファイルがある
+  - main worktreeを起動中のコンテナやdevサーバー・testが使っている
+  - 他のsessionがmain worktreeで作業を実行している。入力待ちで止まっているsessionは数えない
 
 ## 手順全体を通して守る事
 
