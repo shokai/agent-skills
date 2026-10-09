@@ -73,7 +73,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - mergeされたら、main worktreeのdefault branchをremoteのdefault branchに追従させる。次のどれかに当たる時は追従させず、理由を報告する
   - main worktreeがdefault branch以外にいる
   - main worktreeの追跡済みファイルに未commitの変更があるか、追従で書き換わる未追跡ファイルがある
-  - main worktreeを起動中のコンテナやdevサーバー・testが使っている
+  - main worktreeを起動中のコンテナや開発サーバー・testが使っている
   - 他のsessionがmain worktreeで作業を実行している。入力待ちで止まっているsessionは数えない
 
 ## 手順全体を通して守る事
