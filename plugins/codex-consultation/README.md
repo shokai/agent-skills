@@ -23,6 +23,8 @@ Codex CLI（OpenAI）にセカンドオピニオンを求めるAgent Skillです
 
 作業中に「codexと相談して」「codexに聞いて」「codexにレビューしてもらって」と伝えると発動します。
 
+「codexはAstra mediumで相談して」のように、Codexのmodelやreasoning effortを指定できます。指定しなければcodexコマンドの既定設定が使われます。
+
 ## インストール方法
 
 マーケットプレイスを登録してから、pluginをインストールします。
