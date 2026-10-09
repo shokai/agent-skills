@@ -7,7 +7,7 @@ description: >-
 
 # GitHubでの作法
 
-pull requestを作成・更新する時、GitHubに載る文章を書く時は、以下の基準に従う。repoのドキュメントやPRテンプレートに別の定めがあれば、そちらに従う。
+pull requestを作成・更新する時、GitHubに載る文章を書く時は、以下の基準に従う。repoのドキュメントやPRテンプレートに別の定めがあれば、そちらに従う。文体はkuden:writing skillの基準に従う。
 
 ## 心得1. タイトルには、何を解決したかを書く
 
