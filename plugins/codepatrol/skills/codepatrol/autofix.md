@@ -11,7 +11,7 @@
 - `software-factory-mode-2026aki` skillのSKILL.mdが読める。修正するsubagentが従う開発フローである。Skill toolでは呼び出せないskillなので、installされたpluginのファイルから探す。見つからなければ、installをユーザーに依頼して止まる
 - 始める前に、状態同期を行う。ページの状態が古いと、他の人が直した問題に着手する
 
-開発環境の用意、testの実行、レビュー依頼の慣習といったrepo固有の手順は、repoのドキュメントや、ユーザーが残した記録にある物を使う。場所を把握し、subagentへの指示に含める。
+開発環境の用意、testの実行、レビュー依頼の慣習といったrepo固有の手順は、repoのドキュメントや、ユーザーが残した記録にある物を使う。場所を把握し、subagentへの指示に含める。関連リポジトリがある時は、修正はどのリポジトリにも及ぶ。repo固有の手順をリポジトリごとに把握し、着手の前に全てのリポジトリを最新のdefault branchに追従させる。コマンドの作業ディレクトリが設定を置くリポジトリに戻る環境では、関連リポジトリのpull requestへの操作で、指揮役も起動するsubagentも対象のリポジトリを毎回明示する。番号だけで指すと、設定を置くリポジトリの同じ番号のpull requestをmergeしたり、そこにコメントを書いたりする。
 
 ## 何を自動修正するかを決める
 
@@ -28,10 +28,10 @@
 
 ## release pull request
 
-修正のpull requestは、mergeしても本番には出ないbranchに向ける。積まれた修正は、人間が本番に出す前にまとめて確かめ、1つのpull requestをmergeしてから本番に出す。このpull requestをrelease pull requestと呼ぶ。deploy noteもここに置く。
+修正のpull requestは、mergeしても本番には出ないbranchに向ける。積まれた修正は、人間が本番に出す前にまとめて確かめ、1つのpull requestをmergeしてから本番に出す。このpull requestをrelease pull requestと呼ぶ。deploy noteもここに置く。release pull requestはリポジトリごとに1つで、関連リポジトリにもそれぞれ用意し、deploy noteもrelease pull requestごとに置く。
 
-- release pull requestを作る仕組みがあるrepoでは、その仕組みが修正を集めるbranchに向ける
-- 仕組みが無いrepoでは、既存のrelease pull requestを使い、無ければ指揮役が作る。修正のpull requestをその子PRにする。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillの親子PRの組み方に従う
+- release pull requestを作る仕組みがあるリポジトリでは、その仕組みが修正を集めるbranchに向ける
+- 仕組みが無いリポジトリでは、既存のrelease pull requestを使い、無ければ指揮役が作る。修正のpull requestをその子PRにする。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillの親子PRの組み方に従う
 
 release pull requestは、指揮役もsubagentもmergeしない。本番に出すのは人間である。人間がmergeする段階でも、指揮役がmergeする段階でも、向け先は同じである。
 
@@ -60,10 +60,10 @@ mergeするのは、subagentがready for reviewにし、CIが通ったpull reque
 
 ## 着手を止める上限
 
-修正が溜まりすぎると、pull request同士が衝突し、まとめて本番に出す量も増える。次の2つの量を数え、どちらかが上限に達したら、新しい問題の修正に着手しない。進行中の修正は完走させる。上限は量ごとに別の値で、作業を始める時に、ユーザーにそれぞれ訊いて決める。
+修正が溜まりすぎると、pull request同士が衝突し、まとめて本番に出す量も増える。次の2つの量を数え、上限に達したら新しい問題の修正に着手しない。着手を止める範囲は量ごとに違う。進行中の修正は完走させる。上限は量ごとに別の値で、作業を始める時に、ユーザーにそれぞれ訊いて決める。
 
-- 自動修正で作った、mergeされていない問題。pull requestではなく、問題で数える。1つの問題の修正が、複数のrepoのpull requestになる事がある。5件を目安として勧める
-- release pull requestに積まれ、本番に出ていないpull request。自動修正の物に限らず、積まれているpull requestの数で数える。上限は、一度に本番に出せる量で決まり、1つ目の量よりずっと大きくなるのが普通である
+- 自動修正で作った、mergeされていない問題。pull requestではなく、問題で数える。1つの問題の修正が、複数のリポジトリのpull requestになる事がある。5件を目安として勧める。上限に達したら、新しい問題の全てに着手しない
+- release pull requestに積まれ、本番に出ていないpull request。自動修正の物に限らず、積まれているpull requestの数で数える。上限は、一度に本番に出せる量で決まり、1つ目の量よりずっと大きくなるのが普通である。release pull requestごとに数え、どれかが上限に達したら、そのリポジトリに修正が及ぶ問題に着手しない。複数のリポジトリに及ぶ修正は、そのうち1つが上限に達していれば着手しない
 
 どちらも、段階に関係なく数える。
 
@@ -103,12 +103,12 @@ mergeするのは、subagentがready for reviewにし、CIが通ったpull reque
 - 担当する問題の名前と、レポートの問題への行リンク、トリアージページの行へのリンク
 - 途中で止まった修正を引き継がせる時は、引き継ぎである事と、残っているpull requestやbranch
 - `software-factory-mode-2026aki` skillのSKILL.mdの場所
-- pull requestの向け先。子PRにする時は、親になるrelease pull request
+- 修正が触るリポジトリと、それぞれのcloneの場所と、pull requestの向け先。子PRにする時は、親になるrelease pull request
 - 仕様の判断が要る時の扱い。ユーザーが決めた時だけ含める
 - ユーザーの署名。subagentが、ページに自分の署名と並べて書く
 - 作業用ディレクトリ。session用の一時ディレクトリの下に、問題ごとに分ける
 - 並走している修正と、それが触るファイル。関連する、merge済みのpull request
-- repo固有の手順の場所
+- 修正が触るリポジトリごとの、repo固有の手順の場所
 
 ## subagentの報告が来たら
 
@@ -139,6 +139,6 @@ mergeされたpull requestについて、次の3つをまとめて1つのsubagen
 
 ## 止まってユーザーの判断を待つ
 
-- 着手を止める上限に達した
+- 着手を止める上限により、着手できる問題が無くなった
 - Codexが止まり、subagentが作業を中断した。Codexを使わない修正に切り替えない
 - subagentが、修正を入れると別の重大な問題が起きると分かって止まった
