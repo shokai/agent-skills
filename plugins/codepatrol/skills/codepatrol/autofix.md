@@ -11,7 +11,12 @@
 - `software-factory-mode-2026aki` skillのSKILL.mdが読める。修正するsubagentが従う開発フローである。Skill toolでは呼び出せないskillなので、installされたpluginのファイルから探す。見つからなければ、installをユーザーに依頼して止まる
 - 始める前に、状態同期を行う。ページの状態が古いと、他の人が直した問題に着手する
 
-開発環境の用意、testの実行、レビュー依頼の慣習といったrepo固有の手順は、repoのドキュメントや、ユーザーが残した記録にある物を使う。場所を把握し、subagentへの指示に含める。関連リポジトリがある時は、修正はどのリポジトリにも及ぶ。repo固有の手順をリポジトリごとに把握し、着手の前に全てのリポジトリを最新のdefault branchに追従させる。コマンドの作業ディレクトリが設定を置くリポジトリに戻る環境では、関連リポジトリのpull requestへの操作で、指揮役も起動するsubagentも対象のリポジトリを毎回明示する。番号だけで指すと、設定を置くリポジトリの同じ番号のpull requestをmergeしたり、そこにコメントを書いたりする。
+開発環境の用意、testの実行、レビュー依頼の慣習といったrepo固有の手順は、repoのドキュメントや、ユーザーが残した記録にある物を使う。場所を把握し、subagentへの指示に含める。
+
+関連リポジトリがある時は、修正はどのリポジトリにも及ぶ。
+
+- repo固有の手順をリポジトリごとに把握し、着手の前に全てのリポジトリを最新のdefault branchに追従させる
+- コマンドの作業ディレクトリが設定を置くリポジトリに戻る環境では、関連リポジトリのpull requestへの操作で、指揮役も起動するsubagentも対象のリポジトリを毎回明示する。番号だけで指すと、設定を置くリポジトリの同じ番号のpull requestをmergeしたり、そこにコメントを書いたりする
 
 ## 何を自動修正するかを決める
 
@@ -28,7 +33,7 @@
 
 ## release pull request
 
-修正のpull requestは、mergeしても本番には出ないbranchに向ける。積まれた修正は、人間が本番に出す前にまとめて確かめ、1つのpull requestをmergeしてから本番に出す。このpull requestをrelease pull requestと呼ぶ。deploy noteもここに置く。release pull requestはリポジトリごとに1つで、関連リポジトリにもそれぞれ用意し、deploy noteもrelease pull requestごとに置く。
+修正のpull requestは、mergeしても本番には出ないbranchに向ける。積まれた修正は、人間が本番に出す前にまとめて確かめ、1つのpull requestをmergeしてから本番に出す。このpull requestをrelease pull requestと呼ぶ。deploy noteもここに置く。release pull requestはリポジトリごとに1つで、修正が及ぶ関連リポジトリにもそれぞれ用意し、deploy noteもrelease pull requestごとに置く。
 
 - release pull requestを作る仕組みがあるリポジトリでは、その仕組みが修正を集めるbranchに向ける
 - 仕組みが無いリポジトリでは、既存のrelease pull requestを使い、無ければ指揮役が作る。修正のpull requestをその子PRにする。default branchへのmergeで即座に本番に出るのか、人間が手作業で本番に適用するのかは問わない。作り方は `kuden:github` skillの親子PRの組み方に従う
