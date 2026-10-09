@@ -4,6 +4,7 @@ description: >-
   Codex CLIと相談するスキル。
   ユーザーが「codexと相談して」「codexに聞いて」「codexにレビューしてもらって」と言った時に使用する。
   現在の会話コンテキストに基づいてCodex CLIにプロンプトを送り、結果を要約して報告する。
+  「codexはAstraで」「effortはhighで」のようにCodexのmodelやreasoning effortを指定された時は、そのmodelとeffortで実行する。
 ---
 
 # Codex CLI 相談手順書
@@ -109,6 +110,7 @@ codex exec --ephemeral -s workspace-write -c sandbox_workspace_write.network_acc
 
 - `--ephemeral` は必須。セッションを保存しない
 - `-s workspace-write -c sandbox_workspace_write.network_access=true` は必須。デフォルトではサンドボックスがネットワークアクセスをブロックするため、`gh`や`curl`などの外部通信コマンドが失敗する
+- ユーザーや呼び出し元のskillがCodexのmodelやreasoning effortを指定している時は、`-m <model>` と `-c model_reasoning_effort=<effort>` で上書きする。reasoning effortには専用のフラグが無く、設定値の上書きで渡す。指定が無い時は上書きせず、codexコマンドの既定設定をそのまま使う
 - ワーキングディレクトリはカレントディレクトリがそのまま使われる
 - カレントディレクトリはgitリポジトリ内である必要がある。非gitディレクトリだとcodexは起動せずに終了する。エラーメッセージはtrust設定の問題に見えるが、判定条件はgitリポジトリ内かどうかだけ
 - プロンプトはstdinから渡す。CLI引数で渡すと、stdinがpipe状態のときcodexが追加入力を `<stdin>` ブロックとして読みEOFまで待つためhangする
