@@ -1,7 +1,7 @@
 ---
 name: github
 description: >-
-  GitHubでpull requestを作り、文章を書く時の心得。PRのタイトルと概要欄の書き方、squash and mergeのcommit messageの書き方、リンクが壊れない書き方、親子PRの組み方を定める。
+  GitHubでpull requestを作り、文章を書く時の心得。PRのタイトルと概要欄の書き方、リンクが壊れない書き方、親子PRの組み方、squash and mergeのcommit messageの書き方を定める。
   pull requestを作成・更新・mergeする時、GitHubに載る文章を書く時に読み込む。
 ---
 
@@ -26,15 +26,7 @@ pull requestを作成・更新・mergeする時、GitHubに載る文章を書く
 - 何を直すPRなのかを最初に書く。bugに気付いた状況の説明は書いてよいが、本題の前に長く置かない。状況の説明が本題に見え、本題の説明を邪魔する
 - 最後に動作確認方法を置き、レビュアーが手元で確かめる手順を書く。AIが済ませた検証は、それとは別の節に分ける
 
-## 心得3. squash and mergeのcommit messageは、概要欄を要約して書く
-
-GitHubでsquash and mergeすると、commit messageの1行目はPRのタイトルになり、本文の既定値は個別commitのmessageの連結になる。本文は既定値を使わず、概要欄を要約して書く。
-
-- 個別commitのmessageを本文に残さない。「Aを実装」「Bを実装」「Aを廃止」の3 commitを連結すると、Aを実装したように読める
-- 本文には、タイトルに無い変更内容や理由を簡潔に書く。タイトルで足りるなら本文は書かない
-- Co-Authored-ByやClaude Sessionのような、AIのattribution行を書かない
-
-## 心得4. リンクが壊れない書き方をする
+## 心得3. リンクが壊れない書き方をする
 
 概要欄、コメント、commit message等、GitHubで表示される文章の全てに当てはまる。
 
@@ -42,10 +34,18 @@ GitHubでsquash and mergeすると、commit messageの1行目はPRのタイト�
 - `#数字` は、issueとPRの番号にだけ使う。Dependabot alertのように別の番号体系を持つ物は、フルURLで書く。`#数字` で書くと、同じ番号の無関係なissueやPRへのリンクになる
 - URLの日本語の部分は、percent-encodeせずに書く。encodeしたURLは、どのページへのリンクかを人間が読み取れない
 
-## 心得5. 親子PRは、両方からリンクする
+## 心得4. 親子PRは、両方からリンクする
 
 - 親PRの概要欄に `## 子PR` の節を置き、子PRを作る度に `- #1234` の形で足す
 - 子PRの概要欄の1行目に、`#1234 の子PRです` と書く
 - 親branchは、default branchに空のcommitを1つ積んで作り、親PRにする。default branchに無いcommitが1つも無いと、PRを作れない
 - 子PRは親branchに向け、子PR同士は兄弟にする。ある子PRのbranchから次の子PRを作ると、先のPRのcommitがdiffに混ざる
 - PRをどこに向けるかをユーザーに訊く時は、branch名ではなくPRの関係で訊く。「`feature-x` からbranchを切るか」ではなく、「#1234 の子PRにするか、mainに向けたPRにするか」と訊き、本番に載る時期のような帰結を添える
+
+## 心得5. squash and mergeのcommit messageは、概要欄を要約して書く
+
+GitHubでsquash and mergeすると、commit messageの1行目はPRのタイトルになり、本文の既定値は個別commitのmessageの連結になる。本文は既定値を使わず、概要欄を要約して書く。
+
+- 個別commitのmessageを本文に残さない。「Aを実装」「Bを実装」「Aを廃止」の3 commitを連結すると、Aを実装したように読める
+- 本文には、タイトルに無い変更内容や理由を簡潔に書く。タイトルで足りるなら本文は書かない
+- Co-Authored-ByやClaude Sessionのような、AIのattribution行を書かない
