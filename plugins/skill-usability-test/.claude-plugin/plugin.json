@@ -1,0 +1,10 @@
+{
+  "name": "skill-usability-test",
+  "description": "Agent Skillのusability testを行うスキル。下位tierのmodelのsubagentに、検証したいskillだけを頼りにゴールを与えて観察し、終了後にインタビューとtranscriptの監査で、手順書だけで完遂できたかを確かめる。",
+  "author": {
+    "name": "shokai"
+  },
+  "repository": "https://github.com/shokai/agent-skills",
+  "license": "MIT",
+  "dependencies": ["kuden"]
+}
