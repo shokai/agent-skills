@@ -65,7 +65,7 @@
       "name": "subagent-consultation",
       "source": "./plugins/subagent-consultation",
       "description": "Agentツール（subagent）にセカンドオピニオンを求めるスキル。「subagentと相談して」「subagentに聞いて」で発動する。",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "author": {
         "name": "shokai"
       },
