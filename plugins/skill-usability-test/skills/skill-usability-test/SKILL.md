@@ -4,7 +4,7 @@ argument-hint: "[対象skill]"
 description: >-
   Agent Skillのusability testを行うスキル。
   下位tierのmodelのsubagentに、検証したいskillだけを頼りにゴールを与え、手を貸さずに観察し、終了後にインタビューとtranscriptの監査で判断の根拠を確かめる。
-  ユーザーが「skillのusability testをして」「skillのE2Eテストをして」「手順書だけで完遂できるか試して」と言った時に使用する。
+  ユーザーが「skillのusability testをして」「skillをE2Eテストして」「手順書だけで完遂できるか試して」と言った時に使用する。
   手順の追加や組み替え、新しいコマンドの組み込み、ガイドラインの判断基準の変更のように、skillのワークフロー構成や判断基準に影響する変更をした後に、実行をユーザーに提案する。
 ---
 
