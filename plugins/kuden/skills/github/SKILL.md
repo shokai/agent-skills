@@ -1,13 +1,13 @@
 ---
 name: github
 description: >-
-  GitHubでpull requestを作り、文章を書く時の心得。PRのタイトルと概要欄の書き方、リンクが壊れない書き方、親子PRの組み方を定める。
-  pull requestを作成・更新する時、GitHubに載る文章を書く時に読み込む。
+  GitHubでpull requestを作り、文章を書く時の心得。PRのタイトルと概要欄の書き方、リンクが壊れない書き方、親子PRの組み方、squash and mergeのcommit messageの書き方を定める。
+  pull requestを作成・更新・mergeする時、GitHubに載る文章を書く時に読み込む。
 ---
 
 # GitHubでの作法
 
-pull requestを作成・更新する時、GitHubに載る文章を書く時は、以下の基準に従う。repoのドキュメントやPRテンプレートに別の定めがあれば、そちらに従う。文体はkuden:writing skillの基準に従う。
+pull requestを作成・更新・mergeする時、GitHubに載る文章を書く時は、以下の基準に従う。repoのドキュメントやPRテンプレートに別の定めがあれば、そちらに従う。文体はkuden:writing skillの基準に従う。
 
 ## 心得1. タイトルには、何を解決したかを書く
 
@@ -41,3 +41,11 @@ pull requestを作成・更新する時、GitHubに載る文章を書く時は�
 - 親branchは、default branchに空のcommitを1つ積んで作り、親PRにする。default branchに無いcommitが1つも無いと、PRを作れない
 - 子PRは親branchに向け、子PR同士は兄弟にする。ある子PRのbranchから次の子PRを作ると、先のPRのcommitがdiffに混ざる
 - PRをどこに向けるかをユーザーに訊く時は、branch名ではなくPRの関係で訊く。「`feature-x` からbranchを切るか」ではなく、「#1234 の子PRにするか、mainに向けたPRにするか」と訊き、本番に載る時期のような帰結を添える
+
+## 心得5. squash and mergeのcommit messageは、概要欄を要約して書く
+
+GitHubでsquash and mergeすると、commit messageの1行目はPRのタイトルになり、本文の既定値は個別commitのmessageの連結になる。本文は既定値を使わず、概要欄を要約して書く。
+
+- 個別commitのmessageを本文に残さない。「Aを実装」「Bを実装」「Aを廃止」の3 commitを連結すると、Aを実装したように読める
+- 本文には、タイトルに無い変更内容や理由を簡潔に書く。タイトルで足りるなら本文は書かない
+- Co-Authored-ByやClaude Sessionのような、AIのattribution行を書かない
