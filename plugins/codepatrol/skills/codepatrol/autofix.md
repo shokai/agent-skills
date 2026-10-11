@@ -11,6 +11,8 @@
 - `software-factory-mode-2026aki` skillのSKILL.mdが読める。修正するsubagentが従う開発フローである。Skill toolでは呼び出せないskillなので、installされたpluginのファイルから探す。見つからなければ、installをユーザーに依頼して止まる
 - 始める前に、状態同期を行う。ページの状態が古いと、他の人が直した問題に着手する
 
+指揮役がrelease pull requestを作る時と、pull requestをmergeする時は、`kuden:github` skillを読み込み、その基準に従う。
+
 開発環境の用意、testの実行、レビュー依頼の慣習といったrepo固有の手順は、repoのドキュメントや、ユーザーが残した記録にある物を使う。場所を把握し、subagentへの指示に含める。
 
 関連リポジトリがある時は、修正はどのリポジトリにも及ぶ。
