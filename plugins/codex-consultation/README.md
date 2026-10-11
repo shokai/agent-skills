@@ -13,7 +13,6 @@ Codex CLI（OpenAI）にセカンドオピニオンを求めるAgent Skillです
 ## 前提条件
 
 - Codex CLIがローカル環境にインストールされ、実行可能であること
-- gitリポジトリ外で実行する場合は、手順書に従って `--skip-git-repo-check` を付ける
 
 ## 使い方
 
