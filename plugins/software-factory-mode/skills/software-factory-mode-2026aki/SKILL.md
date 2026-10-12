@@ -2,7 +2,7 @@
 name: software-factory-mode-2026aki
 description: >-
   Software Factory 2026秋の開発フローをこのsessionに適用する。
-  着手前に不明点をユーザーに質問、変更が一段落したらcodexでbug確認、draft PR作成、対話コンテキストexport、インラインレビューコメントの草稿、ユーザーの指示でsanity-review、mergeのcommit messageの草案の確認、という進め方を定める。
+  着手前に不明点をユーザーに質問、変更が一段落したらcodexでbug確認、draft PR作成、対話コンテキストexport、インラインレビューコメントの草稿、ユーザーの指示でsanity-review、ready for review後のsquash and mergeのcommit message草案の提示、という進め方を定める。
   開発の開始時にユーザーが手動で起動する。
 disable-model-invocation: true
 ---
@@ -28,7 +28,7 @@ modeを適用する前に実行環境を確認する。いずれかを満たさ�
 6. PR作成を指示されたらdraftで作成し、対話コンテキストをexportし、インラインレビューコメントの草稿を書く
 7. 草稿を提示したら投稿方法をユーザーに確認する。AIが投稿するか、ユーザー自身が投稿するか
 8. sanity-reviewはユーザーの指示を待ち、指摘対応をpushし、対応内容を簡単にコメント投稿してからready for review
-9. mergeを指示されたら、squash and mergeのcommit messageのタイトルと本文の草案を提示し、この内容でよいかと、AIがmergeするかユーザー自身がmergeするかをユーザーに確認する
+9. ready for reviewに切り替えたら、そのPRのsquash and mergeでcommit messageを指定できる時は、タイトルと本文の草案を提示し、mergeを指示されたらこの草案でsquash and mergeすると告げる
 10. mergeされたら開発環境を後始末する
 
 ## 各手順の詳細
