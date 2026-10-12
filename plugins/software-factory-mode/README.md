@@ -1,6 +1,6 @@
 # software-factory-mode
 
-Software Factory 2026秋の開発フローをsessionに適用するmode skillです。開発の開始時に手動で起動すると、着手前の質問、codexとのbug確認、draft PRの作成、対話コンテキストのexport、インラインレビューコメントの草稿、sanity-reviewという順序で作業を進めます。
+Software Factory 2026秋の開発フローをsessionに適用するmode skillです。開発の開始時に手動で起動すると、着手前の質問、codexとのbug確認、draft PRの作成、対話コンテキストのexport、インラインレビューコメントの草稿、sanity-review、mergeのcommit messageの草案の確認という順序で作業を進めます。
 
 repoのCLAUDE.mdを書き換えずに、自分のマシンにインストールするだけで開発フローを持ち込めます。
 
