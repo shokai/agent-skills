@@ -46,7 +46,7 @@ pull requestを作成・更新・mergeする時、GitHubに載る文章を書く
 
 ## 心得5. squash and mergeのcommit messageは、概要欄を要約して書く
 
-squash and mergeのcommit messageは、1行目をPRのタイトルにし、本文は既定値を使わず、概要欄を要約して書く。
+squash and mergeでは、commit messageの1行目を指定せず、GitHubの既定値に任せる。本文は既定値を使わず、概要欄を要約して書く。
 
 - 個別commitのmessageを本文に残さない。「Aを実装」「Bを実装」「Aを廃止」の3 commitを連結すると、Aを実装したように読める
 - 本文には、タイトルに無い変更内容や理由を簡潔に書く。タイトルで足りるなら本文は書かない
