@@ -42,6 +42,7 @@ pull requestを作成・更新・mergeする時、GitHubに載る文章を書く
 - 親branchは、default branchに空のcommitを1つ積んで作り、親PRにする。default branchに無いcommitが1つも無いと、PRを作れない
 - 子PRは親branchに向け、子PR同士は兄弟にする。ある子PRのbranchから次の子PRを作ると、先のPRのcommitがdiffに混ざる
 - PRをどこに向けるかをユーザーに訊く時は、branch名ではなくPRの関係で訊く。「`feature-x` からbranchを切るか」ではなく、「#1234 の子PRにするか、mainに向けたPRにするか」と訊き、本番に載る時期のような帰結を添える
+- 親PRの概要欄は、親PRをmergeするまでに、mergeする実装に合わせて書き直す。作成時の概要欄は「詳細は子PRで詰める」の仮置きになりがちで、子PRのmergeで実装が変わると古くなる
 
 ## 心得5. squash and mergeのcommit messageは、概要欄を要約して書く
 
@@ -50,4 +51,5 @@ GitHubでsquash and mergeすると、commit messageの1行目はPRのタイト�
 - 個別commitのmessageを本文に残さない。「Aを実装」「Bを実装」「Aを廃止」の3 commitを連結すると、Aを実装したように読める
 - 本文には、タイトルに無い変更内容や理由を簡潔に書く。タイトルで足りるなら本文は書かない
 - 機能を構成するステップを概要欄に並べたPRでは、本文もそのステップを同じ順にリスト記法で書く。判定条件の中身のような詳細を本文にしない
+- 親PRでは、本文の末尾に子PRの番号を `子PR: #1234 #1235` のように並べる。親PRをsquash and mergeすると子PRのcommitはmerge先の履歴に残らないので、この行が無いとgit logから子PRへ直接辿れない
 - Co-Authored-ByやClaude Sessionのような、AIのattribution行を書かない
