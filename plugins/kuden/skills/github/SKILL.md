@@ -51,5 +51,5 @@ GitHubでsquash and mergeすると、commit messageの1行目はPRのタイト�
 - 個別commitのmessageを本文に残さない。「Aを実装」「Bを実装」「Aを廃止」の3 commitを連結すると、Aを実装したように読める
 - 本文には、タイトルに無い変更内容や理由を簡潔に書く。タイトルで足りるなら本文は書かない
 - 機能を構成するステップを概要欄に並べたPRでは、本文もそのステップを同じ順にリスト記法で書く。判定条件の中身のような詳細を本文にしない
-- 親PRでは、本文の末尾に子PRの番号を `子PR: #1234 #1235` のように並べる。親PRをsquash and mergeすると子PRのcommitはmerge先の履歴に残らないので、この行が無いとgit logから子PRへ直接辿れない
+- 親PRでは、本文の末尾に子PRの番号を `子PR: #1234 #1235` のように並べる
 - Co-Authored-ByやClaude Sessionのような、AIのattribution行を書かない
