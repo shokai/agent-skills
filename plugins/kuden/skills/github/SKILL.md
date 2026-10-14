@@ -35,7 +35,7 @@ pull requestを作成・更新・mergeする時、GitHubに載る文章を書く
 - `#数字` は、issueとPRの番号にだけ使う。Dependabot alertのように別の番号体系を持つ物は、フルURLで書く。`#数字` で書くと、同じ番号の無関係なissueやPRへのリンクになる
 - URLの日本語の部分は、percent-encodeせずに書く。encodeしたURLは、どのページへのリンクかを人間が読み取れない
 
-## 心得4. 親子PRは、両方からリンクする
+## 心得4. 親子PRの組み方
 
 - 親PRの概要欄に `## 子PR` の節を置き、子PRを作る度に `- #1234` の形で足す
 - 子PRの概要欄の1行目に、`#1234 の子PRです` と書く
@@ -46,7 +46,7 @@ pull requestを作成・更新・mergeする時、GitHubに載る文章を書く
 
 ## 心得5. squash and mergeのcommit messageは、概要欄を要約して書く
 
-GitHubでsquash and mergeすると、commit messageの1行目はPRのタイトルになり、本文の既定値は個別commitのmessageの連結になる。本文は既定値を使わず、概要欄を要約して書く。
+squash and mergeのcommit messageは、1行目をPRのタイトルにし、本文は既定値を使わず、概要欄を要約して書く。
 
 - 個別commitのmessageを本文に残さない。「Aを実装」「Bを実装」「Aを廃止」の3 commitを連結すると、Aを実装したように読める
 - 本文には、タイトルに無い変更内容や理由を簡潔に書く。タイトルで足りるなら本文は書かない
