@@ -14,8 +14,22 @@ repoのCLAUDE.mdを書き換えずに、自分のマシンにインストール�
 
 ## 使い方
 
+2つのmodeがあります。開発の開始時にどちらか1つを起動します。
+
+### software-factory-mode-2026aki
+
+基本の開発フローです。インラインレビューコメントは草稿を提示して投稿方法を確認し、sanity-reviewはユーザーの指示を待ちます。
+
 ```bash
 /software-factory-mode:software-factory-mode-2026aki
+```
+
+### software-factory-mode-2026hashi
+
+2026akiの開発フローに、作者が各repoで上書きしてきた動作を重ねたmodeです。ファイル変更はgit worktreeで行い、bug確認は変更のたびによく相談し、インラインレビューコメントは草稿を提示せずに投稿し、sanity-review・指摘対応のpush・ready for reviewへの切り替えを指示を待たずに続けます。AIの作業の品質に信頼を得た後に使います。
+
+```bash
+/software-factory-mode:software-factory-mode-2026hashi
 ```
 
 ## インストール方法
