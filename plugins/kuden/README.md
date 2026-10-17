@@ -5,6 +5,7 @@
 ## 含まれるスキル
 
 - **agent-skill**: Agent Skillを書く時に、何を書き、何を書かないかの判断基準と、レビュー指摘の採否の基準
+- **agent-rules**: CLAUDE.mdやAGENTS.mdのように、AIが作業の前に毎回読む行動のルール文書を書く時に、何を書き、何を書かないか、制約の文体、置き場所
 - **code-comment**: ソースコード中のコメントに、何を書き、何を書かないかの判断基準と、置く位置、日本語の文体
 - **writing**: ソースコードのコメント、PR概要欄、ドキュメント、wikiのどこに書く時も変わらない、解釈のブレを起こさない文の書き方と、強調記号とカッコ書きの扱い
 - **github**: pull requestのタイトルと概要欄の書き方、リンクが壊れない書き方、親子PRの組み方、概要欄やコメントを書き換える時の確かめ方、レビュー指摘への対応の仕方、squash and mergeのcommit messageの書き方
@@ -15,6 +16,7 @@
 
 ```bash
 /kuden:agent-skill
+/kuden:agent-rules
 /kuden:code-comment
 /kuden:writing
 /kuden:github
