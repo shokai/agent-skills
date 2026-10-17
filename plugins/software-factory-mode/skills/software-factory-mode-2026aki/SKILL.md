@@ -79,6 +79,10 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 
 ## 手順全体を通して守る事
 
+### ユーザーの判断の得方
+
+kuden:user-decision skillを読み込み、その基準に従う。
+
 ### ソースコード中のコメントの書き方
 
 kuden:code-comment skillを読み込み、その基準に従う。
@@ -86,6 +90,10 @@ kuden:code-comment skillを読み込み、その基準に従う。
 ### Agent Skillの書き方
 
 kuden:agent-skill skillを読み込み、その基準に従う。
+
+### CLAUDE.md・AGENTS.md等のルール文書の書き方
+
+kuden:persistent-instructions skillを読み込み、その基準に従う。
 
 ### pull requestとGitHubに載る文章の書き方
 
