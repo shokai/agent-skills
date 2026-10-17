@@ -131,7 +131,7 @@
       "license": "MIT",
       "keywords": [
         "guideline",
-        "common-writing-rules-for-agent",
+        "common-rules-for-agent-instructions",
         "agent-skill",
         "persistent-instructions",
         "code-comment",

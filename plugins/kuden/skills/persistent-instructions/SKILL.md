@@ -7,7 +7,7 @@ description: >-
 
 # AI向けのルール文書を書く時の心得
 
-CLAUDE.mdやAGENTS.mdのように、AIが作業の前に毎回読む行動のルール文書を作る時、編集する時、他所から規則を取り込む時は、kuden:common-writing-rules-for-agent skillを読み込み、その基準に加えて、以下の基準に従う。Agent Skillは、kuden:agent-skill skillの基準に従う。
+CLAUDE.mdやAGENTS.mdのように、AIが作業の前に毎回読む行動のルール文書を作る時、編集する時、他所から規則を取り込む時は、kuden:common-rules-for-agent-instructions skillを読み込み、その基準に加えて、以下の基準に従う。Agent Skillは、kuden:agent-skill skillの基準に従う。
 
 ## 心得1. 制約だけを書く
 

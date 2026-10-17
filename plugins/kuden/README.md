@@ -4,7 +4,7 @@
 
 ## 含まれるスキル
 
-- **common-writing-rules-for-agent**: Agent SkillやCLAUDE.md・AGENTS.mdのように、AIが読んで従う文書に共通の、読み手の前提、何を書かないか、編集の仕方、レビュー指摘の採否の基準。agent-skillとpersistent-instructionsから参照される
+- **common-rules-for-agent-instructions**: Agent SkillやCLAUDE.md・AGENTS.mdのように、AIが読んで従う文書に共通の、読み手の前提、何を書かないか、編集の仕方、レビュー指摘の採否の基準。agent-skillとpersistent-instructionsから参照される
 - **agent-skill**: Agent Skillを書く時に、SKILL.mdに何を書き、何を書かないかの判断基準
 - **persistent-instructions**: CLAUDE.mdやAGENTS.mdのように、AIが作業の前に毎回読む行動のルール文書を書く時に、何を書き、何を書かないか、制約の文体、置き場所
 - **code-comment**: ソースコード中のコメントに、何を書き、何を書かないかの判断基準と、置く位置、日本語の文体
@@ -16,7 +16,7 @@
 ## 使い方
 
 ```bash
-/kuden:common-writing-rules-for-agent
+/kuden:common-rules-for-agent-instructions
 /kuden:agent-skill
 /kuden:persistent-instructions
 /kuden:code-comment

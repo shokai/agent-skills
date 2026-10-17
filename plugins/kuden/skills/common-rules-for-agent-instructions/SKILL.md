@@ -1,5 +1,5 @@
 ---
-name: common-writing-rules-for-agent
+name: common-rules-for-agent-instructions
 description: >-
   Agent SkillやCLAUDE.md・AGENTS.mdのように、AIが読んで従う文書を書く時に共通の心得。読み手の前提、何を書かないか、編集の仕方、レビュー指摘の採否を定める。kuden:agent-skillとkuden:persistent-instructionsの両方から参照される。
   AIが読んで従う文書を作る時、編集する時、レビュー指摘の採否を決める時に読み込む。

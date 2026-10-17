@@ -1,13 +1,13 @@
 ---
 name: agent-skill
 description: >-
-  Agent Skillを書く時の心得。SKILL.mdに何を書き、何を書かないかの判断基準を定める。AIが読んで従う文書に共通の心得は、kuden:common-writing-rules-for-agentにある。
+  Agent Skillを書く時の心得。SKILL.mdに何を書き、何を書かないかの判断基準を定める。AIが読んで従う文書に共通の心得は、kuden:common-rules-for-agent-instructionsにある。
   Agent Skillを作成する時、編集する時、レビュー指摘の採否を決める時に読み込む。
 ---
 
 # Agent Skillを書く時の心得
 
-Agent Skillを作成・編集する間、kuden:common-writing-rules-for-agent skillを読み込み、その基準に加えて、以下の基準に従う。
+Agent Skillを作成・編集する間、kuden:common-rules-for-agent-instructions skillを読み込み、その基準に加えて、以下の基準に従う。
 
 ## 心得1. 方針を書き、手段は任せる
 
@@ -18,7 +18,7 @@ Agent Skillを作成・編集する間、kuden:common-writing-rules-for-agent sk
 
 ## 心得2. 無いとmodelが行き詰まる記述は残す
 
-kuden:common-writing-rules-for-agentの「読み手は賢いmodelである」と、このskillの心得1は、具体的な記述を消す理由にならない。消す前に、その記述が無い時にmodelがどう実行するかを想像し、行き詰まるなら残す。
+kuden:common-rules-for-agent-instructionsの「読み手は賢いmodelである」と、このskillの心得1は、具体的な記述を消す理由にならない。消す前に、その記述が無い時にmodelがどう実行するかを想像し、行き詰まるなら残す。
 
 - 数万行あるlock fileから依存関係を調べる時の絞り込みコマンドのように、判断の助けになるヒントは残す。手順としての強制や、進め方を1つに寄せる具体例とは別の物である
 - 特定のエコシステムに依存した記述を、抽象化のために先回りして消さない。他のエコシステムに対応する時に書き換えれば足りる
