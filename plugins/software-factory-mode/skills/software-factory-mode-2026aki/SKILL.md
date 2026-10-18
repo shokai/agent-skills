@@ -78,7 +78,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 
 ### worktreeの開発環境
 
-- worktreeの作業内容のtest・lint・build・検証scriptの実行は、worktree専用のコンテナ環境で行う。コンテナのnetwork・volume・imageをworktree毎に分ける。並行して動いている別のworktreeの環境と同じnetworkに乗ると、同じ名前のDBやキャッシュへの名前解決がどちらに向くか定まらなくなる。起動は成功するのでportの衝突と違って気付きにくく、testが実行ごとに違う箇所で落ちる形で現れる
+- worktreeの作業内容のtest・lint・build・検証scriptの実行は、worktree専用のコンテナ環境で行う。コンテナのnetwork・volume・imageをworktree毎に分ける。並行して動いている別のworktreeの環境と同じnetworkに乗ると、同じ名前のDBやキャッシュへの名前解決がどちらに向くか定まらなくなる。起動は成功するので、portの衝突と違って気付きにくい
 - host側のportを公開するのは、hostから接続して確かめる環境だけにする。testはコンテナ間のnetworkで繋がる
 - ローカルマシンに溜まっているデータを使って動作確認やUI確認をする時だけ、main worktreeの環境で動いているDBに接続する。接続先のDBは動いている物をそのまま使い、作り直さない
 - 環境を起動する操作をした時は、自分が新しく起動した物と、既に動いていた物に繋いだだけの物を区別して把握する
@@ -87,7 +87,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 ### 開発環境の後始末
 
 - 起動した開発サーバーやコンテナは、目視確認・test・lint・Codexとの相談といった、それを使う作業が終わったら止める。再び要る時に起動し直す
-- 他のworktreeやsessionが起動した物は、ユーザーの指示があるまで止めない。止めてよいのは自分が新しく起動した物だけである。止める前に、そのコンテナを別のworktreeやsessionのプロセスが使っていないかを確かめる
+- 他のworktreeやsessionが起動した物は、ユーザーの指示があるまで止めない。止めてよいのは自分が新しく起動した物だけである。止める前に、それを別のworktreeやsessionのプロセスが使っていないかを確かめる
 - mergeされたら、作業に使ったworktreeとbranchを消す。worktree専用に作られたコンテナのnetwork・volume・image等も一緒に消す。main worktreeの物と、他のworktreeやsessionと共有している物は残す
 - mergeされたら、main worktreeのdefault branchをremoteのdefault branchに追従させる。次のどれかに当たる時は追従させず、理由を報告する
   - main worktreeがdefault branch以外にいる
