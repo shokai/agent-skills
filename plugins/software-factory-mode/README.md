@@ -26,7 +26,7 @@ repoのCLAUDE.mdを書き換えずに、自分のマシンにインストール�
 
 ### software-factory-mode-2026hashi
 
-2026akiの開発フローに、作者が各repoで上書きしてきた動作を重ねたmodeです。ファイル変更はgit worktreeで行い、bug確認は変更のたびによく相談し、インラインレビューコメントは草稿を提示せずに投稿し、sanity-review・指摘対応のpush・ready for reviewへの切り替えを指示を待たずに続けます。AIの作業の品質に信頼を得た後に使います。
+2026akiのブレーキをかなり外したmodeです。インラインレビューコメントは草稿を提示せずに投稿し、sanity-review・指摘対応のpush・ready for reviewへの切り替えを指示を待たずに続けます。AIの作業の品質に信頼を得た後に使います。
 
 ```bash
 /software-factory-mode:software-factory-mode-2026hashi

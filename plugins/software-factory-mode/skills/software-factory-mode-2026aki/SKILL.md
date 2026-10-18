@@ -16,7 +16,7 @@ disable-model-invocation: true
 modeを適用する前に実行環境を確認する。いずれかを満たさなければ、modeを適用せず、満たさない条件をユーザーに報告して停止する:
 
 1. 自分のmodelがOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは、新しい世代でも満たさない
-2. Codex CLIがある場合、そのmodelがSol以上のflagship（Sol、Astra等）で、reasoning effortがmedium以上である。Bashツールで `command -v codex` を実行して有無を確認し、あれば短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない
+2. Codex CLIがある場合、そのmodelがSol以上のflagship（Sol、Astra等）で、reasoning effortがmedium以上である。Bashツールで `command -v codex` を実行して有無を確認し、あれば短いプロンプトを作業ツリー外のファイルに書き、`codex exec --ephemeral` にstdinで渡して1回実行し、出力のヘッダから読む。Luna・Terra等の軽量tierと、Solより前の世代のmodelは相談相手として足りない。modelがどのtierかを判断できない時は、ユーザーに訊く前に、Codex CLIのmodelカタログでそのmodelの説明を確認する
 
 ## 基本フロー
 
@@ -29,15 +29,18 @@ modeを適用する前に実行環境を確認する。いずれかを満たさ�
 7. 草稿を提示したら投稿方法をユーザーに確認する。AIが投稿するか、ユーザー自身が投稿するか
 8. sanity-reviewはユーザーの指示を待ち、指摘対応をpushし、対応内容を簡単にコメント投稿してからready for review
 9. PRがready for reviewに切り替わったら、そのPRがsquash and mergeでcommit messageを指定できる場合は、1行目の既定値と本文の草稿を提示し、「指示されたらこの本文でsquash and mergeする」と告げる
-10. mergeされたら開発環境を後始末する
+10. mergeを指示されたらsquash and mergeする。ラベルでPRの状態を表しているrepoでは、レビュー依頼のラベルを外し、merge承認のラベルに付け替える
+11. mergeされたら開発環境を後始末する
 
 ## 各手順の詳細
 
 ### bug確認
 
-変更が一段落したら、codex-consultation skillでよく相談し、実装内容を確認する。単純なbugであれば修正する。解決方法が複数ある場合はユーザーに質問する。
+変更が一段落したら、codex-consultation skillでよく相談し、実装内容を確認する。testをbackgroundで実行している間は相談せず、testの完了を確かめてから相談する。Codexは実行不要と伝えても自分でtestを実行する事があるので、プロンプトにはtest・lint・build・コンテナ操作を実行しない事を書く。
 
 Codex CLIが無い環境ではsubagent-consultation skillにフォールバックし、報告にその旨を明記する。subagentはOpus以上のtierのmodelを指定して起動する。Codexが利用制限や通信障害等で使えなくなった時はフォールバックせず、ユーザーに報告して判断を仰ぐ。
+
+指摘された単純なbugは修正する。解決方法が複数ある場合はユーザーに質問する。ユーザーへの報告には、相談の深さと、相談の後に加えた変更の有無を書く。pushの前に、最後の相談より後に加えた変更が残っていないかを確かめ、残っていれば相談してからpushする。
 
 ### Gitの使い方
 
@@ -45,15 +48,16 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - branch名は、入力補完や一覧から探しやすくなるよう、最重要トピックを先頭に置いて `対象-性質` の順にする。各セグメントはcamelCaseで書き、セグメント間をハイフンでつなぐ。例: `reviewSkills-requireOpusModel`
   - `fix/` や `worktree-` 等の接頭辞を付けない
 - `git commit --amend` やreflogを使った巻き戻しなど、commit済みの履歴を書き換える操作は勝手に行わない。必要だと判断した場合は、実行前にユーザーに提案して指示を仰ぐ
+- 作業中に見つけた1行程度の付随的な修正は、別のbranchを切らず、今のbranchで独立したcommitにする。レビューの論点が増える修正は、別branchを提案する
 - 作成済みのPRがあるbranchにpushしたら、対話コンテキストをexportする
-- git worktreeを作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする
+- git worktreeは、main worktreeの `.claude/worktrees/<branch名>` に作る。作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする
 
 ### pull requestの作成
 
 - PRはdraftで作成する。draftは実装者が仕上げている途中の状態で、AIによるレビューはこの間に済ませる。ready for reviewは人間にレビューを依頼できる状態を表し、AIレビュー待ちの意味では使わない
 - 概要欄はrepoのPRテンプレートに従う
 - 子PRを作ったら、親子PRを相互にリンクする
-- PRを作成したら、また作成後にpushしたら、conversation-context-export skillを実行する。worktreeで作業している場合は、出力先をmain worktreeの`.dev/contexts/`にする
+- PRを作成したら、また作成後にpushしたら、conversation-context-export skillを実行する。worktreeで作業している場合は、出力先をmain worktreeの`.dev/contexts/`にする。報告では、ローカルのファイルのパスとPRコメントのURLだけを伝え、commitの可否に言及しない
 - `.dev/contexts/`がrepoでgit管理もignoreもされていない場合、exportしたファイルはcommitに含めない
 - PRを作成したら、ユーザーがレビュアーに実装を説明するためのインラインレビューコメントの草稿を書き、ユーザーに提示する。重要な変更に絞り、ファイル名と行番号を付ける
 
@@ -62,9 +66,13 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - sanity-review skillの実行者はレビュアーではなく実装者。概要欄を書き終えてから、レビュアーに依頼する前に実行する
 - 変更の規模を理由にsanity-reviewを省略しない。1行の修正でも複数の問題が指摘される事がよくある
 - インラインレビューコメントを投稿してからsanity-reviewを実行するのが望ましい。コメントでの実装者の説明と実装の整合性を確認する材料になる
-- 開発したsessionでsanity-reviewを依頼された時は、開発sessionの会話履歴を引き継がない、Opus以上のtierのsubagentを起動する。subagentにはPRのURL、実行条件、報告書の出力先だけを渡す。出力先はチャットとpull requestの両方に固定する。skillのフォールバック手順を使わない事も指示に含める
+- 開発したsessionでsanity-reviewを依頼された時は、開発sessionの会話履歴を引き継がない、Opus以上のtierのsubagentを起動する。subagentにはPRのURL、実行条件、報告書の出力先だけを渡す。出力先はチャットとpull requestの両方に固定する。実行条件には次を含める
+  - skillのフォールバック手順を使わない
+  - 一時ファイルはscratchpad内のPRごとのディレクトリに置く
+  - コンテナ操作とtest・lint・buildを実行せず、相談するCodexにも実行させない。外部ツールに渡すプロンプトのファイルは、本文がシェルに展開されない方法で書く。Bashのheredocを使うならクォートする。Bashの呼び出しごとに作業ディレクトリを明示する
+- subagentがcodex-consultation skillを呼んだ事は、報告の自己申告ではなく、subagentの記録にあるSkillツールの呼び出しを数えて確かめる。skillを呼ばずにCodexを直接実行して作った報告書は信用しない
 - sanity-reviewの前提: 対話コンテキストがPRコメントに投稿されている事。同じマシンにCodex CLIがあり、modelとreasoning effortが「実行環境の確認」の条件を満たす事。Codex CLIが無ければ実行せず、Codexとの相談に失敗したら中止する。Opus以上のtierを使う。Sonnetではレビューできない
-- sanity-reviewが済むまでPRはdraftのままにする。指摘への対応をpushし終えてから、実装者がdraftからready for reviewに切り替える
+- sanity-reviewが済むまでPRはdraftのままにする。指摘への対応をpushし終えてから、実装者がdraftからready for reviewに切り替える。切り替えと同時に、そのrepoがレビュー依頼に使うラベルやreviewerを付ける
 
 ### 開発環境の後始末
 
@@ -107,9 +115,9 @@ kuden:software-test skillを読み込み、その基準に従う。
 
 タスクの指示元が作業ページ・issue・チケット等のドキュメントにある時に行う。記法や状態の表し方はプロジェクトの慣習に従い、既存の記述に合わせる。
 
-- 作業を開始したら、指示元に自分が着手した事を書く
+- 作業を開始したら、指示元に自分が着手した事を書く。着手表明は、担当者であるユーザーの名義で書く。AIの発言への署名はプロジェクトの慣習に従う
 - PRの概要欄に指示元のURLを書き、指示元にはPRへのリンクを足す
-- draft PR作成・ready for review・mergeの各時点で、指示元と、それを載せている親のタスクまとめページの状態を同期する。mergeは実際にmergeされた事を確かめてから反映する
+- draft PR作成・ready for review・mergeの各時点で、指示元と、それを載せている親のタスクまとめページの状態を同期する。ready for reviewのPRは、approveされていてもmergeされるまでレビュー待ちの状態にする。mergeは実際にmergeされた事を確かめてから反映する
 
 ### 共有テキストの編集
 
