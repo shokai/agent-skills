@@ -50,7 +50,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - `git commit --amend` やreflogを使った巻き戻しなど、commit済みの履歴を書き換える操作は勝手に行わない。必要だと判断した場合は、実行前にユーザーに提案して指示を仰ぐ
 - 作業中に見つけた1行程度の付随的な修正は、別のbranchを切らず、今のbranchで独立したcommitにする。レビューの論点が増える修正は、別branchを提案する
 - 作成済みのPRがあるbranchにpushしたら、対話コンテキストをexportする
-- git worktreeは、main worktreeの `.claude/worktrees/<branch名>` に作る。作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする
+- git worktreeは、main worktreeの `.claude/worktrees/<branch名>` に作る。作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする。開発環境の使い分けは「worktreeの開発環境」に従う
 
 ### pull requestの作成
 
@@ -76,11 +76,19 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - sanity-reviewの前提: 対話コンテキストがPRコメントに投稿されている事。同じマシンにCodex CLIがあり、modelとreasoning effortが「実行環境の確認」の条件を満たす事。Codex CLIが無ければ実行せず、Codexとの相談に失敗したら中止する。Opus以上のtierを使う。Sonnetではレビューできない
 - sanity-reviewが済むまでPRはdraftのままにする。指摘への対応をpushし終えてから、実装者がdraftからready for reviewに切り替える。切り替えと同時に、そのrepoがレビュー依頼に使うラベルやreviewerを付ける
 
+### worktreeの開発環境
+
+- worktreeの作業内容のtest・lint・build・検証scriptの実行は、worktree専用のコンテナ環境で行う。コンテナのnetwork・volume・imageをworktree毎に分ける。並行して動いている別のworktreeの環境と同じnetworkに乗ると、同じ名前のDBやキャッシュへの名前解決がどちらに向くか定まらなくなる。起動は成功するのでportの衝突と違って気付きにくく、testが実行ごとに違う箇所で落ちる形で現れる
+- host側のportを公開するのは、hostから接続して確かめる環境だけにする。testはコンテナ間のnetworkで繋がる
+- ローカルマシンに溜まっているデータを使って動作確認やUI確認をする時だけ、main worktreeの環境で動いているDBに接続する。接続先のDBは動いている物をそのまま使い、作り直さない
+- 環境を起動する操作をした時は、自分が新しく起動した物と、既に動いていた物に繋いだだけの物を区別して把握する
+- コンテナ環境を操作するコマンドは、呼び出しごとに作業ディレクトリを明示する。作業ディレクトリはmain worktreeに戻っている事があり、そのまま実行するとworktreeのつもりでmain worktreeをbuildする
+
 ### 開発環境の後始末
 
 - 起動した開発サーバーやコンテナは、目視確認・test・lint・Codexとの相談といった、それを使う作業が終わったら止める。再び要る時に起動し直す
-- 他のworktreeやsessionが起動した物は、ユーザーの指示があるまで止めない
-- mergeされたら、作業に使ったworktreeとbranchを消す。worktree専用に作られたdocker volumeやimage等も一緒に消す。main worktreeの物は残す
+- 他のworktreeやsessionが起動した物は、ユーザーの指示があるまで止めない。止めてよいのは自分が新しく起動した物だけである。止める前に、そのコンテナを別のworktreeやsessionのプロセスが使っていないかを確かめる
+- mergeされたら、作業に使ったworktreeとbranchを消す。worktree専用に作られたコンテナのnetwork・volume・image等も一緒に消す。main worktreeの物と、他のworktreeやsessionと共有している物は残す
 - mergeされたら、main worktreeのdefault branchをremoteのdefault branchに追従させる。次のどれかに当たる時は追従させず、理由を報告する
   - main worktreeがdefault branch以外にいる
   - main worktreeの追跡済みファイルに未commitの変更があるか、追従で書き換わる未追跡ファイルがある
