@@ -58,7 +58,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - 概要欄はrepoのPRテンプレートに従う
 - 子PRを作ったら、親子PRを相互にリンクする
 - PRを作成したら、また作成後にpushしたら、conversation-context-export skillを実行する。worktreeで作業している場合は、出力先をmain worktreeの`.dev/contexts/`にする。報告では、ローカルのファイルのパスとPRコメントのURLを伝え、commitの可否に言及しない
-- `.dev/contexts/`がrepoでgit管理もignoreもされていない場合、exportしたファイルはcommitに含めない
+- `.dev/contexts/`がrepoでgit管理もignoreもされていない場合、exportしたファイルはcommitに含めず、gitignoreに加える事をユーザーに提案する
 - PRを作成したら、ユーザーがレビュアーに実装を説明するためのインラインレビューコメントの草稿を書き、ユーザーに提示する。重要な変更に絞り、ファイル名と行番号を付ける
 
 ### レビュー
@@ -67,9 +67,11 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - 変更の規模を理由にsanity-reviewを省略しない。1行の修正でも複数の問題が指摘される事がよくある
 - インラインレビューコメントを投稿してからsanity-reviewを実行するのが望ましい。コメントでの実装者の説明と実装の整合性を確認する材料になる
 - 開発したsessionでsanity-reviewを実行する時は、開発sessionの会話履歴を引き継がない、Opus以上のtierのsubagentを起動する。subagentにはPRのURL、実行条件、報告書の出力先だけを渡す。出力先はチャットとpull requestの両方に固定する。実行条件には次を含める
-  - skillのフォールバック手順を使わない
+  - 外部Agent相談のフォールバック手順を使わない
   - 一時ファイルはscratchpad内のPRごとのディレクトリに置く
-  - コンテナ操作とtest・lint・buildを実行せず、相談するCodexにも実行させない。外部ツールに渡すプロンプトのファイルは、本文がシェルに展開されない方法で書く。Bashのheredocを使うならクォートする。Bashの呼び出しごとに作業ディレクトリを明示する
+  - コンテナ操作とtest・lint・buildを実行せず、相談するCodexにも実行させない
+  - 外部ツールに渡すプロンプトのファイルは、本文がシェルに展開されない方法で書く。Bashのheredocを使うならクォートする
+  - Bashの呼び出しごとに作業ディレクトリを明示する
 - subagentがcodex-consultation skillを呼んだ事は、報告の自己申告ではなく、subagentの記録にあるSkillツールの呼び出しを数えて確かめる。skillを呼ばずにCodexを直接実行して作った報告書は信用しない
 - sanity-reviewの前提: 対話コンテキストがPRコメントに投稿されている事。同じマシンにCodex CLIがあり、modelとreasoning effortが「実行環境の確認」の条件を満たす事。Codex CLIが無ければ実行せず、Codexとの相談に失敗したら中止する。Opus以上のtierを使う。Sonnetではレビューできない
 - sanity-reviewが済むまでPRはdraftのままにする。指摘への対応をpushし終えてから、実装者がdraftからready for reviewに切り替える。切り替えと同時に、そのrepoがレビュー依頼に使うラベルやreviewerを付ける
