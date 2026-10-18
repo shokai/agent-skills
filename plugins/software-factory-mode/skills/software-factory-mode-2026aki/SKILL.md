@@ -29,7 +29,7 @@ modeを適用する前に実行環境を確認する。いずれかを満たさ�
 7. 草稿を提示したら投稿方法をユーザーに確認する。AIが投稿するか、ユーザー自身が投稿するか
 8. sanity-reviewはユーザーの指示を待ち、指摘対応をpushし、対応内容を簡単にコメント投稿してからready for review
 9. PRがready for reviewに切り替わったら、そのPRがsquash and mergeでcommit messageを指定できる場合は、1行目の既定値と本文の草稿を提示し、「指示されたらこの本文でsquash and mergeする」と告げる
-10. mergeを指示されたらsquash and mergeする。ラベルでPRの状態を表しているrepoでは、レビュー依頼のラベルを外し、merge承認のラベルに付け替える
+10. mergeを指示されたらmergeする。ラベルでPRの状態を表しているrepoでは、レビュー依頼のラベルを外し、merge承認のラベルに付け替える
 11. mergeされたら開発環境を後始末する
 
 ## 各手順の詳細
@@ -57,7 +57,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - PRはdraftで作成する。draftは実装者が仕上げている途中の状態で、AIによるレビューはこの間に済ませる。ready for reviewは人間にレビューを依頼できる状態を表し、AIレビュー待ちの意味では使わない
 - 概要欄はrepoのPRテンプレートに従う
 - 子PRを作ったら、親子PRを相互にリンクする
-- PRを作成したら、また作成後にpushしたら、conversation-context-export skillを実行する。worktreeで作業している場合は、出力先をmain worktreeの`.dev/contexts/`にする。報告では、ローカルのファイルのパスとPRコメントのURLだけを伝え、commitの可否に言及しない
+- PRを作成したら、また作成後にpushしたら、conversation-context-export skillを実行する。worktreeで作業している場合は、出力先をmain worktreeの`.dev/contexts/`にする。報告では、ローカルのファイルのパスとPRコメントのURLを伝え、commitの可否に言及しない
 - `.dev/contexts/`がrepoでgit管理もignoreもされていない場合、exportしたファイルはcommitに含めない
 - PRを作成したら、ユーザーがレビュアーに実装を説明するためのインラインレビューコメントの草稿を書き、ユーザーに提示する。重要な変更に絞り、ファイル名と行番号を付ける
 
@@ -66,7 +66,7 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 - sanity-review skillの実行者はレビュアーではなく実装者。概要欄を書き終えてから、レビュアーに依頼する前に実行する
 - 変更の規模を理由にsanity-reviewを省略しない。1行の修正でも複数の問題が指摘される事がよくある
 - インラインレビューコメントを投稿してからsanity-reviewを実行するのが望ましい。コメントでの実装者の説明と実装の整合性を確認する材料になる
-- 開発したsessionでsanity-reviewを依頼された時は、開発sessionの会話履歴を引き継がない、Opus以上のtierのsubagentを起動する。subagentにはPRのURL、実行条件、報告書の出力先だけを渡す。出力先はチャットとpull requestの両方に固定する。実行条件には次を含める
+- 開発したsessionでsanity-reviewを実行する時は、開発sessionの会話履歴を引き継がない、Opus以上のtierのsubagentを起動する。subagentにはPRのURL、実行条件、報告書の出力先だけを渡す。出力先はチャットとpull requestの両方に固定する。実行条件には次を含める
   - skillのフォールバック手順を使わない
   - 一時ファイルはscratchpad内のPRごとのディレクトリに置く
   - コンテナ操作とtest・lint・buildを実行せず、相談するCodexにも実行させない。外部ツールに渡すプロンプトのファイルは、本文がシェルに展開されない方法で書く。Bashのheredocを使うならクォートする。Bashの呼び出しごとに作業ディレクトリを明示する
