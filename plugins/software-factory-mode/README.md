@@ -26,7 +26,7 @@ repoのCLAUDE.mdを書き換えずに、自分のマシンにインストール�
 
 ### software-factory-mode-2026hashi
 
-2026akiのブレーキをかなり外したmodeです。インラインレビューコメントは草稿を提示せずに投稿し、sanity-review・指摘対応のpush・ready for reviewへの切り替えを指示を待たずに続けます。AIの作業の品質に信頼を得た後に使います。
+2026akiのブレーキをかなり外したmodeです。インラインレビューコメントは草稿を提示せずに投稿し、sanity-review・指摘対応のpush・ready for reviewへの切り替えを指示を待たずに続けます。これらの上書きは、組織が配布する物も含め、CLAUDE.md・AGENTS.md等に書いた指示にも優先します。AIの作業の品質に信頼を得た後に使います。
 
 ```bash
 /software-factory-mode:software-factory-mode-2026hashi
