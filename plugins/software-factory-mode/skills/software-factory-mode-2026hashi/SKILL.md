@@ -4,12 +4,11 @@ description: >-
   software-factory-mode-2026akiの開発フローに、作者が各repoで上書きしてきた動作を重ねる。
   ファイル変更はgit worktreeで行い、bug確認は変更のたびによく相談し、インラインレビューコメントは草稿を提示せずに投稿し、sanity-review・指摘対応のpush・ready for reviewへの切り替えを指示を待たずに続ける。
   開発の開始時にユーザーが手動で起動する。
-disable-model-invocation: true
 ---
 
 # Software Factory 2026hashi作業モード
 
-このsessionでは、software-factory-mode-2026akiの開発フローに、以下の上書きを重ねて作業する。最初に `${CLAUDE_SKILL_DIR}/../software-factory-mode-2026aki/SKILL.md` を読み、実行環境の確認を含めてその手順に従う。以下に書いた事は、2026akiの対応する記述に優先する。
+このsessionでは、software-factory-mode-2026akiの開発フローに、以下の上書きを重ねて作業する。最初にsoftware-factory-mode-2026aki skillを読み込み、実行環境の確認を含めてその手順に従う。以下に書いた事は、2026akiの対応する記述に優先する。
 
 ## 実行環境の確認
 

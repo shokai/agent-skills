@@ -31,7 +31,7 @@ codepatrol skillの指揮役から任されて、調査レポートの問題を1
 
 ## 開発フロー
 
-指揮役から渡された場所にある、`software-factory-mode-2026aki` skillのSKILL.mdを読み、その開発フローに従う。Skill toolでは呼び出せないskillなので、ファイルを読む。
+指揮役から渡された場所にある、`software-factory-mode-2026aki` skillのSKILL.mdを読み、その開発フローに従う。
 
 そのフローが、ユーザーの指示や確認を待つと定めている箇所は、ユーザーが次の通り包括的に許可している。待たずに進める。
 

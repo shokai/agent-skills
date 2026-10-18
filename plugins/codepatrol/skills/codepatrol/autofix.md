@@ -8,7 +8,7 @@
 
 - 書き出し先がCosenseで、修正する問題を載せたトリアージページがある。無ければ、先にトリアージを行う
 - 「実行環境の確認」の3つの条件を全て満たす
-- `software-factory-mode-2026aki` skillのSKILL.mdが読める。修正するsubagentが従う開発フローである。Skill toolでは呼び出せないskillなので、installされたpluginのファイルから探す。見つからなければ、installをユーザーに依頼して止まる
+- `software-factory-mode-2026aki` skillのSKILL.mdが読める。修正するsubagentが従う開発フローである。installされたpluginのファイルから探す。見つからなければ、installをユーザーに依頼して止まる
 - 始める前に、状態同期を行う。ページの状態が古いと、他の人が直した問題に着手する
 
 指揮役がrelease pull requestを作る時と、pull requestをmergeする時は、`kuden:github` skillを読み込み、その基準に従う。
