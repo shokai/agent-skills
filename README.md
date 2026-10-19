@@ -34,7 +34,7 @@
 - [codepatrol](plugins/codepatrol/README.md) - リポジトリを領域ごとに巡回するセキュリティ調査ツール。発見した脆弱性をトリアージし、自動修正と自動mergeも行う
 - [software-factory-mode](plugins/software-factory-mode/README.md) - セッションをSoftware Factory Modeに切り替え、極めて正確な実装を行う。基本フローの2026akiと、レビュー工程を指示を待たずに進める2026hashiの2つのmodeがある
 - [kuden](plugins/kuden/README.md) - 作者がAIとの様々な作業の中で重ねてきた失敗と成功のmemoryから抽出した心得を集めたガイドライン群
-- [skill-usability-test](plugins/skill-usability-test/README.md) - Agent Skillのusability test。下位tierのmodelのsubagentにskillだけを頼りにゴールを与えて観察し、手順書だけで完遂できたかを確かめる
+- [skill-usability-test](plugins/skill-usability-test/README.md) - Agent SkillやCLAUDE.md等のルール文書のusability test。下位tierのmodelのsubagentにゴールを与えて観察し、文書の記述を根拠に完遂できたかを確かめる
 
 ### その他
 
