@@ -42,6 +42,8 @@ Codex CLIが無い環境ではsubagent-consultation skillにフォールバッ�
 
 指摘された単純なbugは修正する。解決方法が複数ある場合はユーザーに質問する。ユーザーへの報告には、相談の深さと、相談の後に加えた変更の有無を書く。pushの前に、最後の相談より後に加えた変更が残っていないかを確かめ、残っていれば相談してからpushする。
 
+変更がAgent Skillに及ぶ時は、相談が済んだらskill-usability-test skillを読み込み、その基準でusability testを提案するかを決める。提案しないと決めた時は、その理由を報告に書く。
+
 ### Gitの使い方
 
 - commit前に現在のbranchを確認する。default branchにいる場合はcommitせず停止し、変更内容に基づいたbranch名を提案してユーザーに確認する
