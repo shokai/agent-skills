@@ -27,9 +27,9 @@ modeを適用する前に実行環境を確認する。いずれかを満たさ�
 5. pushはユーザーの明示的な指示を待つ
 6. PR作成を指示されたらdraftで作成し、対話コンテキストをexportし、インラインレビューコメントの草稿を書く
 7. 草稿を提示したら投稿方法をユーザーに確認する。AIが投稿するか、ユーザー自身が投稿するか
-8. sanity-reviewはユーザーの指示を待ち、指摘対応をpushし、対応内容を簡単にコメント投稿してからready for review
+8. sanity-reviewはユーザーの指示を待ち、指摘対応をpushし、対応内容を簡単にコメント投稿し、CIが通った事を確かめてからready for review
 9. PRがready for reviewに切り替わったら、そのPRがsquash and mergeでcommit messageを指定できる場合は、1行目の既定値と本文の草稿を提示し、「指示されたらこの本文でsquash and mergeする」と告げる
-10. mergeを指示されたらmergeする。ラベルでPRの状態を表しているrepoでは、レビュー依頼のラベルを外し、merge承認のラベルに付け替える
+10. mergeを指示されたら、CIが通った事を確かめてmergeする。ラベルでPRの状態を表しているrepoでは、レビュー依頼のラベルを外し、merge承認のラベルに付け替える
 11. mergeされたら開発環境を後始末する
 
 ## 各手順の詳細
@@ -77,6 +77,13 @@ AIが読んで従う文書を変更した時は、相談が済んだらskill-usa
 - subagentがcodex-consultation skillを呼んだ事は、報告の自己申告ではなく、subagentの記録にあるSkillツールの呼び出しを数えて確かめる。skillを呼ばずにCodexを直接実行して作った報告書は信用しない
 - sanity-reviewの前提: 対話コンテキストがPRコメントに投稿されている事。同じマシンにCodex CLIがあり、modelとreasoning effortが「実行環境の確認」の条件を満たす事。Codex CLIが無ければ実行せず、Codexとの相談に失敗したら中止する。Opus以上のtierを使う。Sonnetではレビューできない
 - sanity-reviewが済むまでPRはdraftのままにする。指摘への対応をpushし終えてから、実装者がdraftからready for reviewに切り替える。切り替えと同時に、そのrepoがレビュー依頼に使うラベルやreviewerを付ける
+
+### CIの確認
+
+- pushの直後はCIの結果を待たず、次の作業を進める
+- ready for reviewに切り替える前と、mergeする前に、最新のcommitに対するCIが通っている事を確かめる
+- CIが設定されているのに走っていない時は、結果が無い事を通ったと扱わない。default branch以外に向けたPRではCIが走らない設定のrepoがある。CIを走らせるか、repoの手順でtestを実行し、通ればCIが通ったのと同じに扱う
+- CIが落ちたら、失敗したjobのlogを読み、再実行で通る見込みがあれば、ユーザーに確認を取らずに失敗したjobを再実行し、再実行した事と理由を報告に書く
 
 ### worktreeの開発環境
 
