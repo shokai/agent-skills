@@ -41,7 +41,7 @@ repoのCLAUDE.mdを書き換えずに、自分のマシンにインストール�
 /plugin install software-factory-mode
 ```
 
-依存する [codex-consultation](../codex-consultation/README.md)・[subagent-consultation](../subagent-consultation/README.md)・[conversation-context](../conversation-context/README.md)・[sanity-review](../sanity-review/README.md)・[kuden](../kuden/README.md) も一緒にインストールされます。
+依存する [codex-consultation](../codex-consultation/README.md)・[subagent-consultation](../subagent-consultation/README.md)・[conversation-context](../conversation-context/README.md)・[sanity-review](../sanity-review/README.md)・[kuden](../kuden/README.md)・[skill-usability-test](../skill-usability-test/README.md) も一緒にインストールされます。
 
 既にマーケットプレイスを登録済みの場合、新しいスキルをインストールするには [マーケットプレイスの更新](../../README.md#スキルをうまくインストールできない場合) が必要です。
 

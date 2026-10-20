@@ -11,6 +11,7 @@
     "subagent-consultation",
     "conversation-context",
     "sanity-review",
-    "kuden"
+    "kuden",
+    "skill-usability-test"
   ]
 }
