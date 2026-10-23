@@ -108,7 +108,7 @@ AskUserQuestionツールで以下を確認する:
 3. main agentが単独で作業を実行する
 
 ユーザーがCodexのmodel・reasoning effort・Daybreakを指定している時は、各手順のArgsにその指定を含める。
-Codexの提供元のフィルタで相談が止められた事をcodex-consultationが報告した時は、2へ進む前に、modelカタログでDaybreak Blueに対応するmodelのうち最新のflagshipでDaybreakを有効にしてやり直すかを、そのmodel名を添えてユーザーに訊く。ユーザーに訊けない時と、やり直しても止められた時は、1の失敗として扱う。
+Codexの提供元のフィルタで相談が止められた事をcodex-consultationが報告した時は、2へ進む前に、modelカタログでDaybreak Blueに対応するmodelのうち最新のflagshipでDaybreakを有効にしてやり直すかを、そのmodel名を添えてユーザーに訊く。ユーザーがDaybreakを指定している時、ユーザーに訊けない時、やり直しても止められた時は、1の失敗として扱う。
 
 フォールバックが発生した場合や、外部Agentが利用できなかった場合は、報告書の「レビュー作業において発生した問題」セクションに記載する。
 
