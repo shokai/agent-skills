@@ -111,7 +111,7 @@ codex exec --ephemeral -s workspace-write -c sandbox_workspace_write.network_acc
 - `--ephemeral` は必須。セッションを保存しない
 - `-s workspace-write -c sandbox_workspace_write.network_access=true` は必須。デフォルトではサンドボックスがネットワークアクセスをブロックするため、`gh`や`curl`などの外部通信コマンドが失敗する
 - ユーザーや呼び出し元のskillがCodexのmodelやreasoning effortを指定している時は、`-m <model>` と `-c model_reasoning_effort=<effort>` で上書きする。reasoning effortには専用のフラグが無く、設定値の上書きで渡す。指定が無い時は上書きせず、codexコマンドの既定設定をそのまま使う
-- `-m` に渡すのはmodel IDである。「Astra」のように表示名や別名で指定された時は、`codex debug models` が出すmodelカタログで表示名からIDを解決する。同じ名前で世代だけが違うmodelが複数ある時は、version番号が最も新しいものを選ぶ。カタログにはmodelごとに対応するreasoning effortも載っている
+- `-m` に渡すのはmodel IDである。「Astra」のように表示名や別名で指定された時は、`codex debug models` が出すmodelカタログで表示名からIDを解決する。同じ名前で世代だけが違うmodelが複数ある時は、version番号が最も新しいものを選ぶ。「Daybreakに対応する中で最新のSol」のようにユーザーが条件を付けていれば、その条件を満たす中で最も新しいものを選ぶ。カタログにはmodelごとに対応するreasoning effortも載っている
 - ユーザーや呼び出し元のskillがDaybreakを指定している時は、`--cyber-access-program daybreak_blue` を付ける。Redを指定された時は値を `daybreak_red` にする。Daybreakはmodelではなく、Codexの提供元がサイバーセキュリティの作業向けに承認制で提供するアクセスprogramで、このフラグで1回の実行ごとに有効になる
 - Daybreakに対応するmodelは限られる。Daybreakを使う時のmodelは、指定があればそれ、無ければcodexコマンドの既定設定のmodelである。実行の前に、そのmodelがDaybreakに対応するかをmodelカタログで確かめる。カタログにはmodelごとに利用できるアクセスprogramが載っている。対応していなければ実行せず、カタログからDaybreakに対応するmodelを集めてユーザーに提示し、選んでもらう
 - ワーキングディレクトリはカレントディレクトリがそのまま使われる
