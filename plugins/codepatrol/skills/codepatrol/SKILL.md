@@ -160,6 +160,10 @@ subagentの報告から、targets.mdの領域の一覧をユーザーに伝え�
 
 レポート1本ごとに新しいsubagentを起動し、codepatrol-reportを実行させる。
 
+### Daybreakでの再実行の確認
+
+Codexの提供元のフィルタで相談が止められた時に、Daybreak Blueで同じ相談をやり直してよいかを、最初のsubagentを起動する前にAskUserQuestionツールで1回訊く。使うmodelは、「実行環境の確認」の条件3を満たすmodelのうち、modelカタログでDaybreak Blueに対応する最新の物にし、質問にそのmodel名を添える。該当するmodelが無い時と、ユーザーがDaybreakを指定している時は訊かない。
+
 ### 指示に含める事
 
 - 担当する領域の名前
@@ -169,6 +173,7 @@ subagentの報告から、targets.mdの領域の一覧をユーザーに伝え�
 - 問題の名前の一覧のファイル
 - 並走している領域と、担当する領域とファイルが重なる領域
 - ユーザーが指定したCodexのmodel・reasoning effort・Daybreak。指定があった時だけ含める
+- フィルタで止められた時にDaybreak Blueで再実行してよい事と、その時に使うmodel。許可があった時だけ含める
 
 既存の問題の内容は、指示に含めない。
 
