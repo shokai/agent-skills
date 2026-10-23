@@ -4,7 +4,7 @@ description: >-
   Codex CLIと相談するスキル。
   ユーザーが「codexと相談して」「codexに聞いて」「codexにレビューしてもらって」と言った時に使用する。
   現在の会話コンテキストに基づいてCodex CLIにプロンプトを送り、結果を要約して報告する。
-  「codexはAstraで」「effortはhighで」「Daybreakで」のようにCodexのmodel・reasoning effort・Daybreakを指定された時は、その指定で実行する。
+  「codexはAstraで」「effortはhighで」「Daybreak Blueを有効化」のようにCodexのmodel・reasoning effort・Daybreakを指定された時は、その指定で実行する。
 ---
 
 # Codex CLI 相談手順書
