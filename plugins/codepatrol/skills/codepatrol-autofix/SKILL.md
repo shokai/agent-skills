@@ -42,7 +42,7 @@ codepatrol skillの指揮役から任されて、調査レポートの問題を1
 - トリアージページとレポートへの記入
 - 向け先のbranchが進んで衝突する時は、自分のpull requestのbranchをrebaseしてforce pushする
 
-フローの中で呼び出すskillが、ユーザーに質問する事がある。質問の答えを引数に含めて呼び出し、質問が起きないようにする。Codexとの相談の深さは「よく相談する」にする。
+フローの中で呼び出すskillが、ユーザーに質問する事がある。質問の答えを引数に含めて呼び出し、質問が起きないようにする。Codexとの相談の深さは「よく相談する」にする。指揮役からCodexのmodel・reasoning effort・Daybreakの指定を伝えられていれば、自分のcodex-consultationのArgsにも、sanity-reviewを任せるsubagentへの指示にも含める。
 
 次の事は、上の許可があっても変わらない。
 

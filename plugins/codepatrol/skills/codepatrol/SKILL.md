@@ -56,6 +56,8 @@ subagentには、Opus以上のtierのmodelを指定する。
 
 `codex exec` を直接実行するのはこの確認だけにする。Codexへの相談は、subagentがSkill toolで `codex-consultation` を呼び出して行う。
 
+ユーザーがCodexのmodel・reasoning effort・Daybreakを指定した時は、codex-consultationを使うsubagentへの指示に含める。Daybreakに対応するmodelは限られる。Daybreakが指定された時は、subagentを起動する前に、使うmodelが対応する事をmodelカタログで確かめる。対応していなければ、対応するmodelをユーザーに選んでもらい、指示に含める。
+
 ## 調査用の作業ツリー
 
 調査と、リストの生成・更新は、調査用のbranchをcheckoutしたgit worktreeで行う。調査は長時間かかるので、その間もユーザーが自分のcheckoutで他の作業を続けられるようにする。
@@ -166,6 +168,7 @@ subagentの報告から、targets.mdの領域の一覧をユーザーに伝え�
 - 作業用ディレクトリ。session用の一時ディレクトリの下に、領域ごとに分ける。Codexの出力や途中結果が、並走するsubagentの物と混ざらないようにする
 - 問題の名前の一覧のファイル
 - 並走している領域と、担当する領域とファイルが重なる領域
+- ユーザーが指定したCodexのmodel・reasoning effort・Daybreak。指定があった時だけ含める
 
 既存の問題の内容は、指示に含めない。
 

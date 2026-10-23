@@ -94,7 +94,7 @@ Codexに相談する時は、必ずSkill toolで `codex-consultation` を呼び�
 
 `lifecycle-*` 領域では、観点のカテゴリではなく、対応表のイベントや資産の区分で分けてよい。
 
-Argsには以下を含める:
+Argsには以下を含める。指揮役からCodexのmodel・reasoning effort・Daybreakの指定を伝えられていれば、それも含める:
 
 ```
 Args: よく相談して。このリポジトリの開発チームが、自分たちのコードの問題を検出して修正するために{領域名}のセキュリティ調査をしている。
