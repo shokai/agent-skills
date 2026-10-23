@@ -24,6 +24,8 @@ Codex CLI（OpenAI）にセカンドオピニオンを求めるAgent Skillです
 
 「codexはAstra mediumで相談して」のように、Codexのmodelやreasoning effortを指定できます。指定しなければcodexコマンドの既定設定が使われます。
 
+「Daybreak Blueを有効化して相談して」と伝えると、CodexのDaybreak Blueを有効にして相談します。Daybreakは、OpenAIの承認を受けたアカウントで使えます。Daybreak Blueに対応するmodelは限られます。使うmodelが対応していない時は、対応するmodelの中から選ぶよう訊きます。
+
 ## インストール方法
 
 マーケットプレイスを登録してから、pluginをインストールします。

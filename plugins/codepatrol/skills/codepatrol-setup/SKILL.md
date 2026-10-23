@@ -193,7 +193,7 @@ targets.mdまたはchecklist.mdを生成・更新したら、2つまとめてcod
 一方だけを更新した場合も、両方を渡す。
 このレビューは省略も代替もできない。
 
-Skill toolで `codex-consultation` を呼び出す。`codex exec` の直接実行で済ませない。Argsには以下を含める:
+Skill toolで `codex-consultation` を呼び出す。`codex exec` の直接実行で済ませない。Argsには以下を含める。指揮役からCodexのmodel・reasoning effort・Daybreakの指定を伝えられていれば、それも含める:
 
 ```
 Args: よく相談して。このリポジトリの開発チームが、自分たちのコードの問題を検出して修正するためにセキュリティ調査をしている。その調査に使う調査対象リストと観点リストを作成した。以下の2つのファイルをレビューしてほしい。

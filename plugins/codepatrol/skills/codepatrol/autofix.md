@@ -116,6 +116,7 @@ mergeするのは、subagentがready for reviewにし、CIが通ったpull reque
 - 作業用ディレクトリ。session用の一時ディレクトリの下に、問題ごとに分ける
 - 並走している修正と、それが触るファイル。関連する、merge済みのpull request
 - 修正が触るリポジトリごとの、repo固有の手順の場所
+- ユーザーが指定したCodexのmodel・reasoning effort・Daybreak。指定があった時だけ含める
 
 ## subagentの報告が来たら
 
