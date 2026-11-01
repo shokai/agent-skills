@@ -1,4 +1,4 @@
-# 依存関係の更新レビュー
+# Dependency update report
 
 - Reviewer: {Agent名 (model名)}
 - 結論: {修正無しでmerge可 | 修正が必要 | merge不可 | 判断保留}
