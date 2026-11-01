@@ -10,10 +10,10 @@ dependency-updateは、1件ごとにAIがレビューレポートを書いてpul
 
 ## このスキルがやること
 
-1. **レビュー**: 対象リポジトリの未レビューのpull request 1件ごとにsubagentを起動し、更新対象の概要、バージョン、変更スコープ、依存関係、使用箇所、release note、コード・設定の修正の要否、過去の失敗を調べたレポートをpull requestにコメント投稿します。レポートの冒頭に「修正無しでmerge可」等の結論を固定の語で書き、レビュー依頼のラベルを付けます。重要なセキュリティ更新にはセキュリティ更新のラベルも付けます
+1. **レビュー**: 対象リポジトリの未レビューのpull request 1件ごとにsubagentを起動し、更新対象の概要、バージョン、変更スコープ、依存関係、使用箇所、release note、コード・設定の修正の要否、過去の失敗を調べたレポートをpull requestにコメント投稿します。レポートの冒頭に「修正無しでmerge可」等の結論を固定の語で書きます。pull requestがどこまで進んだかは、このレポートの有無と内容で判定するので、ラベルで状態を管理しないリポジトリでも使えます。ラベルの名前を起動プロンプトに書いた時は、人間向けの印としてレビュー依頼のラベルを付け、セキュリティ更新と判定した時はそのラベルも付けます
 2. **修正**: 結論が「修正が必要」のdependabotのpull requestを、リポジトリのルール文書が参照する「依存関係の更新時に揃える箇所」の文書の範囲で、subagentが直してpushします。範囲外の修正が要る物は直しません。修正後はCIを待って再レビューします
-3. **merge**: 結論が「修正無しでmerge可」で、必須のCIが通り、conflictも人間の反対も無いpull requestを、指揮役が1件ずつmergeします。セキュリティ更新を先にmergeし、merge後にmerge承認のラベルを付けます
-4. **通知**: mergeの予定と結果、mergeしなかった物とその理由、レビューしたpull requestの興味深い更新を、通知先の1つのthreadにまとめて投稿します
+3. **merge**: 結論が「修正無しでmerge可」で、必須のCIが通り、conflictも人間の反対も無いpull requestを、指揮役が1件ずつmergeします。セキュリティ更新を先にmergeし、ラベルを使う時はmerge後にmerge承認のラベルを付けます
+4. **通知**: mergeの予定と結果、mergeしなかった物とその理由、レビューしたpull requestの興味深い更新、修正が必要だが自動では直さなかった等、人間の判断が要るpull requestを、通知先の1つのthreadにまとめて投稿します
 5. **routineの登録**: 起動プロンプトを値を訊いて作り、Claude Code on the webのroutineを作成・更新します
 
 ## 含まれるスキル
@@ -27,7 +27,7 @@ dependency-updateは、1件ごとにAIがレビューレポートを書いてpul
 
 - **主エージェントのmodel**: Claude CodeのOpus以上のtier（Opus、Fable、Mythos等）で実行します。Sonnet・Haiku等の下位tierでは、何もせずに停止します
 - **subagentを起動できる環境**: レビューと修正はsubagentが行います。subagentもOpus以上のtierで動かします
-- **GitHubにアクセスする手段**: pull requestを読み、コメントを投稿し、ラベルを付ける手段が要ります。修正の段階にはbranchにpushする手段、mergeの段階にはmergeする手段も要ります。手段が無い段階は行いません
+- **GitHubにアクセスする手段**: pull requestを読み、コメントを投稿する手段が要ります。修正の段階にはbranchにpushする手段、mergeの段階にはmergeする手段も要ります。手段が無い段階は行いません
 - **通知先に投稿する手段**: Slackのチャンネルのように、返信を1つのthreadにまとめられる場所です。投稿する手段が無い時は、mergeをしません
 - **`kuden` plugin**: 指揮役が `kuden:orchestrator` の心得に従い、mergeとコメントの投稿で `kuden:github` の心得に従います
 - **routineの実行環境**: このpluginと `kuden` pluginをinstallしておきます
@@ -40,7 +40,7 @@ dependency-updateは、1件ごとにAIがレビューレポートを書いてpul
 /dependency-update:dependency-update-setup-routine
 ```
 
-対象リポジトリと段階、ラベルの名前、通知先を質問し、起動プロンプトを作ります。Claude Code on the webのroutineを扱える環境では、routineの作成か、既存のroutineの更新まで行います。`起動プロンプトだけ` を付けて実行すると、起動プロンプトと設定項目を出力するだけにし、登録は人間が行います。
+対象リポジトリと段階、ラベルの名前、通知先を質問し、起動プロンプトを作ります。ラベルは任意で、リポジトリがラベルで状態を示す運用の時だけ書きます。Claude Code on the webのroutineを扱える環境では、routineの作成か、既存のroutineの更新まで行います。`起動プロンプトだけ` を付けて実行すると、起動プロンプトと設定項目を出力するだけにし、登録は人間が行います。
 
 起動プロンプトは、skill名と値だけを書いた短い物です。
 

@@ -29,6 +29,8 @@ dependency-update skillを実行する。
 通知先: {通知先}
 ```
 
+ラベルを使わないリポジトリだけなら、ラベルの行を省く。
+
 ## routineに登録する
 
 このsessionに、Claude Code on the webのroutineを一覧・作成・更新する手段があれば、それを使う。使い方は、手段自身の説明に従う。手段が無ければ、「人間に登録を任せる」に進む。
