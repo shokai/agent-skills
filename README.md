@@ -38,7 +38,7 @@
 
 ### 実験的
 
-- [dependency-update](plugins/dependency-update/README.md) - dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた段階までレビュー・修正・mergeする指揮。Claude Code on the webのroutineに登録して毎日動かす
+- [dependency-update](plugins/dependency-update/README.md) - dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた段階までレビュー・修正・mergeする指揮。Claude Code on the webのroutineに登録して毎日動かす。1件のPRを手元でレビューするだけならlibrary-update-reviewを使う
 
 ### その他
 
