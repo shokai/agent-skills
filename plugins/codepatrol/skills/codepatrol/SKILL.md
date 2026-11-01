@@ -56,7 +56,7 @@ subagentには、Opus以上のtierのmodelを指定する。
 
 `codex exec` を直接実行するのはこの確認だけにする。Codexへの相談は、subagentがSkill toolで `codex-consultation` を呼び出して行う。
 
-ユーザーがCodexのmodel・reasoning effort・Daybreakを指定した時は、codex-consultationを使うsubagentへの指示に含める。Daybreakに対応するmodelは限られる。Daybreakが指定された時は、subagentを起動する前に、使うmodelが対応する事をmodelカタログで確かめる。対応していなければ、対応するmodelをユーザーに選んでもらい、指示に含める。
+ユーザーがCodexのmodel・reasoning effort・Daybreak・fast modeを指定した時は、codex-consultationを使うsubagentへの指示に含める。Daybreakに対応するmodelは限られる。Daybreakが指定された時は、subagentを起動する前に、使うmodelが対応する事をmodelカタログで確かめる。対応していなければ、対応するmodelをユーザーに選んでもらい、指示に含める。
 
 ## 調査用の作業ツリー
 
@@ -172,7 +172,7 @@ Codexの提供元のフィルタで相談が止められた時に、Daybreak Blu
 - 作業用ディレクトリ。session用の一時ディレクトリの下に、領域ごとに分ける。Codexの出力や途中結果が、並走するsubagentの物と混ざらないようにする
 - 問題の名前の一覧のファイル
 - 並走している領域と、担当する領域とファイルが重なる領域
-- ユーザーが指定したCodexのmodel・reasoning effort・Daybreak。指定があった時だけ含める
+- ユーザーが指定したCodexのmodel・reasoning effort・Daybreak・fast mode。指定があった時だけ含める
 - フィルタで止められた時にDaybreak Blueで再実行してよい事と、その時に使うmodel。許可があった時だけ含める
 
 既存の問題の内容は、指示に含めない。
