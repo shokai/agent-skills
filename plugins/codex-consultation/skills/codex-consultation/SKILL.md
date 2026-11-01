@@ -4,7 +4,7 @@ description: >-
   Codex CLIと相談するスキル。
   ユーザーが「codexと相談して」「codexに聞いて」「codexにレビューしてもらって」と言った時に使用する。
   現在の会話コンテキストに基づいてCodex CLIにプロンプトを送り、結果を要約して報告する。
-  「codexはAstraで」「effortはhighで」「Daybreak Blueを有効化」のようにCodexのmodel・reasoning effort・Daybreakを指定された時は、その指定で実行する。
+  「codexはAstraで」「effortはhighで」「Daybreak Blueを有効化」「fast modeで」のようにCodexのmodel・reasoning effort・Daybreak・fast modeを指定された時は、その指定で実行する。
 ---
 
 # Codex CLI 相談手順書
@@ -114,6 +114,7 @@ codex exec --ephemeral -s workspace-write -c sandbox_workspace_write.network_acc
 - `-m` に渡すのはmodel IDである。「Astra」のように表示名や別名で指定された時は、`codex debug models` が出すmodelカタログで表示名からIDを解決する。同じ名前で世代だけが違うmodelが複数ある時は、version番号が最も新しいものを選ぶ。「Daybreakに対応する中で最新のSol」のようにユーザーが条件を付けていれば、その条件を満たす中で最も新しいものを選ぶ。カタログにはmodelごとに対応するreasoning effortも載っている
 - ユーザーや呼び出し元のskillがDaybreakを指定している時は、`--cyber-access-program daybreak_blue` を付ける。Redを指定された時は値を `daybreak_red` にする。Daybreakはmodelではなく、Codexの提供元がサイバーセキュリティの作業向けに承認制で提供するアクセスprogramで、このフラグで1回の実行ごとに有効になる
 - Daybreakに対応するmodelは限られる。Daybreakを使う時のmodelは、指定があればそれ、無ければcodexコマンドの既定設定のmodelである。実行の前に、そのmodelがDaybreakに対応するかをmodelカタログで確かめる。カタログにはmodelごとに利用できるアクセスprogramが載っている。対応していなければ実行せず、カタログからDaybreakに対応するmodelを集めてユーザーに提示し、選んでもらう
+- ユーザーや呼び出し元のskillがfast modeを指定している時は、`--enable fast_mode -c service_tier="fast"` を付ける。fast modeはmodelではなく、Codexの提供元がAPIリクエストを通常より速く処理する処理tierで、Codexにはservice tierを選ぶ専用のフラグが無く、この設定値の上書きで1回の実行ごとに有効になる。`fast_mode` の機能が設定で無効にされている環境では、service tierの値が警告無しに捨てられるので、機能の有効化も一緒に付ける。対応するmodelは、modelカタログの各modelに載るservice tierの一覧で分かる。対応しないmodelでは、Codexは値を無視して通常の速度で実行する
 - ワーキングディレクトリはカレントディレクトリがそのまま使われる
 - カレントディレクトリがgitリポジトリ内でないと、codexは起動せずに終了する。エラーメッセージはtrust設定の問題に見えるが、判定条件はgitリポジトリ内かどうかだけ。非gitディレクトリで相談する時は `--skip-git-repo-check` を付ける
 - プロンプトはstdinから渡す。CLI引数で渡すと、stdinがpipe状態のときcodexが追加入力を `<stdin>` ブロックとして読みEOFまで待つためhangする
@@ -125,7 +126,7 @@ codexの実行には時間がかかる場合がある。Bashツールのtimeout�
 
 ### 出力の扱い
 
-出力は、標準出力と標準エラー出力のどちらも欠落なく保持する。回答は標準出力に出るので、要約はそこから行う。標準エラー出力には、Codex CLIのversion、model、reasoning effortを示すヘッダが冒頭に出て、その後にcodexの作業の経過が続く。報告の実行環境の行はこのヘッダから取り、コマンド失敗の兆候は経過からも確かめる。ヘッダにDaybreakの状態は出ない。対応しないmodelはエラーで止まるので、フラグ付きで成功した事を有効になった根拠にする。`tail` で末尾だけを見るとヘッダを失う。
+出力は、標準出力と標準エラー出力のどちらも欠落なく保持する。回答は標準出力に出るので、要約はそこから行う。標準エラー出力には、Codex CLIのversion、model、reasoning effortを示すヘッダが冒頭に出て、その後にcodexの作業の経過が続く。報告の実行環境の行はこのヘッダから取り、コマンド失敗の兆候は経過からも確かめる。ヘッダにDaybreakとfast modeの状態は出ない。Daybreakは、対応しないmodelではエラーで止まるので、フラグ付きで成功した事を有効になった根拠にする。fast modeは、対応しないmodelでは値を無視した旨の警告が標準エラー出力に出るので、警告無しに成功した事を有効になった根拠にする。`tail` で末尾だけを見るとヘッダを失う。
 
 ### 追加往復の判断
 
@@ -158,7 +159,7 @@ codexの出力を読み取り、以下の構成でユーザーに報告する:
 
 #### codexへの相談内容
 
-codexの実行環境を、標準エラー出力の冒頭のヘッダから読み取り、`Codex CLI v0.153.4 (gpt-6-astra, reasoning effort: high)` の形式で1行記載する。Daybreakを指定した時は、ヘッダに出ないDaybreakを `Codex CLI v0.163.0 (gpt-6-sol, reasoning effort: high, Daybreak Blue)` のように末尾に書き足す。続けてcodexに送ったプロンプトの概要を1-2文で説明する。
+codexの実行環境を、標準エラー出力の冒頭のヘッダから読み取り、`Codex CLI v0.153.4 (gpt-6-astra, reasoning effort: high)` の形式で1行記載する。Daybreakやfast modeを有効にした時は、ヘッダに出ないそれらを `Codex CLI v0.163.0 (gpt-6-sol, reasoning effort: high, Daybreak Blue)` や `Codex CLI v0.166.0 (gpt-6.1-sol, reasoning effort: xhigh, fast mode)` のように末尾に書き足す。続けてcodexに送ったプロンプトの概要を1-2文で説明する。
 
 #### codexの回答サマリー
 

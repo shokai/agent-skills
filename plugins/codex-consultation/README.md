@@ -26,6 +26,8 @@ Codex CLI（OpenAI）にセカンドオピニオンを求めるAgent Skillです
 
 「Daybreak Blueを有効化して相談して」と伝えると、CodexのDaybreak Blueを有効にして相談します。Daybreakは、OpenAIの承認を受けたアカウントで使えます。Daybreak Blueに対応するmodelは限られます。使うmodelが対応していない時は、対応するmodelの中から選ぶよう訊きます。
 
+「fast modeで相談して」と伝えると、Codexのfast modeを有効にして相談します。利用枠の消費やtoken料金が増える代わりに、応答が速くなります。
+
 ## インストール方法
 
 マーケットプレイスを登録してから、pluginをインストールします。
