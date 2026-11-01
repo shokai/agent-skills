@@ -1,0 +1,136 @@
+---
+name: dependency-update
+description: >-
+  dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた段階まで進める定期処理の指揮。
+  レビューと修正はpull requestごとに起動したsubagentに任せ、条件を満たしたpull requestのmergeと通知は指揮役が行う。
+  Claude Code on the webのroutineや、手動の起動プロンプトから実行する。
+---
+
+# 依存関係の更新pull requestの定期処理の指揮
+
+起動プロンプトに書かれたリポジトリの、dependabotやrenovateが作成した依存関係の更新pull requestを、レビュー、修正、mergeの順に、リポジトリごとに決めた段階まで進める。依存関係には、ライブラリの他に、Docker image、GitHub Actions、ランタイムが含まれる。
+このsessionは指揮役になる。指揮役としての振る舞いは、`kuden:orchestrator` skillを読み込み、その基準に従う。指揮役はpull requestの差分もリポジトリのコードも読まない。
+
+作業は、以下のskillを実行するsubagentに任せる。
+
+| skill                    | 作業                                                             | 読む物                                     |
+| ------------------------ | ---------------------------------------------------------------- | ------------------------------------------ |
+| dependency-update-report | pull request 1件をレビューし、レポートをコメント投稿する         | pull requestの差分とリポジトリのコード     |
+| dependency-update-fix    | pull request 1件を、リポジトリの文書が挙げる範囲で直してpushする | レビューコメントとリポジトリの文書とコード |
+
+subagentには、Opus以上のtierのmodelを指定し、使うラベルの名前を伝える。mergeは指揮役だけが行い、subagentにはmergeさせない。
+
+起動プロンプトの指示は、このskillの記述に優先する。
+
+このskillで「レビューコメント」と呼ぶのは、dependency-update-reportのTEMPLATE.mdの形で投稿されたコメントである。Reviewerの行と結論の行で見分ける。同じ形で結論を書く旧版のレビューskillのコメントも含め、人間のレビューや他の形式のコメントは含めない。
+
+## 起動プロンプトから受け取る値
+
+実行に要る値は次の3つで、起動プロンプトに書かれている。起動プロンプトは、dependency-update-setup-routine skillが作る。
+
+- 対象リポジトリの一覧と、リポジトリごとの段階。段階は「レビューまで」「修正まで」「mergeまで」のどれかである。一覧に無いリポジトリのpull requestには、レビューも、CIの再実行も、rebaseの依頼もしない
+- ラベルの名前。レビュー依頼、merge承認、セキュリティ更新の3つである。リポジトリごとに違う時は、そのリポジトリの行に書かれている
+- 通知先。mergeの予定と結果と、興味深い更新を人間に知らせる場所で、返信を1つのthreadにまとめられる物。Slackのチャンネル等である
+
+値が欠けている時は、ユーザーと対話できる環境では訊いて埋める。無人で実行している時は、欠けている値を報告して終了する。
+
+## 実行環境の確認
+
+処理を始める前に確認する。満たさなければ、何も行わず、満たさない条件を報告して終了する。
+
+- 自分のmodelがOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは、新しい世代でも満たさない
+- Opus以上のtierのsubagentを起動できる
+- GitHubのpull requestを読み、コメントを投稿し、ラベルを付ける手段がある。このsessionで使える連携手段を自分で見つけて使う
+
+修正にはbranchにpushする手段、mergeにはmergeする手段と通知先に投稿する手段も要る。手段が無い段階は行わず、その旨を完了報告に書く。
+
+## mergeに必須のCI
+
+pull requestのbase branchに適用される保護規則で、mergeに必須と指定されたcheckを、mergeに必須のCIとする。branch protectionとrulesetのどちらで指定されていても同じである。必須のcheckの一覧は、保護規則の設定を読む権限が無くても、base branchの情報から読める。必須でないcheckは、失敗していてもmergeを止めず、再実行もしない。必須のcheckが指定されていないリポジトリと、指定を読めなかった時は、全てのCIを必須として扱う。指定を読めなかった時は、その理由を完了報告に書く。
+
+## 1. レビュー
+
+### 対象
+
+一覧にあるリポジトリの、dependabotまたはrenovateが作成したopenなpull requestのうち、次のどちらかに当たる物。対象が0件なら、2の修正に進む。
+
+- レビュー依頼のラベルが付いていない
+- レビュー依頼のラベルが付いているが、更新する依存関係とバージョンが、最新のレビューコメントの記載と違う。botが新しいバージョンに更新し直した時がこれに当たる。レビュー依頼のラベルを外してからレビューさせる。botのrebaseはバージョンを変えないので、再レビューしない
+
+レビュー依頼のラベルが無く、2の修正のsubagentが積んだcommitを含むpull requestは、修正の後にCIを待ちきれずに持ち越した物である。修正のsubagentが投稿したコメントから、commitのSHAと揃える箇所を列挙した文書の場所を読み取り、「2. 修正 > 修正の後」と同じCIの待ち方で再レビューさせる。
+
+### subagentに任せる
+
+pull request 1件ごとに新しいsubagentを起動し、dependency-update-reportを実行させる。同じリポジトリの複数のpull requestを並列に扱う時は、subagentごとに作業ディレクトリを分ける。
+
+指示に含める事:
+
+- pull requestの場所。リポジトリ名と番号
+- ラベルの名前
+- コードを読む場所と、作業ディレクトリ
+- レポートの言語。起動プロンプトに指定があればそれ、無ければ起動プロンプトの言語
+- 修正のcommitを含むpull requestの再レビューの時は、修正のcommitのSHAと、揃える箇所を列挙した文書の場所。どちらも修正のsubagentのコメントにある
+
+### 報告を確かめる
+
+レポートがpull requestにコメント投稿され、レビュー依頼のラベルが付いている事を確かめる。結論が「判断保留」のpull requestにはラベルが付かず、次回の実行で再レビューする。レポートの結論の語と、「興味深い更新」の節に内容があるかは、後の工程で使う。
+
+## 2. 修正
+
+段階が「修正まで」か「mergeまで」のリポジトリのpull requestだけを直す。1のレビューが終わってから始める。終わらないレビューのsubagentがあれば、そのpull requestを次回の実行に回し、他のpull requestの修正に進む。
+
+### 対象
+
+次の全てを満たすpull requestを直す。この実行でレビューした物と、過去の実行でレビュー済みのレビュー依頼ラベル付きの物の両方から探す。
+
+- dependabotが作成した
+- 最新のレビューコメントの結論が「修正が必要」である
+- 更新する依存関係とバージョンが、最新のレビューコメントの記載と一致している
+- 全てのcommitがbotの物である
+- 人間による未撤回のchanges requested、mergeへの反対、保留の要求が無い
+
+リポジトリの文書を読まないと分からない条件は、dependency-update-fixが着手する前に確かめる。満たさないpull requestは、subagentが何も変えずに対象外として報告する。
+
+### subagentに任せる
+
+pull request 1件ごとに新しいsubagentを起動し、dependency-update-fixを実行させる。
+
+指示に含める事:
+
+- pull requestの場所。リポジトリ名と番号
+- ラベルの名前
+- cloneの場所と、作業ディレクトリ
+
+### 修正の後
+
+subagentがpushしたcommitに対するCIが終わってから、1と同じ方法で再レビューさせる。mergeに必須のCIが失敗した時は、再レビューの前にそのjobを1回再実行する。10分待ってもCIが終わらなければ、次回の実行で再レビューさせる。
+
+## 3. merge
+
+段階が「mergeまで」のリポジトリのpull requestだけをmergeする。全てのsubagentのレビューと修正が終わってから、[merge.md](merge.md) を読み込み、それに従って指揮役がmergeする。終わらないsubagentがあれば、そのpull requestを次回の実行に回し、他のmergeに進む。
+
+## 通知
+
+この実行での投稿は、通知先の1つのthreadにまとめる。最初の投稿を親にし、以降はその返信として投稿する。mergeの予定と結果の投稿は、merge.mdが定める。
+
+全てのmergeが終わったら、この実行の1でレビューしたpull requestのうち、レポートの「興味深い更新」の節に内容がある物を、1つの投稿にまとめて投稿する。修正のcommitを含むpull requestの再レビューと、結論が「判断保留」の物は対象外である。pull request 1件ごとに、リポジトリ名、更新対象の名前と更新前後のバージョン、興味深い更新の要点を2〜3行、レポートのコメントのURLを書く。段階が「レビューまで」のリポジトリのpull requestも投稿する。
+
+merge対象も、merge.mdが定める見送ったpull requestも、興味深い更新も無い時は投稿しない。
+
+## 守る事
+
+- dependabotとrenovateのpull requestのbranchには、2の修正のsubagentが直すcommitを1つ積んでpushする以外に、commitもpushもしない
+- 各pull requestは独立して処理し、1件が失敗しても他は続行する
+- GitHubに投稿するコメントには、書いたAgentの名前とmodel名を書く。subagentにも同じように書かせる
+
+## 完了報告
+
+レビューを投稿したpull request、直したpull request、既レビューで飛ばした物、mergeした物、merge候補だがmergeしなかった物とその理由を簡潔に報告する。GitHubや通知先にアクセスできない等で実行できなかった事があれば、その原因を明記する。
+
+## 関連スキル
+
+- **dependency-update-report**: 依存関係の更新pull requestを1件レビューし、レポートをコメント投稿するスキル。subagentが実行する
+- **dependency-update-fix**: レビューで修正が必要とされたpull requestを1件直してpushするスキル。subagentが実行する
+- **dependency-update-setup-routine**: このskillの起動プロンプトを作り、Claude Code on the webのroutineに登録するスキル。ユーザーが起動する
+- **kuden:orchestrator**: subagentに作業を任せる指揮役の心得。指揮役が従う
+- **kuden:github**: GitHubでpull requestを作り、文章を書く時の心得。指揮役がmergeする時と、subagentがコメントを書く時に従う
