@@ -18,11 +18,16 @@ if [ -n "$window" ] && [ -z "$name" ]; then
   exit 1
 fi
 
+# tmuxは-sのsession名と-cのディレクトリをformatとして展開し、#(...)をshell commandとして実行するので、#を##にエスケープして文字として渡す
+# -tのtargetは展開されないので、そのまま渡す
+dir_literal=${dir//#/##}
+name_literal=${name//#/##}
+
 # claudeをsessionやwindowのコマンドにすると、claudeの終了と同時に閉じ、起動に失敗した時のerrorを読めない
 if [ -n "$window" ]; then
-  pane=$(tmux new-window -d -t "=$name:" -c "$dir" -P -F '#{pane_id}') # =が無いと、tmuxはsession名を前方一致でも解決し、別のsessionにwindowを足す
+  pane=$(tmux new-window -d -t "=$name:" -c "$dir_literal" -P -F '#{pane_id}') # =が無いと、tmuxはsession名を前方一致でも解決し、別のsessionにwindowを足す
 else
-  pane=$(tmux new-session -d -c "$dir" ${name:+-s "$name"} -P -F '#{pane_id}')
+  pane=$(tmux new-session -d -c "$dir_literal" ${name:+-s "$name_literal"} -P -F '#{pane_id}')
 fi
 tmux send-keys -t "$pane" 'claude --rc' Enter
 

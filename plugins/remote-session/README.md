@@ -1,10 +1,10 @@
 # remote-session
 
-Claude Codeのremote session（`claude --rc`）をtmux内に新しく起動するAgent Skillです。remote controlで繋いでいるsessionに「〇〇のclaude session作って」と頼むと、指定したディレクトリで新しいsessionを起動し、そのremote sessionのURLを返します。
+Claude Codeのremote session（Remote Control、`claude --remote-control` の短縮形が `--rc`）をtmux内に新しく起動するAgent Skillです。remote controlで繋いでいるsessionに「〇〇のclaude session作って」と頼むと、指定したディレクトリで新しいsessionを起動し、そのremote sessionのURLを返します。
 
 ## 背景
 
-Claude Codeのremote controlは、パソコンで起動したsessionをスマホから操作できます。sessionは起動したディレクトリのプロジェクトで作業するので、出先で別のリポジトリの作業をしたくなった時は、そのディレクトリで起動したsessionが要ります。
+Claude Codeのremote controlは、パソコンで起動したsessionをスマホから操作できます。sessionは起動したディレクトリのプロジェクトで作業するので、出先で別のリポジトリを独立したsessionで扱いたくなった時は、そのディレクトリで起動したsessionが要ります。
 
 このスキルを入れたsessionを1つremote controlで繋いでおけば、そのsessionに頼んで、別のディレクトリの新しいsessionをいくつでも作れます。
 
@@ -12,6 +12,7 @@ Claude Codeのremote controlは、パソコンで起動したsessionをスマホ
 
 - tmuxがインストールされている事。新しいsessionはtmuxのsessionかwindowとして起動する
 - 起動した新しいsessionがremote controlに接続できる事。Claude Codeが `claude --rc` で接続できる状態にしておく
+- Claude Codeの設定ディレクトリが既定の `~/.claude` である事。scriptはそこに書かれるremote sessionのIDを読んでURLを組み立てる
 
 ## 使い方
 
@@ -27,7 +28,7 @@ tmux-claude-rc <ディレクトリパス> [session名]
 tmux-claude-rc -w <ディレクトリパス> <session名>
 ```
 
-起動すると、remote sessionのURLを標準出力に出し、そのwindowに切り替えます。
+起動すると、remote sessionのURLを標準出力に出します。tmuxの中から実行した時はそのwindowに切り替え、外から実行した時はそのsessionにattachします。
 
 ## インストール方法
 
