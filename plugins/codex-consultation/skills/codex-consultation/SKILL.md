@@ -114,7 +114,7 @@ codex exec --ephemeral -s workspace-write -c sandbox_workspace_write.network_acc
 - `-m` に渡すのはmodel IDである。「Astra」のように表示名や別名で指定された時は、`codex debug models` が出すmodelカタログで表示名からIDを解決する。同じ名前で世代だけが違うmodelが複数ある時は、version番号が最も新しいものを選ぶ。「Daybreakに対応する中で最新のSol」のようにユーザーが条件を付けていれば、その条件を満たす中で最も新しいものを選ぶ。カタログにはmodelごとに対応するreasoning effortも載っている
 - ユーザーや呼び出し元のskillがDaybreakを指定している時は、`--cyber-access-program daybreak_blue` を付ける。Redを指定された時は値を `daybreak_red` にする。Daybreakはmodelではなく、Codexの提供元がサイバーセキュリティの作業向けに承認制で提供するアクセスprogramで、このフラグで1回の実行ごとに有効になる
 - Daybreakに対応するmodelは限られる。Daybreakを使う時のmodelは、指定があればそれ、無ければcodexコマンドの既定設定のmodelである。実行の前に、そのmodelがDaybreakに対応するかをmodelカタログで確かめる。カタログにはmodelごとに利用できるアクセスprogramが載っている。対応していなければ実行せず、カタログからDaybreakに対応するmodelを集めてユーザーに提示し、選んでもらう
-- ユーザーや呼び出し元のskillがfast modeを指定している時は、`-c service_tier="fast"` を付ける。fast modeはmodelではなく、Codexの提供元がAPIリクエストを通常より速く処理する処理tierで、Codexには専用のフラグが無く、この設定値の上書きで1回の実行ごとに有効になる。対応するmodelは、modelカタログの各modelに載るservice tierの一覧で分かる。対応しないmodelでは、Codexは値を無視して通常の速度で実行する
+- ユーザーや呼び出し元のskillがfast modeを指定している時は、`--enable fast_mode -c service_tier="fast"` を付ける。fast modeはmodelではなく、Codexの提供元がAPIリクエストを通常より速く処理する処理tierで、Codexにはservice tierを選ぶ専用のフラグが無く、この設定値の上書きで1回の実行ごとに有効になる。`fast_mode` の機能が設定で無効にされている環境では、service tierの値が警告無しに捨てられるので、機能の有効化も一緒に付ける。対応するmodelは、modelカタログの各modelに載るservice tierの一覧で分かる。対応しないmodelでは、Codexは値を無視して通常の速度で実行する
 - ワーキングディレクトリはカレントディレクトリがそのまま使われる
 - カレントディレクトリがgitリポジトリ内でないと、codexは起動せずに終了する。エラーメッセージはtrust設定の問題に見えるが、判定条件はgitリポジトリ内かどうかだけ。非gitディレクトリで相談する時は `--skip-git-repo-check` を付ける
 - プロンプトはstdinから渡す。CLI引数で渡すと、stdinがpipe状態のときcodexが追加入力を `<stdin>` ブロックとして読みEOFまで待つためhangする
