@@ -155,6 +155,19 @@
       "license": "MIT",
       "keywords": ["agent-skill", "usability-test", "e2e", "subagent", "sonnet"],
       "category": "testing"
+    },
+    {
+      "name": "remote-session",
+      "source": "./plugins/remote-session",
+      "description": "Claude Codeのremote session(claude --rc)をtmux内に新しく起動し、URLを伝えるスキル。remote controlで繋いだsessionに「〇〇のclaude session作って」と頼むと、別のディレクトリで新しいsessionを作れる。",
+      "version": "0.1.0",
+      "author": {
+        "name": "shokai"
+      },
+      "repository": "https://github.com/shokai/agent-skills",
+      "license": "MIT",
+      "keywords": ["remote-control", "tmux", "session", "claude-code"],
+      "category": "workflow"
     }
   ]
 }
