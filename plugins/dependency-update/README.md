@@ -6,7 +6,7 @@ dependabotやrenovateが作成した依存関係の更新pull requestを、リ�
 
 依存関係の更新pull requestは毎日届きます。ライブラリだけでなく、Docker image、GitHub Actions、ランタイムの更新も含まれます。1件ずつrelease noteを読み、アプリケーションへの影響を調べ、CIを待ってmergeする作業は、人間が続けるには量が多すぎます。一方で、何も読まずに自動mergeすると、breaking changeやバージョンの不整合を取り込みます。
 
-dependency-updateは、1件ごとにAIがレビューレポートを書いてpull requestに残し、レポートの結論に基づいて修正とmergeを進めます。どこまで自動で進めるかはリポジトリごとに決め、レビューの出来を人間が見ながら徐々に自動化の度合いを引き上げます。
+dependency-updateは、1件ごとにAIがレビューレポートを書いてpull requestに残し、レポートの結論に基づいて修正とmergeを進めます。どこまで自動で進めるかはリポジトリごとに決め、レビューの出来を人間が見ながら徐々に自動化段階を引き上げます。
 
 ## このスキルがやること
 
