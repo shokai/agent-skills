@@ -1,14 +1,14 @@
 ---
 name: dependency-update
 description: >-
-  dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた段階まで進める定期処理の指揮。
+  dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた自動化段階まで進める定期処理の指揮。
   レビューと修正はpull requestごとに起動したsubagentに任せ、条件を満たしたpull requestのmergeと通知は指揮役が行う。
   Claude Code on the webのroutineや、手動の起動プロンプトから実行する。
 ---
 
 # 依存関係の更新pull requestの定期処理の指揮
 
-起動プロンプトに書かれたリポジトリの、dependabotやrenovateが作成した依存関係の更新pull requestを、レビュー、修正、mergeの順に、リポジトリごとに決めた段階まで進める。依存関係には、ライブラリの他に、Docker image、GitHub Actions、ランタイムが含まれる。
+起動プロンプトに書かれたリポジトリの、dependabotやrenovateが作成した依存関係の更新pull requestを、レビュー、修正、mergeの順に、リポジトリごとに決めた自動化段階まで進める。依存関係には、ライブラリの他に、Docker image、GitHub Actions、ランタイムが含まれる。
 このsessionは指揮役になる。指揮役としての振る舞いは、`kuden:orchestrator` skillを読み込み、その基準に従う。指揮役はpull requestの差分もリポジトリのコードも読まない。
 
 作業は、以下のskillを実行するsubagentに任せる。
@@ -30,7 +30,7 @@ pull requestがどこまで進んだかは、レビューコメントと、修�
 
 起動プロンプトから受け取る値は次の3つで、対象リポジトリと通知先は必須、ラベルの名前は任意である。起動プロンプトは、dependency-update-setup-routine skillが作る。
 
-- 対象リポジトリの一覧と、リポジトリごとの段階。段階は「レビューまで」「修正まで」「mergeまで」のどれかである。一覧に無いリポジトリのpull requestには、レビューも、CIの再実行も、rebaseの依頼もしない
+- 対象リポジトリの一覧と、リポジトリごとの自動化段階。自動化段階は、どこまで自動で進めるかを表す値で、「レビューまで」「修正まで」「mergeまで」のどれかである。一覧に無いリポジトリのpull requestには、レビューも、CIの再実行も、rebaseの依頼もしない
 - ラベルの名前。書かれていない事もある。レビュー依頼、merge承認、セキュリティ更新の3つで、リポジトリごとに違う時は、そのリポジトリの行に書かれている。リポジトリがラベルで状態を示す運用の時に使う
 - 通知先。mergeの予定と結果と、興味深い更新を人間に知らせる場所で、返信を1つのthreadにまとめられる物。Slackのチャンネル等である
 
@@ -44,7 +44,7 @@ pull requestがどこまで進んだかは、レビューコメントと、修�
 - Opus以上のtierのsubagentを起動できる
 - GitHubのpull requestを読み、コメントを投稿する手段がある。このsessionで使える連携手段を自分で見つけて使う
 
-修正にはbranchにpushする手段、mergeにはmergeする手段と通知先に投稿する手段も要る。手段が無い段階は行わず、その旨を完了報告に書く。
+修正にはbranchにpushする手段、mergeにはmergeする手段と通知先に投稿する手段も要る。手段が無い工程は行わず、その旨を完了報告に書く。
 
 ## mergeに必須のCI
 
@@ -80,7 +80,7 @@ pull request 1件ごとに新しいsubagentを起動し、dependency-update-repo
 
 ## 2. 修正
 
-段階が「修正まで」か「mergeまで」のリポジトリのpull requestだけを直す。1のレビューが終わってから始める。終わらないレビューのsubagentがあれば、そのpull requestを次回の実行に回し、他のpull requestの修正に進む。
+自動化段階が「修正まで」か「mergeまで」のリポジトリのpull requestだけを直す。1のレビューが終わってから始める。終わらないレビューのsubagentがあれば、そのpull requestを次回の実行に回し、他のpull requestの修正に進む。
 
 ### 対象
 
@@ -111,17 +111,17 @@ subagentがpushしたcommitに対するCIが終わってから、1と同じ方�
 
 ## 3. merge
 
-段階が「mergeまで」のリポジトリのpull requestだけをmergeする。全てのsubagentのレビューと修正が終わってから、[merge.md](merge.md) を読み込み、それに従って指揮役がmergeする。終わらないsubagentがあれば、そのpull requestを次回の実行に回し、他のmergeに進む。
+自動化段階が「mergeまで」のリポジトリのpull requestだけをmergeする。全てのsubagentのレビューと修正が終わってから、[merge.md](merge.md) を読み込み、それに従って指揮役がmergeする。終わらないsubagentがあれば、そのpull requestを次回の実行に回し、他のmergeに進む。
 
 ## 通知
 
 この実行での投稿は、通知先の1つのthreadにまとめる。最初の投稿を親にし、以降はその返信として投稿する。mergeの予定と結果の投稿は、merge.mdが定める。
 
-全てのmergeが終わったら、この実行の1でレビューしたpull requestのうち、レポートの「興味深い更新」の節に内容がある物を、1つの投稿にまとめて投稿する。修正のcommitを含むpull requestの再レビューと、結論が「判断保留」の物は対象外である。pull request 1件ごとに、リポジトリ名、更新対象の名前と更新前後のバージョン、興味深い更新の要点を2〜3行、レポートのコメントのURLを書く。段階が「レビューまで」のリポジトリのpull requestも投稿する。
+全てのmergeが終わったら、この実行の1でレビューしたpull requestのうち、レポートの「興味深い更新」の節に内容がある物を、1つの投稿にまとめて投稿する。修正のcommitを含むpull requestの再レビューと、結論が「判断保留」の物は対象外である。pull request 1件ごとに、リポジトリ名、更新対象の名前と更新前後のバージョン、興味深い更新の要点を2〜3行、レポートのコメントのURLを書く。自動化段階が「レビューまで」のリポジトリのpull requestも投稿する。
 
 続けて、この実行で人間の判断が要ると分かったpull requestを、1つの投稿にまとめて投稿する。次の物がこれに当たる。
 
-- この実行のレビューの結論が「修正が必要」で、2で直さなかった物。段階が「レビューまで」のリポジトリの物と、2の対象の条件を満たさない物である
+- この実行のレビューの結論が「修正が必要」で、2で直さなかった物。自動化段階が「レビューまで」のリポジトリの物と、2の対象の条件を満たさない物である
 - この実行でdependency-update-fixが対象外と報告した物
 - この実行の2で直した後の再レビューの結論が、まだ「修正が必要」の物。修正のcommitはもう積まない
 - この実行のレビューの結論が「merge不可」の物

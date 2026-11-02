@@ -1,10 +1,10 @@
 # mergeの手順
 
-段階が「mergeまで」のリポジトリのpull requestを、指揮役が自分でmergeする。mergeする時は、`kuden:github` skillを読み込み、その基準に従う。
+自動化段階が「mergeまで」のリポジトリのpull requestを、指揮役が自分でmergeする。mergeする時は、`kuden:github` skillを読み込み、その基準に従う。
 
 ## 対象
 
-段階が「mergeまで」のリポジトリのopenなpull requestのうち、最新のレビューコメントの結論が「修正無しでmerge可」の物がmergeの候補である。この実行でレビューした物に限らない。候補のうち、次の全てを満たす物をmergeする。
+自動化段階が「mergeまで」のリポジトリのopenなpull requestのうち、最新のレビューコメントの結論が「修正無しでmerge可」の物がmergeの候補である。この実行でレビューした物に限らない。候補のうち、次の全てを満たす物をmergeする。
 
 - 全てのcommitが、botの物か、修正のsubagentがコメントにSHAを書いたcommitで、更新する依存関係とバージョンがレビューコメントの記載と一致している
 - レビューコメントが修正のcommitを前提にしている（7-3の節にSHAがある）なら、そのcommitがpull requestに含まれている

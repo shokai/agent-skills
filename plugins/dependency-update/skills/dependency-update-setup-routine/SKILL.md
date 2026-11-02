@@ -1,7 +1,7 @@
 ---
 name: dependency-update-setup-routine
 description: >-
-  dependency-update skillの起動プロンプトを、実行に要る値を訊いて作る。
+  dependency-update skillの起動プロンプトを、実行に必要な値を訊いて作る。
   Claude Code on the webのroutineを作成・更新する手段があれば、routineの登録・更新まで行う。
   ユーザーが手動で起動する。
 argument-hint: "[起動プロンプトだけ]"
@@ -14,14 +14,14 @@ dependency-update skillを定期的に実行する起動プロンプトを作り
 
 ## 起動プロンプトを作る
 
-実行に要る値の定義は、[dependency-update skill](../dependency-update/SKILL.md) の「起動プロンプトから受け取る値」にある。それを読み、値をユーザーに訊いて埋める。初めて対象にするリポジトリの段階は「レビューまで」を勧める。レビューの出来を人間が見てから、段階を上げる。
+実行に必要な値の定義は、[dependency-update skill](../dependency-update/SKILL.md) の「起動プロンプトから受け取る値」にある。それを読み、値をユーザーに訊いて埋める。初めて対象にするリポジトリの自動化段階は「レビューまで」を勧める。レビューの出来を人間が見ながら、徐々に自動化段階を上げる。
 
 起動プロンプトには、dependency-update skillを実行する事と、値だけを書く。手順はskillにあるので、書き写さない。待ち時間のような例外をユーザーが求めた時は、skillに優先する指示として起動プロンプトに書く。同じ起動プロンプトを、手元の手動実行にも使える。
 
 ```
 dependency-update skillを実行する。
 
-対象リポジトリと段階:
+対象リポジトリと自動化段階:
 - {owner/repo}: mergeまで
 - {owner/repo}: レビューまで
 
