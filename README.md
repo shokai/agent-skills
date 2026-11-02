@@ -36,6 +36,10 @@
 - [kuden](plugins/kuden/README.md) - 作者がAIとの様々な作業の中で重ねてきた失敗と成功のmemoryから抽出した心得を集めたガイドライン群
 - [skill-usability-test](plugins/skill-usability-test/README.md) - Agent SkillやCLAUDE.md等のルール文書のusability test。下位tierのmodelのsubagentにゴールを与えて観察し、文書の記述を根拠に完遂できたかを確かめる
 
+### 実験的
+
+- [dependency-update](plugins/dependency-update/README.md) - dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた自動化段階までレビュー・修正・mergeする指揮。Claude Code on the webのroutineに登録して毎日動かす。1件のPRを手元でレビューするだけならlibrary-update-reviewを使う
+
 ### その他
 
 - [unconventional-simplification](plugins/unconventional-simplification/README.md) - 定石外発想で実装をシンプルにする
