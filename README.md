@@ -37,6 +37,10 @@
 - [skill-usability-test](plugins/skill-usability-test/README.md) - Agent SkillやCLAUDE.md等のルール文書のusability test。下位tierのmodelのsubagentにゴールを与えて観察し、文書の記述を根拠に完遂できたかを確かめる
 - [remote-session](plugins/remote-session/README.md) - Claude Codeのremote sessionをtmux内に新しく起動し、URLを返す。remote controlで繋いだsessionに頼めば、スマホからでも別のディレクトリの新しいsessionを作れる
 
+### 実験的
+
+- [dependency-update](plugins/dependency-update/README.md) - dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた自動化段階までレビュー・修正・mergeする指揮。Claude Code on the webのroutineに登録して毎日動かす。1件のPRを手元でレビューするだけならlibrary-update-reviewを使う
+
 ### その他
 
 - [unconventional-simplification](plugins/unconventional-simplification/README.md) - 定石外発想で実装をシンプルにする

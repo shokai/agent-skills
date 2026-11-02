@@ -157,6 +157,26 @@
       "category": "testing"
     },
     {
+      "name": "dependency-update",
+      "source": "./plugins/dependency-update",
+      "description": "dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた自動化段階までレビュー・修正・mergeする指揮。起動したsessionが指揮役になり、pull requestごとに起動したsubagentがレビューと修正を行う。起動プロンプトの作成と、Claude Code on the webのroutineへの登録も行う。",
+      "version": "0.1.0",
+      "author": {
+        "name": "shokai"
+      },
+      "repository": "https://github.com/shokai/agent-skills",
+      "license": "MIT",
+      "keywords": [
+        "dependency-update",
+        "dependabot",
+        "renovate",
+        "auto-merge",
+        "review",
+        "orchestrator"
+      ],
+      "category": "code-review"
+    },
+    {
       "name": "remote-session",
       "source": "./plugins/remote-session",
       "description": "Claude Codeのremote session(claude --rc)をtmux内に新しく起動し、URLを伝えるスキル。remote controlで繋いだsessionに「〇〇のclaude session作って」と頼むと、別のディレクトリで新しいsessionを作れる。",
