@@ -12,7 +12,7 @@ allowed-tools: Bash(${CLAUDE_SKILL_DIR}/scripts/tmux-claude-rc:*)
 
 ## 起動するディレクトリの決め方
 
-過去にclaudeを使ったディレクトリは `~/.claude/projects/` のディレクトリ名から分かる。ディレクトリ名はpathの記号を `-` に置き換えたもので、元のpathを一意には復元できない。実在を確かめてからpathを決める。
+過去にclaudeを使ったディレクトリは `~/.claude/projects/` のディレクトリ名から分かる。ディレクトリ名はpathの `/` と `.` を `-` に置き換えたもので、元のpathを一意には復元できない。実在を確かめてからpathを決める。
 
 ## tmux sessionの選び方
 
