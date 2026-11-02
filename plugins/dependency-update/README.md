@@ -53,7 +53,7 @@ dependency-update skillを実行する。
 - example-org/app-web: レビューまで
 
 ラベル: レビュー依頼は `please review`、merge承認は `ship it`、セキュリティ更新は `security`
-failしていてもmergeするCI: example-org/app-server の `docker-build`
+failしていてもmergeするCI: example-org/app-serverの `docker-build`
 通知先: Slackの #example-channel
 ```
 
