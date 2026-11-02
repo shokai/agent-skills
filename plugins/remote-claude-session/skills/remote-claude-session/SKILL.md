@@ -1,5 +1,5 @@
 ---
-name: remote-session
+name: remote-claude-session
 description: >-
   Claude Codeのremote session(claude --rc)をtmux内に新しく起動し、そのURLをユーザーに伝えるスキル。
   ユーザーが「新規claude --rcを起動して」「〇〇のclaude session作って」「remote claude接続を作って」と言った時に使用する。

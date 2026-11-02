@@ -1,5 +1,5 @@
 {
-  "name": "remote-session",
+  "name": "remote-claude-session",
   "description": "Claude Codeのremote session(claude --rc)をtmux内に新しく起動し、URLを伝えるスキル。「〇〇のclaude session作って」で発動する。",
   "author": {
     "name": "shokai"

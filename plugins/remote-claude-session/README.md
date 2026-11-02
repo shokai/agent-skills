@@ -1,4 +1,4 @@
-# remote-session
+# remote-claude-session
 
 Claude Codeのremote session（Remote Control、`claude --remote-control` の短縮形が `--rc`）をtmux内に新しく起動するAgent Skillです。remote controlで繋いでいるsessionに「〇〇のclaude session作って」と頼むと、指定したディレクトリで新しいsessionを起動し、そのremote sessionのURLを返します。
 
@@ -18,7 +18,7 @@ Claude Codeのremote controlは、パソコンで起動したsessionをスマホ
 
 作業中に「新規claude --rcを起動して」「〇〇のclaude session作って」「remote claude接続を作って」と伝えると発動します。既存のtmux sessionにwindowとして足すか、新規のtmux sessionを作るかを訊き、起動後にremote sessionのURLを伝えます。
 
-同梱のscript `skills/remote-session/scripts/tmux-claude-rc` は単体で動くので、ターミナルから直接使う事もできます。PATHの通った場所にコピーするか、パスを指定して実行します。
+同梱のscript `skills/remote-claude-session/scripts/tmux-claude-rc` は単体で動くので、ターミナルから直接使う事もできます。PATHの通った場所にコピーするか、パスを指定して実行します。
 
 ```bash
 # 新規のtmux sessionを作って起動する
@@ -36,7 +36,7 @@ tmux-claude-rc -w <ディレクトリパス> <session名>
 
 ```bash
 /plugin marketplace add shokai/agent-skills
-/plugin install remote-session
+/plugin install remote-claude-session
 ```
 
 既にマーケットプレイスを登録済みの場合、新しいスキルをインストールするには [マーケットプレイスの更新](../../README.md#スキルをうまくインストールできない場合) が必要です。
