@@ -8,14 +8,14 @@
 
 - 全てのcommitが、botの物か、修正のsubagentがコメントにSHAを書いたcommitで、更新する依存関係とバージョンがレビューコメントの記載と一致している
 - レビューコメントが修正のcommitを前提にしている（7-3の節にSHAがある）なら、そのcommitがpull requestに含まれている
-- 現在のHEADに対する、mergeに必須のCIが全て成功している
+- 現在のHEADに対する、mergeの条件にするCIが全て終わっていて、失敗した物が無い
 - base branchとconflictしていない
 - 人間による未撤回のchanges requested、mergeへの反対、保留の要求が無い
 
 ## 条件を満たさないpull requestの扱い
 
 - base branchとconflictしている物はmergeせず、次回の実行で判定し直す。作り直しやrebaseの依頼は、全てのcommitがbotの物か修正のsubagentのcommitである時だけ行う。人間のcommitがある物には何も依頼しない。dependabotが作成し、修正のcommitを含む時は、dependabotにpull requestを作り直させる。それ以外は、botが対応する方法でrebaseを依頼する。rebase後の再レビューは要らない
-- mergeに必須のCIが失敗している物は、失敗した必須のjobを1回再実行し、結果が出るのを待ってから判定する。5分待っても終わらなければ、次回の実行で判定し直す。この実行の修正の後に再実行済みのjobは、再実行しない
+- mergeの条件にするCIが失敗している物は、失敗したjobを1回再実行し、結果が出るのを待ってから判定する。5分待っても終わらなければ、次回の実行で判定し直す。この実行の修正の後に再実行済みのjobは、再実行しない
 
 ## 順序
 

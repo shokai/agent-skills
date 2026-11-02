@@ -26,10 +26,11 @@ dependency-update skillを実行する。
 - {owner/repo}: レビューまで
 
 ラベル: レビュー依頼は `{名前}`、merge承認は `{名前}`、セキュリティ更新は `{名前}`
+failしていてもmergeするCI: {owner/repo} の `{checkの名前}`
 通知先: {通知先}
 ```
 
-ラベルを使わないリポジトリだけなら、ラベルの行を省く。
+ラベルを使わないリポジトリだけなら、ラベルの行を省く。failしていてもmergeするCIは、mergeを止めなくてよいとユーザーが決めたcheckがある時だけ書き、無ければ行を省く。checkの名前は、pull requestのcheckの一覧に出る名前をそのまま書く。何も書かなければ、全てのCIのcheckが失敗せずに終わっている事がmergeの条件になる。
 
 ## routineに登録する
 
