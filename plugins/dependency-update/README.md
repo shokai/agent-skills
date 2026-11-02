@@ -12,7 +12,7 @@ dependency-updateは、1件ごとにAIがレビューレポートを書いてpul
 
 1. **レビュー**: 対象リポジトリの未レビューの、dependabotやrenovateが作ったpull request 1件ごとにsubagentを起動し、更新対象の概要、バージョン、変更スコープ、依存関係、使用箇所、release note、コード・設定の修正の要否、過去の失敗を調べたレポートをpull requestにコメント投稿します。レポートの冒頭に「修正無しでmerge可」等の結論を固定の語で書きます。pull requestがどこまで進んだかは、このレポートの有無と内容で判定するので、ラベルで状態を管理しないリポジトリでも使えます。ラベルの名前を起動プロンプトに書いた時は、人間向けの印としてレビュー依頼のラベルを付け、セキュリティ更新と判定した時はそのラベルも付けます
 2. **修正**: 結論が「修正が必要」のdependabotのpull requestを、リポジトリのルール文書が参照する「依存関係の更新時に揃える箇所」の文書の範囲で、subagentが直してpushします。範囲外の修正が要る物は直しません。修正後はCIを待って再レビューします
-3. **merge**: 結論が「修正無しでmerge可」で、必須のCIが通り、conflictも人間の反対も無いpull requestを、指揮役が1件ずつmergeします。セキュリティ更新を先にmergeし、状態表現にラベルを使っているリポジトリではmerge後にmerge承認のラベルを付けます
+3. **merge**: 結論が「修正無しでmerge可」で、CIが通り、conflictも人間の反対も無いpull requestを、指揮役が1件ずつmergeします。CIは全てのcheckが失敗せずに終わっている事を条件にし、GitHubの保護規則の必須の指定は読みません。failしていてもmergeしてよいcheckは、起動プロンプトにリポジトリごとに書きます。セキュリティ更新を先にmergeし、状態表現にラベルを使っているリポジトリではmerge後にmerge承認のラベルを付けます
 4. **通知**: mergeの予定と結果、mergeしなかった物とその理由、レビューしたpull requestの興味深い更新、修正が必要だが自動では直さなかった等、人間の判断が要るpull requestを、通知先の1つのthreadにまとめて投稿します
 5. **routineの登録**: 起動プロンプトを値を訊いて作り、Claude Code on the webのroutineを作成・更新します
 
@@ -40,7 +40,7 @@ dependency-updateは、1件ごとにAIがレビューレポートを書いてpul
 /dependency-update:dependency-update-setup-routine
 ```
 
-対象リポジトリと自動化段階、ラベルの名前、通知先を質問し、起動プロンプトを作ります。ラベルは任意で、リポジトリがラベルで状態を示す運用の時だけ書きます。Claude Code on the webのroutineを扱える環境では、routineの作成か、既存のroutineの更新まで行います。`起動プロンプトだけ` を付けて実行すると、起動プロンプトと設定項目を出力するだけにし、登録は人間が行います。
+対象リポジトリと自動化段階、ラベルの名前、failしていてもmergeするCI、通知先を質問し、起動プロンプトを作ります。ラベルは任意で、リポジトリがラベルで状態を示す運用の時だけ書きます。failしていてもmergeするCIも任意で、mergeを止めなくてよいと決めたcheckがある時だけ書きます。Claude Code on the webのroutineを扱える環境では、routineの作成か、既存のroutineの更新まで行います。`起動プロンプトだけ` を付けて実行すると、起動プロンプトと設定項目を出力するだけにし、登録は人間が行います。
 
 起動プロンプトは、skill名と値だけを書いた短い物です。
 
@@ -53,6 +53,7 @@ dependency-update skillを実行する。
 - example-org/app-web: レビューまで
 
 ラベル: レビュー依頼は `please review`、merge承認は `ship it`、セキュリティ更新は `security`
+failしていてもmergeするCI: example-org/app-serverの `docker-build`
 通知先: Slackの #example-channel
 ```
 
