@@ -2,6 +2,17 @@
 
 set -e
 
+if [ "$1" = -h ] || [ "$1" = --help ]; then
+  cat <<'USAGE'
+使い方:
+  tmux-claude-rc <ディレクトリパス> [session名]      新規のtmux sessionを作り、そこでclaude --rcを起動する
+  tmux-claude-rc -w <ディレクトリパス> <session名>   既存のtmux sessionにwindowとして足し、そこでclaude --rcを起動する
+
+起動したremote sessionのURLを標準出力に出す。URLを30秒以内に取得できなかった時の終了コードは1。
+USAGE
+  exit 0
+fi
+
 window=
 if [ "$1" = -w ]; then
   window=1
