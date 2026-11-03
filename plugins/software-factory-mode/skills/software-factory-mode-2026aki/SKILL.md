@@ -46,13 +46,15 @@ AIが読んで従う文書を変更した時は、相談が済んだらskill-usa
 
 ### Gitの使い方
 
-- commit前に現在のbranchを確認する。default branchにいる場合はcommitせず停止し、変更内容に基づいたbranch名を提案してユーザーに確認する
+- 着手前の質問の時にdefault branchにいる場合は、変更内容に基づいたbranch名を提案し、git worktreeで作業するかを訊く。repoの構成から見てworktreeを使った開発が難しそうな場合を除き、worktreeを推奨する
+- git worktreeは、main worktreeの `.claude/worktrees/<branch名>` に作る。作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする。開発環境の使い分けは「worktreeの開発環境」に従う
+  - `.claude/worktrees/`がrepoでignoreされていない場合、gitignoreに加える事をユーザーに提案する
 - branch名は、入力補完や一覧から探しやすくなるよう、最重要トピックを先頭に置いて `対象-性質` の順にする。各セグメントはcamelCaseで書き、セグメント間をハイフンでつなぐ。例: `reviewSkills-requireOpusModel`
   - `fix/` や `worktree-` 等の接頭辞を付けない
-- `git commit --amend` やreflogを使った巻き戻しなど、commit済みの履歴を書き換える操作は勝手に行わない。必要だと判断した場合は、実行前にユーザーに提案して指示を仰ぐ
 - 作業中に見つけた1行程度の付随的な修正は、別のbranchを切らず、今のbranchで独立したcommitにする。レビューの論点が増える修正は、別branchを提案する
+- commit前に現在のbranchを確認する。default branchにいる場合はcommitせず停止し、変更内容に基づいたbranch名を提案してユーザーに確認する
 - 作成済みのPRがあるbranchにpushしたら、対話コンテキストをexportする
-- git worktreeは、main worktreeの `.claude/worktrees/<branch名>` に作る。作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする。開発環境の使い分けは「worktreeの開発環境」に従う
+- `git commit --amend` やreflogを使った巻き戻しなど、commit済みの履歴を書き換える操作は勝手に行わない。必要だと判断した場合は、実行前にユーザーに提案して指示を仰ぐ
 
 ### pull requestの作成
 
@@ -87,7 +89,7 @@ AIが読んで従う文書を変更した時は、相談が済んだらskill-usa
 
 ### worktreeの開発環境
 
-- worktreeの作業内容のtest・lint・build・検証scriptの実行は、worktree専用のコンテナ環境で行う。コンテナのnetwork・volume・imageをworktree毎に分ける。並行して動いている別のworktreeの環境と同じnetworkに乗ると、同じ名前のDBやキャッシュへの名前解決がどちらに向くか定まらなくなる。起動は成功するので、portの衝突と違って気付きにくい
+- コンテナで開発環境を動かすrepoでは、worktreeの作業内容のtest・lint・build・検証scriptの実行を、worktree専用のコンテナ環境で行う。コンテナのnetwork・volume・imageをworktree毎に分ける。並行して動いている別のworktreeの環境と同じnetworkに乗ると、同じ名前のDBやキャッシュへの名前解決がどちらに向くか定まらなくなる。起動は成功するので、portの衝突と違って気付きにくい
 - host側のportを公開するのは、hostから接続して確かめる環境だけにする。testはコンテナ間のnetworkで繋がる
 - ローカルマシンに溜まっているデータを使って動作確認やUI確認をする時だけ、main worktreeの環境で動いているDBに接続する。接続先のDBは動いている物をそのまま使い、作り直さない
 - 環境を起動する操作をした時は、自分が新しく起動した物と、既に動いていた物に繋いだだけの物を区別して把握する
