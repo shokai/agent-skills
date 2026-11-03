@@ -88,7 +88,7 @@ AIが読んで従う文書を変更した時は、相談が済んだらskill-usa
 
 ### worktreeの開発環境
 
-- worktreeの作業内容のtest・lint・build・検証scriptの実行は、worktree専用のコンテナ環境で行う。コンテナのnetwork・volume・imageをworktree毎に分ける。並行して動いている別のworktreeの環境と同じnetworkに乗ると、同じ名前のDBやキャッシュへの名前解決がどちらに向くか定まらなくなる。起動は成功するので、portの衝突と違って気付きにくい
+- コンテナで開発環境を動かすrepoでは、worktreeの作業内容のtest・lint・build・検証scriptの実行を、worktree専用のコンテナ環境で行う。コンテナのnetwork・volume・imageをworktree毎に分ける。並行して動いている別のworktreeの環境と同じnetworkに乗ると、同じ名前のDBやキャッシュへの名前解決がどちらに向くか定まらなくなる。起動は成功するので、portの衝突と違って気付きにくい
 - host側のportを公開するのは、hostから接続して確かめる環境だけにする。testはコンテナ間のnetworkで繋がる
 - ローカルマシンに溜まっているデータを使って動作確認やUI確認をする時だけ、main worktreeの環境で動いているDBに接続する。接続先のDBは動いている物をそのまま使い、作り直さない
 - 環境を起動する操作をした時は、自分が新しく起動した物と、既に動いていた物に繋いだだけの物を区別して把握する
