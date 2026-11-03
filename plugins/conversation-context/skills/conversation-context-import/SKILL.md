@@ -64,7 +64,7 @@ worktree内で作業中の場合は、main treeとworktreeローカルの両方�
 - その親PR
 - 兄弟の子PR: 親PRの子PR
 
-PR同士の親子関係は、baseと概要欄の両方で辿る。子PRのbaseは親PRのhead branchである。親PRの概要欄の `## 子PR` の節には子PRが並び、子PRの概要欄の1行目には `#1234 の子PRです` のように親PRが書かれる。
+PR同士の親子関係は、baseと概要欄の両方で辿る。子PRのbaseは親PRのhead branchで、概要欄では親PRと子PRが互いにリンクされる。
 
 カレントブランチのPRが未作成の時は、baseがdefault branchのopenなPRのうち、head branchにあってbase branchに無いcommitをHEADが含んでいる物を親PRとみなす。
 
@@ -91,7 +91,7 @@ GitHub CLIが使えないか、認証されていない時は、PRコメント�
 
 ### 4. 読み込みと報告
 
-対象の対話コンテキストを読み込む。
+対象の対話コンテキストの全文を読み込む。
 
 読み込み完了後、どの対話コンテキストを読み込んだかをユーザーに報告する:
 
