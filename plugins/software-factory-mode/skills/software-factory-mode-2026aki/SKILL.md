@@ -48,6 +48,7 @@ AIが読んで従う文書を変更した時は、相談が済んだらskill-usa
 
 - 着手前の質問の時にdefault branchにいる場合は、変更内容に基づいたbranch名を提案し、git worktreeで作業するかを訊く。repoの構成から見てworktreeを使った開発が難しそうな場合を除き、worktreeを推奨する
 - git worktreeは、main worktreeの `.claude/worktrees/<branch名>` に作る。作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする。開発環境の使い分けは「worktreeの開発環境」に従う
+  - `.claude/worktrees/`がrepoでignoreされていない場合、gitignoreに加える事をユーザーに提案する
 - branch名は、入力補完や一覧から探しやすくなるよう、最重要トピックを先頭に置いて `対象-性質` の順にする。各セグメントはcamelCaseで書き、セグメント間をハイフンでつなぐ。例: `reviewSkills-requireOpusModel`
   - `fix/` や `worktree-` 等の接頭辞を付けない
 - 作業中に見つけた1行程度の付随的な修正は、別のbranchを切らず、今のbranchで独立したcommitにする。レビューの論点が増える修正は、別branchを提案する
