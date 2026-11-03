@@ -20,7 +20,7 @@ modeを適用する前に実行環境を確認する。いずれかを満たさ�
 
 ## 基本フロー
 
-1. 着手前に不明点・懸念事項をユーザーに質問し、解消してからplan modeに入る
+1. 着手前に不明点・懸念事項をユーザーに質問し、解消してからplan modeに入る。作業するbranchとworktreeも、この質問で「Gitの使い方」に従って訊く
 2. 変更が一段落したらbug確認
 3. formatterとlinterを実行
 4. 必要に応じてcommit。default branchには直接commitしない
@@ -46,13 +46,14 @@ AIが読んで従う文書を変更した時は、相談が済んだらskill-usa
 
 ### Gitの使い方
 
-- commit前に現在のbranchを確認する。default branchにいる場合はcommitせず停止し、変更内容に基づいたbranch名を提案してユーザーに確認する
+- 着手前の質問の時にdefault branchにいる場合は、変更内容に基づいたbranch名を提案し、git worktreeで作業するかを訊く。repoの構成から見てworktreeを使った開発が難しそうな場合を除き、worktreeを推奨する
+- git worktreeは、main worktreeの `.claude/worktrees/<branch名>` に作る。作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする。開発環境の使い分けは「worktreeの開発環境」に従う
 - branch名は、入力補完や一覧から探しやすくなるよう、最重要トピックを先頭に置いて `対象-性質` の順にする。各セグメントはcamelCaseで書き、セグメント間をハイフンでつなぐ。例: `reviewSkills-requireOpusModel`
   - `fix/` や `worktree-` 等の接頭辞を付けない
-- `git commit --amend` やreflogを使った巻き戻しなど、commit済みの履歴を書き換える操作は勝手に行わない。必要だと判断した場合は、実行前にユーザーに提案して指示を仰ぐ
 - 作業中に見つけた1行程度の付随的な修正は、別のbranchを切らず、今のbranchで独立したcommitにする。レビューの論点が増える修正は、別branchを提案する
+- commit前に現在のbranchを確認する。default branchにいる場合はcommitせず停止し、変更内容に基づいたbranch名を提案してユーザーに確認する
 - 作成済みのPRがあるbranchにpushしたら、対話コンテキストをexportする
-- git worktreeは、main worktreeの `.claude/worktrees/<branch名>` に作る。作ったら、repoの手順に従って依存関係を用意する。main worktreeからコピーするかinstallする。開発環境の使い分けは「worktreeの開発環境」に従う
+- `git commit --amend` やreflogを使った巻き戻しなど、commit済みの履歴を書き換える操作は勝手に行わない。必要だと判断した場合は、実行前にユーザーに提案して指示を仰ぐ
 
 ### pull requestの作成
 
