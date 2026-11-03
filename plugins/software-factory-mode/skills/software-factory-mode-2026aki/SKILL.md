@@ -20,7 +20,7 @@ modeを適用する前に実行環境を確認する。いずれかを満たさ�
 
 ## 基本フロー
 
-1. 着手前に不明点・懸念事項をユーザーに質問し、解消してからplan modeに入る。作業するbranchとworktreeも、この質問で「Gitの使い方」に従って訊く
+1. 着手前に不明点・懸念事項をユーザーに質問し、解消してからplan modeに入る
 2. 変更が一段落したらbug確認
 3. formatterとlinterを実行
 4. 必要に応じてcommit。default branchには直接commitしない
