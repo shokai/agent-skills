@@ -3,7 +3,7 @@
 - PR: #{番号}（PRが未作成の場合は「export時点でPR未作成」と記入する）
 - Branch: `{ブランチ名}`
 - Source commit: {git rev-parse --short HEADの出力}
-- Updated at: {YYYY-MM-DD HH:mm:ss}
+- Updated at: {YYYY-MM-DD HH:mm:ss ±HH:MM}
 - Exported by: {Agent名 / AIモデル名。複数セッションで更新された場合はカンマ区切りで貢献モデル名を累積}
 
 ## 目的
