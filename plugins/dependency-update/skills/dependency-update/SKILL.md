@@ -134,7 +134,7 @@ subagentがpushしたcommitに対する、mergeの条件にするCIが終わっ�
 
 - この実行のレビューの結論が「修正が必要」で、2で直さなかった物。自動化段階が「レビューまで」のリポジトリの物と、2の対象の条件を満たさない物である
 - この実行でdependency-update-fixが対象外と報告した物
-- この実行でdependency-update-resolve-conflictがconflictを解消せずに止めた物
+- この実行でdependency-update-resolve-conflictが、止めた旨のコメントを投稿した物
 - この実行の2で直した後の再レビューの結論が、まだ「修正が必要」の物。修正のcommitはもう積まない
 - この実行のレビューの結論が「merge不可」の物
 

@@ -12,7 +12,7 @@ dependency-updateは、1件ごとにAIがレビューレポートを書いてpul
 
 1. **レビュー**: 対象リポジトリの未レビューの、dependabotやrenovateが作ったpull request 1件ごとにsubagentを起動し、更新対象の概要、バージョン、変更スコープ、依存関係、使用箇所、release note、コード・設定の修正の要否、過去の失敗を調べたレポートをpull requestにコメント投稿します。レポートの冒頭に「修正無しでmerge可」等の結論を固定の語で書きます。pull requestがどこまで進んだかは、このレポートの有無と内容で判定するので、ラベルで状態を管理しないリポジトリでも使えます。ラベルの名前を起動プロンプトに書いた時は、人間向けの印としてレビュー依頼のラベルを付け、セキュリティ更新と判定した時はそのラベルも付けます
 2. **修正**: 結論が「修正が必要」のdependabotのpull requestを、リポジトリのルール文書が参照する「依存関係の更新時に揃える箇所」の文書の範囲で、subagentが直してpushします。範囲外の修正が要る物は直しません。修正後はCIを待って再レビューします
-3. **merge**: 結論が「修正無しでmerge可」で、CIが通り、conflictも人間の反対も無いpull requestを、指揮役が1件ずつmergeします。CIは全てのcheckが失敗せずに終わっている事を条件にし、GitHubの保護規則の必須の指定は読みません。failしていてもmergeしてよいcheckは、起動プロンプトにリポジトリごとに書きます。セキュリティ更新を先にmergeし、状態表現にラベルを使っているリポジトリではmerge後にmerge承認のラベルを付けます。先にmergeした物とconflictしたpull requestは、botが自分でrebaseするのを数分待ち、来なければsubagentがbase branchを取り込んで解消してpushし、CIを待ってmergeします
+3. **merge**: 結論が「修正無しでmerge可」で、CIが通り、conflictも人間の反対も無いpull requestを、指揮役が1件ずつmergeします。CIは全てのcheckが失敗せずに終わっている事を条件にし、GitHubの保護規則の必須の指定は読みません。failしていてもmergeしてよいcheckは、起動プロンプトにリポジトリごとに書きます。セキュリティ更新を先にmergeし、状態表現にラベルを使っているリポジトリではmerge後にmerge承認のラベルを付けます。先にmergeした物とconflictしたpull requestは、botが自分でrebaseするのを数分待ちます。subagentのcommitが積まれていてbotがrebaseしない物は、subagentがbase branchを取り込んで解消してpushし、CIを待ってmergeします
 4. **通知**: mergeの予定と結果、mergeしなかった物とその理由、レビューしたpull requestの興味深い更新、修正が必要だが自動では直さなかった等、人間の判断が要るpull requestを、通知先の1つのthreadにまとめて投稿します
 5. **routineの登録**: 起動プロンプトを値を訊いて作り、Claude Code on the webのroutineを作成・更新します
 
