@@ -13,10 +13,11 @@ description: >-
 
 作業は、以下のskillを実行するsubagentに任せる。
 
-| skill                    | 作業                                                             | 読む物                                     |
-| ------------------------ | ---------------------------------------------------------------- | ------------------------------------------ |
-| dependency-update-report | pull request 1件をレビューし、レポートをコメント投稿する         | pull requestの差分とリポジトリのコード     |
-| dependency-update-fix    | pull request 1件を、リポジトリの文書が挙げる範囲で直してpushする | レビューコメントとリポジトリの文書とコード |
+| skill                              | 作業                                                                               | 読む物                                     |
+| ---------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------ |
+| dependency-update-report           | pull request 1件をレビューし、レポートをコメント投稿する                           | pull requestの差分とリポジトリのコード     |
+| dependency-update-fix              | pull request 1件を、リポジトリの文書が挙げる範囲で直してpushする                   | レビューコメントとリポジトリの文書とコード |
+| dependency-update-resolve-conflict | base branchとconflictしたpull request 1件を、base branchを取り込んで解消しpushする | pull requestのbranchとbase branch          |
 
 subagentには、Opus以上のtierのmodelを指定し、起動プロンプトにラベルの名前があればそれも伝える。mergeは指揮役だけが行い、subagentにはmergeさせない。
 
@@ -24,13 +25,13 @@ subagentには、Opus以上のtierのmodelを指定し、起動プロンプト�
 
 このskillで「レビューコメント」と呼ぶのは、dependency-update-reportのTEMPLATE.mdの形で投稿されたコメントである。1行目のタイトル `# Dependency update report` と、Reviewerの行、結論の行で見分ける。人間のレビューや他の形式のコメントは含めない。
 
-pull requestがどこまで進んだかは、レビューコメントと、修正のsubagentが投稿したコメントから判定する。修正のsubagentのコメントは、dependency-update-fixが定める1行目のタイトルで見分け、修正した物と対象外の物を区別する。ラベルは判定に使わない。ラベルは、人間に状態を示すための印で、起動プロンプトで名前が指定された時だけ付ける。
+pull requestがどこまで進んだかは、レビューコメントと、修正のsubagentが投稿したコメントから判定する。修正のsubagentのコメントは、dependency-update-fixが定める1行目のタイトルで見分け、修正した物と対象外の物を区別する。conflict解消のsubagentのコメントも同じように、dependency-update-resolve-conflictが定める1行目のタイトルで見分け、解消した物と止めた物を区別する。ラベルは判定に使わない。ラベルは、人間に状態を示すための印で、起動プロンプトで名前が指定された時だけ付ける。
 
 ## 起動プロンプトから受け取る値
 
 このskillは、値を書いた起動プロンプトから実行する。起動プロンプトは、dependency-update-setup-routine skillがユーザーに値を訊いて作る。受け取る値は次の4つで、対象リポジトリと通知先は必須、ラベルの名前とfailしていてもmergeするCIは任意である。
 
-- 対象リポジトリの一覧と、リポジトリごとの自動化段階。自動化段階は、どこまで自動で進めるかを表す値で、「レビューまで」「修正まで」「mergeまで」のどれかである。一覧に無いリポジトリのpull requestには、レビューも、CIの再実行も、rebaseの依頼もしない
+- 対象リポジトリの一覧と、リポジトリごとの自動化段階。自動化段階は、どこまで自動で進めるかを表す値で、「レビューまで」「修正まで」「mergeまで」のどれかである。一覧に無いリポジトリのpull requestには、レビューも、CIの再実行も、conflictの解消もしない
 - ラベルの名前。書かれていない事もある。レビュー依頼、merge承認、セキュリティ更新の3つで、リポジトリごとに違う時は、そのリポジトリの行に書かれている。リポジトリがラベルで状態を示す運用の時に使う
 - 通知先。mergeの予定と結果と、興味深い更新を人間に知らせる場所で、返信を1つのthreadにまとめられる物。Slackのチャンネル等である
 - failしていてもmergeするCI。書かれていない事もある。リポジトリごとに、pull requestのcheckの一覧に出る名前で書かれている。mergeの条件は全てのCIのcheckが失敗せずに終わっている事なので、人間がその条件から外すと決めたcheckをここで受け取る
@@ -66,7 +67,7 @@ base branchの保護規則で必須と指定されたcheckの一覧は、判定�
 
 - レビューコメントが無い
 - 最新のレビューコメントの結論が「判断保留」である
-- 更新する依存関係とバージョンが、最新のレビューコメントの記載と違う。botが新しいバージョンに更新し直した時がこれに当たる。botのrebaseはバージョンを変えないので、再レビューしない
+- 更新する依存関係とバージョンが、最新のレビューコメントの記載と違う。botが新しいバージョンに更新し直した時がこれに当たる。botのrebaseと、conflict解消のsubagentのmerge commitはバージョンを変えないので、再レビューしない
 - 2の修正のsubagentの最新のコメントに書かれたcommitがpull requestに含まれていて、そのコメントが最新のレビューコメントより後である。修正の後にCIを待ちきれずに持ち越した物である。そのコメントから、commitのSHAと揃える箇所を列挙した文書の場所を読み取り、「2. 修正 > 修正の後」と同じCIの待ち方で再レビューさせる
 - 最新のレビューコメントが修正のcommitを前提にしている（7-3の節にSHAがある）が、そのcommitがpull requestに含まれていない。botが作り直した時がこれに当たる。修正を前提にした結論は使えないので、通常のレビューとしてレビューし直す
 
@@ -133,6 +134,7 @@ subagentがpushしたcommitに対する、mergeの条件にするCIが終わっ�
 
 - この実行のレビューの結論が「修正が必要」で、2で直さなかった物。自動化段階が「レビューまで」のリポジトリの物と、2の対象の条件を満たさない物である
 - この実行でdependency-update-fixが対象外と報告した物
+- この実行でdependency-update-resolve-conflictが、止めた旨のコメントを投稿した物
 - この実行の2で直した後の再レビューの結論が、まだ「修正が必要」の物。修正のcommitはもう積まない
 - この実行のレビューの結論が「merge不可」の物
 
@@ -142,18 +144,19 @@ merge対象も、merge.mdが定める見送ったpull requestも、興味深い�
 
 ## 守る事
 
-- dependabotとrenovateのpull requestのbranchには、2の修正のsubagentが直すcommitを1つ積んでpushする以外に、commitもpushもしない
+- dependabotとrenovateのpull requestのbranchには、2の修正のsubagentが直すcommitをpull requestごとに1つと、3のconflict解消のsubagentがbase branchを取り込むmerge commitを解消1回につき1つ積んでpushする以外に、commitもpushもしない。force pushはしない
 - 各pull requestは独立して処理し、1件が失敗しても他は続行する
 - GitHubに投稿するコメントには、書いたAgentの名前とmodel名を書く。subagentにも同じように書かせる
 
 ## 完了報告
 
-レビューを投稿したpull request、直したpull request、既レビューで飛ばした物、mergeした物、merge候補だがmergeしなかった物とその理由を簡潔に報告する。GitHubや通知先にアクセスできない等で実行できなかった事があれば、その原因を明記する。
+レビューを投稿したpull request、直したpull request、既レビューで飛ばした物、conflictを解消した物、mergeした物、merge候補だがmergeしなかった物とその理由を簡潔に報告する。GitHubや通知先にアクセスできない等で実行できなかった事があれば、その原因を明記する。
 
 ## 関連スキル
 
 - **dependency-update-report**: 依存関係の更新pull requestを1件レビューし、レポートをコメント投稿するスキル。subagentが実行する
 - **dependency-update-fix**: レビューで修正が必要とされたpull requestを1件直してpushするスキル。subagentが実行する
+- **dependency-update-resolve-conflict**: base branchとconflictしたpull requestを1件、base branchを取り込んで解消しpushするスキル。subagentが実行する
 - **dependency-update-setup-routine**: このskillの起動プロンプトを作り、Claude Code on the webのroutineに登録するスキル。ユーザーが起動する
 - **kuden:orchestrator**: subagentに作業を任せる指揮役の心得。指揮役が従う
 - **kuden:github**: GitHubでpull requestを作り、文章を書く時の心得。指揮役がmergeする時と、subagentがコメントを書く時に従う

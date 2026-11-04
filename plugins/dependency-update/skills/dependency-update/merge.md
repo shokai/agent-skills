@@ -6,7 +6,7 @@
 
 自動化段階が「mergeまで」のリポジトリのopenなpull requestのうち、最新のレビューコメントの結論が「修正無しでmerge可」の物がmergeの候補である。この実行でレビューした物に限らない。候補のうち、次の全てを満たす物をmergeする。
 
-- 全てのcommitが、botの物か、修正のsubagentがコメントにSHAを書いたcommitで、更新する依存関係とバージョンがレビューコメントの記載と一致している
+- 全てのcommitが、botの物か、修正のsubagentがコメントにSHAを書いたcommitか、conflict解消のsubagentがコメントにSHAを書いたmerge commitで、更新する依存関係とバージョンがレビューコメントの記載と一致している
 - レビューコメントが修正のcommitを前提にしている（7-3の節にSHAがある）なら、そのcommitがpull requestに含まれている
 - 現在のHEADに対する、mergeの条件にするCIが全て終わっていて、失敗した物が無い
 - base branchとconflictしていない
@@ -14,8 +14,18 @@
 
 ## 条件を満たさないpull requestの扱い
 
-- base branchとconflictしている物はmergeせず、次回の実行で判定し直す。作り直しやrebaseの依頼は、全てのcommitがbotの物か修正のsubagentのcommitである時だけ行う。人間のcommitがある物には何も依頼しない。dependabotが作成し、修正のcommitを含む時は、dependabotにpull requestを作り直させる。それ以外は、botが対応する方法でrebaseを依頼する。rebase後の再レビューは要らない
+- base branchとconflictしている物は、「conflictの解消」に従う
 - mergeの条件にするCIが失敗している物は、失敗したjobを1回再実行し、結果が出るのを待ってから判定する。5分待っても終わらなければ、次回の実行で判定し直す。この実行の修正の後に再実行済みのjobは、再実行しない
+
+## conflictの解消
+
+1件mergeする度に、残りの候補がbase branchとconflictする事がある。conflictした候補は次のように扱う。botにrebaseや作り直しを依頼するコメントは投稿しない。
+
+- 人間のcommitがある物と、人間による未撤回のchanges requested、mergeへの反対、保留の要求がある物には何もせず、次回の実行で判定し直す
+- 全てのcommitがbotの物なら、botのrebaseを待つ。dependabotもrenovateも、既定の設定ではconflictすると自分でrebaseする。HEADが変わってconflictが解消されるのを、5分を上限に待つ。待つ間は他の候補のmergeを先に進めてよい。来なければ、次回の実行で判定し直す
+- 修正や解消のsubagentのcommitが積まれている物は、botがrebaseしないので、dependency-update-resolve-conflictを実行するsubagentを起動し、base branchを取り込むmerge commitで解消させる。指示には、pull requestの場所、確かめたHEAD、cloneの場所と作業ディレクトリを含める。rebase and mergeしかできないリポジトリでは、解消しても元のcommitを積み直す時に再びconflictするので、起動せずに次回の実行で判定し直す
+- botのrebaseの後も、subagentの解消の後も、再レビューはしない。どちらも更新する依存関係とバージョンを変えず、解消は機械的に決まるconflictに限る。新しいHEADに対する、mergeの条件にするCIが終わるのを10分を上限に待ち、mergeの条件を全て確かめ直してmergeする。間に合わなければ、次回の実行で判定し直す
+- subagentが止めた旨のコメントを投稿した物は、そのコメントに書かれたHEADのSHAが現在のHEADと同じ間は、解消のsubagentを起動しない。指揮役のskillの「通知」が、人間の判断が要る物として扱う
 
 ## 順序
 
@@ -29,4 +39,4 @@
 
 - merge対象が1件以上ある時は、mergeを始める前に、これからmergeするpull requestの一覧をリポジトリ名・タイトル・URL付きで投稿する。投稿に失敗した時は1件もmergeせず、その旨を完了報告に書く
 - 1件mergeする度に、その結果を投稿する。投稿に失敗した時は、残りのmergeを止めて、その旨を完了報告に書く
-- 全てのmergeが終わったら、候補のうちmergeしなかった物を、その理由付きで投稿する。作り直しやrebaseを依頼した物も含める。mergeした物が0件でも投稿する。結論が「修正が必要」や「merge不可」の物は候補ではなく、指揮役のskillの「通知」が人間の判断が要る物として扱う
+- 全てのmergeが終わったら、候補のうちmergeしなかった物を、その理由付きで投稿する。conflictの解消をpushしたがCIを待ちきれなかった物も含める。mergeした物が0件でも投稿する。結論が「修正が必要」や「merge不可」の物は候補ではなく、指揮役のskillの「通知」が人間の判断が要る物として扱う
