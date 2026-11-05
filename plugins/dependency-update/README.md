@@ -28,7 +28,7 @@ dependency-updateは、1件ごとにAIがレビューレポートを書いてpul
 
 1件の更新を手元でレビューするだけなら、主エージェントのmodelの条件と `kuden` pluginに加えて、レビューの対象を読み、レポートを出力先に出す手段があれば足ります。他の項目は、指揮役で定期処理を動かす時の前提です。
 
-- **主エージェントのmodel**: ClaudeのOpus以上のtier（Opus、Fable、Mythos等）か、CodexのSol以上のflagship（Sol、Astra等）でreasoning effortがmedium以上のmodelで実行します。条件に当てはまらないmodelでは、何もせずに停止します
+- **主エージェントのmodel**: ClaudeのOpus以上のtier（Opus、Fable、Mythos等）か、CodexのSol以上のflagship（Sol、Astra等）で実行します。条件に当てはまらないmodelでは、何もせずに停止します
 - **subagentを起動できる環境**: レビュー、修正、conflictの解消はsubagentが行います。subagentも同じ条件のmodelで動かします
 - **GitHubにアクセスする手段**: pull requestを読み、コメントを投稿する手段が要ります。修正とconflictの解消にはbranchにpushする手段、mergeにはmergeする手段も要ります。手段が無い工程は行いません
 - **通知先に投稿する手段**: Slackのチャンネルのように、返信を1つのthreadにまとめられる場所です。投稿する手段が無い時は、mergeをしません
