@@ -50,7 +50,7 @@ pull requestがどこまで進んだかは、レビューコメントと、修�
 
 - 自分のmodelが、次のどちらかに当てはまる
   - ClaudeのOpus以上のtier（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは、新しい世代でも当てはまらない
-  - CodexのSol以上のflagship（Sol、Astra等）。Luna・Terra等の軽量tierと、Solより前の世代のmodelは当てはまらない
+  - CodexのSol以上のtier（Sol、Astra等）。Luna・Terra等の軽量tierと、Solより前の世代のmodelは当てはまらない
 - 前の項のmodelの条件を満たすsubagentを起動できる
 - GitHubのpull requestを読み、コメントを投稿する手段がある。このsessionで使える連携手段を自分で見つけて使う
 
