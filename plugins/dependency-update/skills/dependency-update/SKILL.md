@@ -19,7 +19,7 @@ description: >-
 | dependency-update-fix              | pull request 1件を、リポジトリの文書が挙げる範囲で直してpushする                   | レビューコメントとリポジトリの文書とコード |
 | dependency-update-resolve-conflict | base branchとconflictしたpull request 1件を、base branchを取り込んで解消しpushする | pull requestのbranchとbase branch          |
 
-subagentには、Opus以上のtierのmodelを指定し、起動プロンプトにラベルの名前があればそれも伝える。mergeは指揮役だけが行い、subagentにはmergeさせない。
+subagentには、「実行環境の確認」のmodelの条件を満たすmodelを指定し、起動プロンプトにラベルの名前があればそれも伝える。mergeは指揮役だけが行い、subagentにはmergeさせない。
 
 起動プロンプトの指示は、このskillの記述に優先する。
 
@@ -48,8 +48,10 @@ pull requestがどこまで進んだかは、レビューコメントと、修�
 
 処理を始める前に確認する。満たさなければ、何も行わず、満たさない条件を報告して終了する。
 
-- 自分のmodelがOpus以上のtierである（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは、新しい世代でも満たさない
-- Opus以上のtierのsubagentを起動できる
+- 自分のmodelが、次のどちらかに当てはまる
+  - ClaudeのOpus以上のtier（Opus、Fable、Mythos等）。Sonnet・Haiku等の下位tierは、新しい世代でも当てはまらない
+  - CodexのSol以上のflagship（Sol、Astra等）で、reasoning effortがmedium以上。Luna・Terra等の軽量tierと、Solより前の世代のmodelは当てはまらない
+- 前の項のmodelの条件を満たすsubagentを起動できる
 - GitHubのpull requestを読み、コメントを投稿する手段がある。このsessionで使える連携手段を自分で見つけて使う
 
 修正にはbranchにpushする手段、mergeにはmergeする手段と通知先に投稿する手段も要る。手段が無い工程は行わず、その旨を完了報告に書く。
@@ -78,6 +80,7 @@ pull request 1件ごとに新しいsubagentを起動し、dependency-update-repo
 指示に含める事:
 
 - pull requestの場所。リポジトリ名と番号
+- レポートの出力先。そのpull requestへのコメントである
 - ラベルの名前。起動プロンプトにある時だけ
 - コードを読む場所と、作業ディレクトリ
 - レポートの言語。起動プロンプトに指定があればそれ、無ければ起動プロンプトの言語

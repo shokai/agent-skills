@@ -13,7 +13,7 @@ feature/bugfix/refactoring PRをレビューし、レビュー報告書を作成
 
 ## 対象外
 
-- ライブラリ更新PR（dependabot/renovatebot等）は `library-update-review` skillの対象であり、このスキルの対象外
+- 依存関係の更新PR（dependabot/renovate等）は `dependency-update-report` skillの対象であり、このスキルの対象外
 
 ## 手順
 
@@ -290,4 +290,4 @@ Args: よく相談して。PR #{番号} のコードレビューをお願いし�
 - **subagent-consultation**: Agentツール（subagent）と相談するスキル。codex-consultationが利用できない場合のフォールバック先
 - **conversation-context-import**: 対話コンテキストを読み込むスキル。手順1の背景知識
 - **conversation-context-export**: 対話コンテキストを書き出すスキル。対話コンテキストの形式の背景知識
-- **library-update-review**: ライブラリ更新PRのレビュースキル。このスキルの対象外であるPRの種類
+- **dependency-update-report**: 依存関係の更新PRのレビュースキル。このスキルの対象外であるPRの種類
