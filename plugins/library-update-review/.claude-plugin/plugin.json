@@ -1,6 +1,6 @@
 {
   "name": "library-update-review",
-  "description": "ライブラリ更新pull requestのレビュー手順。dependabot/renovatebot PRの分析、release note調査、コード更新、過去の失敗調査を行う。",
+  "description": "deprecated。代わりにdependency-updateを使う。ライブラリ更新pull requestのレビュー手順。dependabot/renovatebot PRの分析、release note調査、コード更新、過去の失敗調査を行う。",
   "author": {
     "name": "shokai"
   },

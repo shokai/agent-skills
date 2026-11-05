@@ -20,14 +20,16 @@ dependency-updateは、1件ごとにAIがレビューレポートを書いてpul
 
 - **dependency-update**: 定期処理を指揮します。routineや手動の起動プロンプトから実行します
 - **dependency-update-setup-routine**: 起動プロンプトを作り、routineに登録します。ユーザーが手動で起動します
-- **dependency-update-report**: pull request 1件をレビューし、レポートをコメント投稿します。dependency-updateが起動したsubagentが実行します
+- **dependency-update-report**: 依存関係の更新1件をレビューし、レポートを出力します。dependency-updateが起動したsubagentが、pull requestにコメント投稿します。1件の更新を手元でレビューする時は、ユーザーが直接実行します
 - **dependency-update-fix**: pull request 1件を、リポジトリの文書が挙げる範囲で直してpushします。dependency-updateが起動したsubagentが実行します
 - **dependency-update-resolve-conflict**: base branchとconflictしたpull request 1件を、base branchを取り込んで解消してpushします。dependency-updateが起動したsubagentが実行します
 
 ## 前提条件
 
-- **主エージェントのmodel**: Claude CodeのOpus以上のtier（Opus、Fable、Mythos等）で実行します。Sonnet・Haiku等の下位tierでは、何もせずに停止します
-- **subagentを起動できる環境**: レビュー、修正、conflictの解消はsubagentが行います。subagentもOpus以上のtierで動かします
+1件の更新を手元でレビューするだけなら、主エージェントのmodelの条件と `kuden` pluginに加えて、レビューの対象を読み、レポートを出力先に出す手段があれば足ります。他の項目は、指揮役で定期処理を動かす時の前提です。
+
+- **主エージェントのmodel**: ClaudeのOpus以上のtier（Opus、Fable、Mythos等）か、CodexのSol以上のtier（Sol、Astra等）で実行します。条件に当てはまらないmodelでは、何もせずに停止します
+- **subagentを起動できる環境**: レビュー、修正、conflictの解消はsubagentが行います。subagentも同じ条件のmodelで動かします
 - **GitHubにアクセスする手段**: pull requestを読み、コメントを投稿する手段が要ります。修正とconflictの解消にはbranchにpushする手段、mergeにはmergeする手段も要ります。手段が無い工程は行いません
 - **通知先に投稿する手段**: Slackのチャンネルのように、返信を1つのthreadにまとめられる場所です。投稿する手段が無い時は、mergeをしません
 - **`kuden` plugin**: 指揮役が `kuden:orchestrator` の心得に従い、mergeとコメントの投稿で `kuden:github` の心得に従います
@@ -64,6 +66,18 @@ failしていてもmergeするCI: example-org/app-serverの `docker-build`
 
 同じ起動プロンプトを手元のsessionに渡すと、その場で1回実行します。routineに登録した後の初回は、手動で実行して様子を見る事を勧めます。
 指揮役は最初に、起動プロンプトから受け取った値を必須・任意の別と共に出力するので、指示が伝わったかをそこで確かめられます。値を指定せずにskillだけを起動すると、処理は始めず、`dependency-update-setup-routine` で起動プロンプトを作るように案内します。
+
+### 1件の更新を手元でレビューする
+
+```bash
+/dependency-update:dependency-update-report [レビュー対象] [レポートの出力先]
+```
+
+レビュー対象には、pull requestのURLや番号の他、まだpull requestになっていないbranchや作業ツリーの変更も指定できます。dependabotやrenovateが作った物に限らず、人間が作った更新もレビューします。出力先には、pull requestへのコメント、ファイル、sessionへの表示等を指定します。どちらかを指定しなかった時は、調査を始める前に訊かれます。ユーザーと対話できない環境では、欠けている値を報告して終わります。
+
+行うのはレビューだけで、コードは直しません。修正が要る時は、レポートを読んでから同じsessionで頼めます。routine、subagent、通知先は要りません。
+
+routineの対象リポジトリにある、dependabotやrenovateのpull requestにレポートをコメント投稿すると、routineはそれを自分が投稿したレポートと同じように扱います。その結論に従って、リポジトリの自動化段階まで修正やmergeが進みます。branchや作業ツリーの変更をレビューしたレポートでも、pull requestに投稿すれば、pull requestに入っていない変更を前提にした結論のまま使われます。
 
 ## インストール方法
 

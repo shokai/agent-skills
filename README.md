@@ -26,7 +26,7 @@
 
 ### オススメ
 
-- [library-update-review](plugins/library-update-review/README.md) - dependabotやrenovateが作成する、ライブラリ更新pull requestのレビューを支援する
+- [dependency-update](plugins/dependency-update/README.md) - dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた自動化段階までレビュー・修正・mergeする指揮。Claude Code on the webのroutineに登録して毎日動かす。1件の更新を手元でレビューする事もできる
 - [codex-consultation](plugins/codex-consultation/README.md) - Codex CLI（OpenAI）に、批判的思考の連鎖を使ったセカンドオピニオンを求める
 - [subagent-consultation](plugins/subagent-consultation/README.md) - Agentツール（subagent）に、批判的思考の連鎖を使ったセカンドオピニオンを求める
 - [conversation-context](plugins/conversation-context/README.md) - AIとの対話で決まったやる事、制約、やらない事とその理由をテキストとしてexportする。別セッションやレビューでimportできる
@@ -37,10 +37,10 @@
 - [skill-usability-test](plugins/skill-usability-test/README.md) - Agent SkillやCLAUDE.md等のルール文書のusability test。下位tierのmodelのsubagentにゴールを与えて観察し、文書の記述を根拠に完遂できたかを確かめる
 - [remote-claude-session](plugins/remote-claude-session/README.md) - Claude Codeのremote sessionをtmux内に新しく起動し、URLを返す。remote controlで繋いだsessionに頼めば、スマホからでも別のディレクトリの新しいsessionを作れる
 
-### 実験的
-
-- [dependency-update](plugins/dependency-update/README.md) - dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた自動化段階までレビュー・修正・mergeする指揮。Claude Code on the webのroutineに登録して毎日動かす。1件のPRを手元でレビューするだけならlibrary-update-reviewを使う
-
 ### その他
 
 - [unconventional-simplification](plugins/unconventional-simplification/README.md) - 定石外発想で実装をシンプルにする
+
+### deprecated
+
+- [library-update-review](plugins/library-update-review/README.md) - dependabotやrenovateが作成する、ライブラリ更新pull requestのレビューを支援する。dependency-updateに置き換えた
