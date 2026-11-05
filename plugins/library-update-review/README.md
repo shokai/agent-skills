@@ -1,6 +1,6 @@
 # library-update-review
 
-このpluginはdeprecatedです。代わりに [dependency-update](../dependency-update/README.md) を使ってください。1件のpull requestを手元でレビューする時は、dependency-update pluginのdependency-update-report skillを実行します。
+このpluginはdeprecatedです。代わりに [dependency-update](../dependency-update/README.md) のdependency-update-report skillを使ってください。
 
 ライブラリ更新pull requestのレビューを支援するAgent Skillです。
 
