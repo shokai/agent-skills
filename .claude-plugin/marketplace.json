@@ -13,7 +13,7 @@
       "name": "library-update-review",
       "source": "./plugins/library-update-review",
       "description": "deprecated。代わりにdependency-updateを使う。ライブラリ更新pull requestのレビュー手順。dependabot/renovatebot PRの分析、release note調査、コード更新、過去の失敗調査を行う。",
-      "version": "1.4.0",
+      "version": "1.5.0",
       "author": {
         "name": "shokai"
       },
@@ -52,7 +52,7 @@
       "name": "sanity-review",
       "source": "./plugins/sanity-review",
       "description": "PRのレビュー報告書を作成する。bugや脆弱性の調査だけでなく、exportされた対話コンテキスト・PR概要欄・実装されたコードの整合性を確認し、実装者の正気を疑う。",
-      "version": "1.11.0",
+      "version": "1.11.1",
       "author": {
         "name": "shokai"
       },
@@ -160,7 +160,7 @@
       "name": "dependency-update",
       "source": "./plugins/dependency-update",
       "description": "dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた自動化段階までレビュー・修正・mergeする指揮。起動したsessionが指揮役になり、pull requestごとに起動したsubagentがレビューと修正を行う。起動プロンプトの作成と、Claude Code on the webのroutineへの登録も行う。",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "author": {
         "name": "shokai"
       },
