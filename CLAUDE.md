@@ -8,7 +8,6 @@ Claude Codeでユーザーがソフトウェア開発を始めた時にsoftware-
 
 1. plan modeで実装した場合はbug確認
 2. formatterを実行
-3. 必要に応じてcommit
 
 ## コードのformatting
 
