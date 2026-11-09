@@ -2,6 +2,8 @@
 
 # AIが作業をする際の重要なルール
 
+Claude Codeでユーザーがソフトウェア開発を始めた時にsoftware-factory-mode skillが呼び出されていなければ、「software-factory-mode skillを使う場合は、skillを呼び出してください」とユーザーに伝える。
+
 コード変更後の基本フロー:
 
 1. plan modeで実装した場合はbug確認
