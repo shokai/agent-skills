@@ -78,6 +78,7 @@ AIが読んで従う文書を変更した時は、相談が済んだらskill-usa
   - Bashの呼び出しごとに作業ディレクトリを明示する
 - subagentがcodex-consultation skillを呼んだ事は、報告の自己申告ではなく、subagentの記録にあるSkillツールの呼び出しを数えて確かめる。skillを呼ばずにCodexを直接実行して作った報告書は信用しない
 - sanity-reviewの前提: 対話コンテキストがPRコメントに投稿されている事。同じマシンにCodex CLIがあり、modelとreasoning effortが「実行環境の確認」の条件を満たす事。Codex CLIが無ければ実行せず、Codexとの相談に失敗したら中止する。Opus以上のtierを使う。Sonnetではレビューできない
+- ready for reviewに切り替える前に、PRに他の自動化されたAIレビューが投稿されていないかを確認し、投稿されていれば対応案をユーザーに提示する
 - sanity-reviewが済むまでPRはdraftのままにする。指摘への対応をpushし終えてから、実装者がdraftからready for reviewに切り替える。切り替えと同時に、そのrepoがレビュー依頼に使うラベルやreviewerを付ける
 
 ### CIの確認
