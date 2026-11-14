@@ -97,7 +97,7 @@ dependency-update-fixが積んだ修正のcommitを含むpull requestでは、�
 
 ## レポートの出力
 
-[TEMPLATE.md](TEMPLATE.md) を読み込み、その構成でレポートを作り、指示された出力先に出す。Reviewerには自分のAgent名とmodel名を書く。レポートの文章の書き方は、出力先によらず、`kuden:github` skillに従う。
+[TEMPLATE.md](TEMPLATE.md) を読み込み、その構成でレポートを作り、指示された出力先に出す。Reviewerには自分のAgent名とmodel名を書く。レポートを書く時は、`kuden:github` skillを読み込み、その基準に従う。
 
 ラベルの名前を指示された時は、レポートをpull requestに投稿したらレビュー依頼のラベルを付け、セキュリティ更新としたレポートにはセキュリティ更新のラベルも付ける。結論が「判断保留」の時は、レビュー依頼のラベルを付けない。
 

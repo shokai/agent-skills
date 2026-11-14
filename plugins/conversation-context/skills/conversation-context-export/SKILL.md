@@ -74,7 +74,7 @@ worktree内で作業中の場合は、AskUserQuestionツールで出力先を確
 
 ### 3. コンテキストの書き出し
 
-このSKILL.mdと同じディレクトリにある [TEMPLATE.md](TEMPLATE.md) を読み込み、その構造に従ってファイルを作成する。文章の書き方は、PRコメントに投稿しない時も、`kuden:github` skillに従う。
+このSKILL.mdと同じディレクトリにある [TEMPLATE.md](TEMPLATE.md) を読み込み、その構造に従ってファイルを作成する。対話コンテキストを書く時は、`kuden:github` skillを読み込み、その基準に従う。
 
 出力先ディレクトリが存在しない場合は作成する。
 
