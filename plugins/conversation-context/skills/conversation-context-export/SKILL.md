@@ -74,7 +74,7 @@ worktree内で作業中の場合は、AskUserQuestionツールで出力先を確
 
 ### 3. コンテキストの書き出し
 
-このSKILL.mdと同じディレクトリにある [TEMPLATE.md](TEMPLATE.md) を読み込み、その構造に従ってファイルを作成する。
+このSKILL.mdと同じディレクトリにある [TEMPLATE.md](TEMPLATE.md) を読み込み、その構造に従ってファイルを作成する。GitHubに載る文章の書き方は、`kuden:github` skillに従う。
 
 出力先ディレクトリが存在しない場合は作成する。
 
@@ -193,3 +193,4 @@ gh api repos/{owner}/{repo}/issues/comments/{コメントID} --method PATCH -F "
 
 - **conversation-context-import**: 保存された対話コンテキストを読み込むスキル。新セッションでの開発継続やfeature PRのレビュー時に使用する。
 - **sanity-review**: PRレビュー報告書を作成するスキル。PRコメントに投稿された対話コンテキストを読み込んでレビューに活用する。
+- **kuden:github**: GitHubでpull requestを作り、文章を書く時の心得。手順3でコンテキストを書き出す時に従う。

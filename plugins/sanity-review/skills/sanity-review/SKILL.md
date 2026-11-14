@@ -271,7 +271,7 @@ Args: よく相談して。PR #{番号} のコードレビューをお願いし�
 
 ### 手順7: レビュー報告書の作成
 
-このSKILL.mdと同じディレクトリにある [TEMPLATE.md](TEMPLATE.md) を読み込み、その形式に従って報告書を作成する。
+このSKILL.mdと同じディレクトリにある [TEMPLATE.md](TEMPLATE.md) を読み込み、その形式に従って報告書を作成する。GitHubに載る文章の書き方は、`kuden:github` skillに従う。
 
 報告書は**会話に出力する**。
 手順0でPRへのコメント投稿を行うと決めた場合は、同じ内容をPRにもコメントとして投稿する。
@@ -291,3 +291,4 @@ Args: よく相談して。PR #{番号} のコードレビューをお願いし�
 - **conversation-context-import**: 対話コンテキストを読み込むスキル。手順1の背景知識
 - **conversation-context-export**: 対話コンテキストを書き出すスキル。対話コンテキストの形式の背景知識
 - **dependency-update-report**: 依存関係の更新PRのレビュースキル。このスキルの対象外であるPRの種類
+- **kuden:github**: GitHubでpull requestを作り、文章を書く時の心得。手順7で報告書を書く時に従う

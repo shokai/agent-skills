@@ -43,6 +43,7 @@ PRのレビュー報告書を作成するAgent Skillです。bugや脆弱性の�
   - 両方未インストールの場合はAgent単独で続行する
 - `conversation-context` スキル: 対話コンテキストの形式の背景知識
   - 未インストールでも動作する
+- `kuden` plugin: 報告書を書く時に `kuden:github` の心得に従う
 
 ## 使い方
 
@@ -60,6 +61,8 @@ PRブランチで実行するか、PR URLまたは番号を指定すると、レ
 /plugin marketplace add shokai/agent-skills
 /plugin install sanity-review
 ```
+
+依存する [kuden](../kuden/README.md) も一緒にインストールされます。
 
 既にマーケットプレイスを登録済みの場合、新しいスキルをインストールするには [マーケットプレイスの更新](../../README.md#スキルをうまくインストールできない場合) が必要です。
 

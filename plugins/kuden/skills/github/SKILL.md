@@ -38,7 +38,10 @@ pull requestを作成・更新・mergeする時、レビュー指摘に対応す
 概要欄、コメント、commit message等、GitHubで表示される文章の全てに当てはまる。
 
 - `#1234` やURLの前後には、半角スペースを入れる。`#1234で直した` はリンクにならない。`(https://example.com/日本語のページ)。` は、`)。` までがURLに含まれる
-- `#数字` は、issueとPRの番号にだけ使う。Dependabot alertのように別の番号体系を持つ物は、フルURLで書く。`#数字` で書くと、同じ番号の無関係なissueやPRへのリンクになる
+- `#数字` は、文章を載せるrepoのissueとPRの番号にだけ使う。次の物はフルURLで書く。`#数字` で書くと、文章を載せたrepoの同じ番号の無関係なissueやPRへのリンクになる
+  - Dependabot alertのように、別の番号体系を持つ物
+  - 他のrepoのissueとPR
+- 他のrepoのcommitも、フルURLで書く。hashだけではリンクにならない
 - URLの日本語の部分は、percent-encodeせずに書く。encodeしたURLは、どのページへのリンクかを人間が読み取れない
 
 ## 心得4. 親子PRの組み方
