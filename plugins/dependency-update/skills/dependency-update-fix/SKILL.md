@@ -28,7 +28,7 @@ dependency-update skillの指揮役から任されて、レビューの結論が
 
 - pull requestのhead branchをcheckoutし、レビューコメントとその文書に従って直し、新しいbranchを作らずにそのbranchへcommitを1つ積む
 - 直している途中で、文書の挙げる箇所の外にも修正が要ると分かった時は、commitもpushもせずに止め、「着手する前に確かめる」と同じ対象外のコメントを投稿して報告する
-- 直した箇所と、commitのSHAと、従った文書の場所を、pull requestにコメント投稿する。1行目は `# Dependency update fix` にする。指揮役がこの行でコメントを見分け、再レビューの指示を組み立てる。コメントには自分のAgent名とmodel名を書く。GitHubに載る文章の書き方は、`kuden:github` skillに従う
+- 直した箇所と、commitのSHAと、従った文書の場所を、pull requestにコメント投稿する。1行目は `# Dependency update fix` にする。指揮役がこの行でコメントを見分け、再レビューの指示を組み立てる。コメントには自分のAgent名とmodel名を書く。コメントを書く時は、`kuden:github` skillを読み込み、その基準に従う
 - 指揮役からラベルの名前を渡されていれば、レビュー依頼のラベルを外す
 - 最後にpushする。コメントの後にpushするのは、pushの後で作業が途切れると、次の実行の指揮役がこのpull requestを修正済みと見分けられないためである。CIが終わった後の再レビューは、指揮役が別のsubagentに任せる
 
