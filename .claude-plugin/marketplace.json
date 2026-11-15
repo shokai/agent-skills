@@ -39,7 +39,7 @@
       "name": "conversation-context",
       "source": "./plugins/conversation-context",
       "description": "対話コンテキストのexport/importスキル。会話で共有された目的・意図・設計判断・制約条件を .dev/contexts/ に書き出してPRコメントにも投稿し、別セッションやレビューで親子PRのコメント欄からも探して読み込む。1対多のコンテキスト共有により、複数の子PRをまとめた親PRのレビューやコードの自動改善に便利。",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": {
         "name": "shokai"
       },
@@ -52,7 +52,7 @@
       "name": "sanity-review",
       "source": "./plugins/sanity-review",
       "description": "PRのレビュー報告書を作成する。bugや脆弱性の調査だけでなく、exportされた対話コンテキスト・PR概要欄・実装されたコードの整合性を確認し、実装者の正気を疑う。",
-      "version": "1.11.1",
+      "version": "1.12.0",
       "author": {
         "name": "shokai"
       },
@@ -97,7 +97,7 @@
       "name": "codepatrol",
       "source": "./plugins/codepatrol",
       "description": "リポジトリを領域ごとに巡回するセキュリティ調査スキル。観点チェックリストに基づき未調査領域を調査し、Codexの批判的レビューを経てレポート出力する。複数session前提の長期作業。起動したsessionが指揮役になり、領域ごとに起動したsubagentが調査する。レポートの問題のトリアージと、自動修正、状態同期も行う。",
-      "version": "5.2.0",
+      "version": "5.2.1",
       "author": {
         "name": "shokai"
       },
@@ -123,7 +123,7 @@
       "name": "kuden",
       "source": "./plugins/kuden",
       "description": "作者がAIとの対話の中で伝えてきた心得を集めたガイドライン群。Agent SkillやAI向けのルール文書、ソースコード中のコメント、ソフトウェアテストを書く時、GitHubでpull requestを作りmergeする時に、何を書き、何を書かないかの判断基準を定める。どこに書く時も変わらない文章の書き方も定める。subagentに作業を任せる指揮役の振る舞いと、ユーザーの判断を得る時の振る舞いも定める。",
-      "version": "0.11.0",
+      "version": "0.12.0",
       "author": {
         "name": "shokai"
       },
@@ -160,7 +160,7 @@
       "name": "dependency-update",
       "source": "./plugins/dependency-update",
       "description": "dependabotやrenovateが作成した依存関係の更新pull requestを、リポジトリごとに決めた自動化段階までレビュー・修正・mergeする指揮。起動したsessionが指揮役になり、pull requestごとに起動したsubagentがレビューと修正を行う。起動プロンプトの作成と、Claude Code on the webのroutineへの登録も行う。",
-      "version": "0.5.0",
+      "version": "0.5.1",
       "author": {
         "name": "shokai"
       },
