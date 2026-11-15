@@ -37,7 +37,7 @@ dependency-update skillの指揮役から任されて、base branchとconflict�
   - base branchが更新対象を既にpull requestより新しいバージョンにしている
 - 止める時は、commitもpushもせず、止めた理由と、解消を試みたHEADのSHAをpull requestにコメント投稿して報告する。コメントの1行目は `# Dependency update conflict resolution skipped` にする。指揮役がこのSHAを読み、HEADが変わるまで解消を再び試みず、人間の判断が要る物として通知する。コメントには自分のAgent名とmodel名を書く
 - 止めなければ、merge commitを1つ積む
-- conflictしたファイルと、どう解消したかと、merge commitのSHAを、pull requestにコメント投稿する。1行目は `# Dependency update conflict resolved` にする。指揮役がこの行でコメントを見分け、SHAを読んでmergeの条件を判定する。コメントには自分のAgent名とmodel名を書く。GitHubに載る文章の書き方は、`kuden:github` skillに従う
+- conflictしたファイルと、どう解消したかと、merge commitのSHAを、pull requestにコメント投稿する。1行目は `# Dependency update conflict resolved` にする。指揮役がこの行でコメントを見分け、SHAを読んでmergeの条件を判定する。コメントには自分のAgent名とmodel名を書く。コメントを書く時は、`kuden:github` skillを読み込み、その基準に従う
 - 最後にpushする。コメントの後にpushするのは、pushの後で作業が途切れると、次の実行の指揮役がこのmerge commitを誰の物か見分けられないためである。force pushはしない。pushが拒否されたら、botが同時にrebaseした等でbranchが進んでいるので、やり直さず、投稿したコメントにpushされなかった事を追記して報告する
 - ラベルは変えない。解消の後に再レビューはしない
 

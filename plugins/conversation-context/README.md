@@ -13,6 +13,7 @@
 
 - exportでのPRの検出とPRコメントへの投稿には、GitHub CLI（`gh`）のインストールと認証が必要
 - importは、GitHubのPRとコメントを読めない時、カレントブランチのローカルファイルだけを読む
+- `kuden` plugin: exportでコンテキストを書き出す時に `kuden:github` の心得に従う
 
 ## 使い方
 
@@ -29,6 +30,8 @@
 /plugin marketplace add shokai/agent-skills
 /plugin install conversation-context
 ```
+
+依存する [kuden](../kuden/README.md) も一緒にインストールされます。
 
 既にマーケットプレイスを登録済みの場合、新しいスキルをインストールするには [マーケットプレイスの更新](../../README.md#スキルをうまくインストールできない場合) が必要です。
 

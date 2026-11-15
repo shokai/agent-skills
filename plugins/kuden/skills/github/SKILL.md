@@ -2,12 +2,12 @@
 name: github
 description: >-
   GitHubでpull requestを作り、文章を書く時の心得。PRのタイトルと概要欄の書き方、リンクが壊れない書き方、親子PRの組み方、概要欄やコメントを書き換える時の確かめ方、レビュー指摘への対応の仕方、squash and mergeのcommit messageの書き方を定める。
-  pull requestを作成・更新・mergeする時、レビュー指摘に対応する時、GitHubに載る文章を書く時に読み込む。
+  pull requestを作成・更新・mergeする時、レビュー指摘に対応する時、GitHubに載る文章を書く時、GitHubに載せない文章からissue・pull request・commitを参照する時に読み込む。
 ---
 
 # GitHubでの作法
 
-pull requestを作成・更新・mergeする時、レビュー指摘に対応する時、GitHubに載る文章を書く時は、以下の基準に従う。repoのドキュメントやPRテンプレートに別の定めがあれば、そちらに従う。文体はkuden:writing skillの基準に従う。
+pull requestを作成・更新・mergeする時、レビュー指摘に対応する時、GitHubに載る文章を書く時、GitHubに載せない文章からissue・pull request・commitを参照する時は、以下の基準に従う。repoのドキュメントやPRテンプレートに別の定めがあれば、そちらに従う。文体はkuden:writing skillの基準に従う。
 
 ## 心得1. タイトルには、何を解決したかを書く
 
@@ -35,10 +35,13 @@ pull requestを作成・更新・mergeする時、レビュー指摘に対応す
 
 ## 心得3. リンクが壊れない書き方をする
 
-概要欄、コメント、commit message等、GitHubで表示される文章の全てに当てはまる。
+概要欄、コメント、commit message等、GitHubで表示される文章の全てに当てはまる。GitHubに載せない文章でも、issue・PR・commitを参照する時は従う。
 
 - `#1234` やURLの前後には、半角スペースを入れる。`#1234で直した` はリンクにならない。`(https://example.com/日本語のページ)。` は、`)。` までがURLに含まれる
-- `#数字` は、issueとPRの番号にだけ使う。Dependabot alertのように別の番号体系を持つ物は、フルURLで書く。`#数字` で書くと、同じ番号の無関係なissueやPRへのリンクになる
+- `#数字` は、文章を載せるrepoのissueとPRの番号にだけ使う。次の物はフルURLで書く。`#数字` で書くと、文章を載せるrepoの同じ番号の無関係なissueやPRへのリンクになる
+  - Dependabot alertのように、別の番号体系を持つ物
+  - 他のrepoのissueとPR
+- 他のrepoのcommitも、フルURLで書く。hashだけでは正しいリンクにならない
 - URLの日本語の部分は、percent-encodeせずに書く。encodeしたURLは、どのページへのリンクかを人間が読み取れない
 
 ## 心得4. 親子PRの組み方
