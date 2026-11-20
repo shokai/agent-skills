@@ -1,6 +1,6 @@
 {
   "name": "skill-usability-test",
-  "description": "Agent SkillやCLAUDE.md等のルール文書のように、AIが読んで従う文書のusability testを行うスキル。下位tierのmodelのsubagentに、ゴールを与えて観察し、終了後にインタビューとtranscriptの監査で、文書の記述を根拠に完遂できたかを確かめる。",
+  "description": "Agent SkillやCLAUDE.md等のルール文書のように、AIが読んで従う文書のusability testを行うスキル。文書を実際に使うtierのmodelのsubagentに、ゴールを与えて観察し、終了後にインタビューとtranscriptの監査で、文書の記述を根拠に完遂できたかを確かめる。",
   "author": {
     "name": "shokai"
   },
